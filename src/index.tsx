@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import WorkPackage from "./WorkPackage";
+import WorkPackage from "./components/WorkPackage";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
