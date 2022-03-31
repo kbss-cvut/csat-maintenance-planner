@@ -22,7 +22,9 @@ const WorkPackage = () => {
   useEffect(() => {
     const fetchWorkPackages = async () => {
       const { data } = await axios.get(
-        "https://kbss.felk.cvut.cz/csat/api/workpackages/list"
+        Constants.CSAT_PLANNING_URL +
+          Constants.API +
+          Constants.CSAT_PLANNING_WORKPACKAGES_LIST_URL
       );
       setWorkPackageList([...data]);
     };
