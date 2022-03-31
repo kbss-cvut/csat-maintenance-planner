@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import WorkPackage from "./components/WorkPackage";
 import reportWebVitals from "./reportWebVitals";
 
+import "../src/styles/global.css";
+
 ReactDOM.render(
   <React.StrictMode>
     <WorkPackage />

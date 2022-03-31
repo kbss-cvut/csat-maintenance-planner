@@ -66,6 +66,7 @@
     "@storybook/testing-library": "^0.0.9",
     "chromatic": "^6.5.3",
     "prettier": "2.6.1",
+    "sass": "^1.49.10",
     "webpack": "^5.70.0"
   }
 }

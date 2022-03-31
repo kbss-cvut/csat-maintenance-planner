@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Constants from "../Constants";
+
+import styles from "../styles/WorkPackageList.module.scss";
 
 const WorkPackage = () => {
   interface WorkPackageInterface {
@@ -27,14 +30,30 @@ const WorkPackage = () => {
   }, []);
 
   return (
-    <React.Fragment>
-      <h1>Work Packages: </h1>
-      <div>
-        {workPackageList.map((workPackage: WorkPackageInterface) => (
-          <p key={workPackage.identifier}>{workPackage.identifier}</p>
-        ))}
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h1>Czech Airlines Techniques</h1>
       </div>
-    </React.Fragment>
+
+      <h2>List work packages: </h2>
+      <ul className={styles.workPackageItems}>
+        {workPackageList.map((workPackage: WorkPackageInterface) => (
+          <li className={styles.workPackageItem}>
+            <a
+              key={workPackage.identifier}
+              target="_blank"
+              href={
+                Constants.CSAT_PLANNING_URL +
+                Constants.CSAT_PLANNING_WORKPACKAGE_DASHBOARD +
+                workPackage.objectIdentifier
+              }
+            >
+              {workPackage.identifier}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
