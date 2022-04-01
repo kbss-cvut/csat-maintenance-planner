@@ -3,6 +3,7 @@ import axios from "axios";
 import Constants from "../Constants";
 
 import styles from "../styles/WorkPackageList.module.scss";
+import LoadingSpinnerIcon from "../styles/icons/LoadindSpinnerIcon";
 
 const WorkPackage = () => {
   interface WorkPackageInterface {
@@ -15,12 +16,14 @@ const WorkPackage = () => {
     startTime: string;
   }
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [workPackageList, setWorkPackageList] = useState<
     Array<WorkPackageInterface>
   >([]);
 
   useEffect(() => {
     const fetchWorkPackages = async () => {
+      setIsLoading(true);
       const { data } = await axios.get(
         Constants.CSAT_PLANNING_URL +
           Constants.API +
@@ -28,6 +31,9 @@ const WorkPackage = () => {
       );
       setWorkPackageList([...data]);
     };
+    fetchWorkPackages().then(() => {
+      setIsLoading(false);
+    });
     fetchWorkPackages().catch(console.error);
   }, []);
 
@@ -38,23 +44,29 @@ const WorkPackage = () => {
       </div>
 
       <h2>List work packages: </h2>
-      <ul className={styles.workPackageItems}>
-        {workPackageList.map((workPackage: WorkPackageInterface) => (
-          <li className={styles.workPackageItem}>
-            <a
-              key={workPackage.identifier}
-              target="_blank"
-              href={
-                Constants.CSAT_PLANNING_URL +
-                Constants.CSAT_PLANNING_WORKPACKAGE_DASHBOARD +
-                workPackage.objectIdentifier
-              }
+      {isLoading ? (
+        <LoadingSpinnerIcon />
+      ) : (
+        <ul className={styles.workPackageItems}>
+          {workPackageList.map((workPackage: WorkPackageInterface) => (
+            <li
+              key={workPackage.objectIdentifier}
+              className={styles.workPackageItem}
             >
-              {workPackage.identifier}
-            </a>
-          </li>
-        ))}
-      </ul>
+              <a
+                target="_blank"
+                href={
+                  Constants.CSAT_PLANNING_URL +
+                  Constants.CSAT_PLANNING_WORKPACKAGE_DASHBOARD +
+                  workPackage.objectIdentifier
+                }
+              >
+                {workPackage.identifier}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
