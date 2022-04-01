@@ -1,16 +1,17 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOMClient from "react-dom/client";
 import WorkPackage from "./components/WorkPackage";
 import reportWebVitals from "./reportWebVitals";
 
 import "../src/styles/global.css";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <WorkPackage />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+// Replacing with new API: https://github.com/reactwg/react-18/discussions/5
+const container: HTMLElement | null = document.getElementById("root");
+let root;
+if (container) {
+  root = ReactDOMClient.createRoot(container);
+  root.render(<WorkPackage />);
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
