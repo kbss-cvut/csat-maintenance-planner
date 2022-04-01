@@ -7,11 +7,7 @@ import "../src/styles/global.css";
 
 // Replacing with new API: https://github.com/reactwg/react-18/discussions/5
 const container: HTMLElement | null = document.getElementById("root");
-let root;
-if (container) {
-  root = ReactDOMClient.createRoot(container);
-  root.render(<WorkPackage />);
-}
+container && ReactDOMClient.createRoot(container).render(<WorkPackage />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

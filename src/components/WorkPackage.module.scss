@@ -11,16 +11,3 @@
 .header {
   padding: 3rem;
 }
-
-.workPackageItems {
-  overflow-y: scroll;
-  padding: 1rem;
-}
-
-.workPackageItem {
-  padding: 1rem;
-  a:hover {
-    transition: .3s;
-    opacity: 20%;
-  }
-}
