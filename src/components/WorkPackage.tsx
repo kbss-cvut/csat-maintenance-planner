@@ -45,10 +45,13 @@ const WorkPackage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1>Czech Airlines Techniques</h1>
+        <img
+          alt="CSAT logo"
+          src="https://www.csatechnics.com/img/lower-logo.png"
+        />
       </div>
-
-      <h2>List work packages: </h2>
+      <br />
+      <h2>Available Dashboards</h2>
       {renderWorkPackageList()}
     </div>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import { WorkPackageInterface } from "../utils/Interfaces";
 import Constants from "../Constants";
+import classNames from "classnames/bind";
 
 import styles from "./WorkPackageList.module.scss";
 
@@ -9,12 +10,22 @@ interface Props {
 }
 
 const WorkPackageList = ({ workPackageList }: Props) => {
+  const applyProgressStatusClass = (workPackage: WorkPackageInterface) => {
+    const progressStatus = workPackage.progressStatus.toUpperCase();
+    return "wp-progress-status-" + progressStatus;
+  };
+
+  const cn = classNames.bind(styles);
+
   return (
     <ul className={styles.workPackageItems}>
       {workPackageList.map((workPackage: WorkPackageInterface) => (
         <li
           key={workPackage.objectIdentifier}
-          className={styles.workPackageItem}
+          className={cn(
+            "workPackageItem",
+            applyProgressStatusClass(workPackage)
+          )}
         >
           <a
             target="_blank"
