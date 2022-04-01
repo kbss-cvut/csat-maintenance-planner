@@ -7,7 +7,12 @@ import "../src/styles/global.css";
 
 // Replacing with new API: https://github.com/reactwg/react-18/discussions/5
 const container: HTMLElement | null = document.getElementById("root");
-container && ReactDOMClient.createRoot(container).render(<WorkPackage />);
+container &&
+  ReactDOMClient.createRoot(container).render(
+    <React.StrictMode>
+      <WorkPackage />
+    </React.StrictMode>
+  );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -13,10 +13,12 @@ const WorkPackage = () => {
   const [workPackageList, setWorkPackageList] = useState<
     Array<WorkPackageInterface>
   >([]);
+  const [update, setUpdate] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchWorkPackages = async () => {
       setIsLoading(true);
+      setUpdate(false);
       const { data } = await axios.get(
         Constants.CSAT_PLANNING_URL +
           Constants.API +
@@ -30,6 +32,10 @@ const WorkPackage = () => {
     fetchWorkPackages().catch((error) => {
       setErrorMessage(error.toString());
     });
+  }, [update]);
+
+  useEffect(() => {
+    setErrorMessage("");
   }, []);
 
   const renderWorkPackageList = () => {
@@ -42,17 +48,34 @@ const WorkPackage = () => {
     );
   };
 
+  const handleUpdateClick = () => {
+    setUpdate(true);
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
+      <div className={styles.dashboard}>
+        <div className={styles.header}>
+          <img
+            alt="CSAT logo"
+            src="https://www.csatechnics.com/img/lower-logo.png"
+          />
+        </div>
+        <br />
+        <h2>Available Dashboards</h2>
+        {renderWorkPackageList()}
+        <button className={styles.button} onClick={handleUpdateClick}>
+          Update
+        </button>
+      </div>
+      <div className={styles.planning}>
         <img
-          alt="CSAT logo"
-          src="https://www.csatechnics.com/img/lower-logo.png"
+          height="100%"
+          width="100%"
+          alt="csat-planning"
+          src="https://thumbs.dreamstime.com/z/infographic-timeline-diagram-calendar-gantt-chart-template-business-modern-presentation-vector-212774519.jpg"
         />
       </div>
-      <br />
-      <h2>Available Dashboards</h2>
-      {renderWorkPackageList()}
     </div>
   );
 };
