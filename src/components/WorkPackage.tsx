@@ -7,6 +7,9 @@ import styles from "./WorkPackage.module.scss";
 import LoadingSpinnerIcon from "../styles/icons/LoadindSpinnerIcon";
 import WorkPackageList from "./WorkPackageList";
 
+import 'planning-tool/dist/PlanningTool.css'
+import PlanningTool from 'planning-tool'
+
 const WorkPackage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -69,12 +72,13 @@ const WorkPackage = () => {
         </button>
       </div>
       <div className={styles.planning}>
-        <img
+        <PlanningTool/>
+        {/*<img
           height="100%"
           width="100%"
           alt="csat-planning"
           src="https://thumbs.dreamstime.com/z/infographic-timeline-diagram-calendar-gantt-chart-template-business-modern-presentation-vector-212774519.jpg"
-        />
+        />*/}
       </div>
     </div>
   );
