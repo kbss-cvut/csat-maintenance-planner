@@ -1,0 +1,15 @@
+.revisionPlanItems {
+  overflow-y: scroll;
+  padding: 1rem 1rem;
+}
+
+.revisionPlanItem {
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  cursor: pointer;
+
+  &:hover {
+    transition: 0.3s;
+    opacity: 20%;
+  }
+}

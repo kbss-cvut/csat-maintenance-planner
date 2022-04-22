@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOMClient from "react-dom/client";
-import WorkPackage from "./components/WorkPackage";
+import Dashboard from "./components/Dashboard";
 import reportWebVitals from "./reportWebVitals";
 
 import "../src/styles/global.css";
@@ -10,7 +10,7 @@ const container: HTMLElement | null = document.getElementById("root");
 container &&
   ReactDOMClient.createRoot(container).render(
     <React.StrictMode>
-      <WorkPackage />
+      <Dashboard />
     </React.StrictMode>
   );
 
