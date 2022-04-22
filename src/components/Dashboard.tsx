@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Constants from "../Constants";
+import Constants from "../utils/Constants";
 import {
   RevisionPlanInterface,
   WorkPackageInterface,
@@ -10,6 +10,7 @@ import styles from "./Dashboard.module.scss";
 import LoadingSpinnerIcon from "../styles/icons/LoadindSpinnerIcon";
 import RevisionPlanList from "./RevisionPlanList";
 import RevisionPlan from "./RevisionPlan";
+import WorkPackageList from "./WorkPackageList";
 
 const Dashboard = () => {
   const [workPackageList, setWorkPackageList] = useState<
@@ -19,23 +20,23 @@ const Dashboard = () => {
   const [revisionPlanData, setRevisionPlanData] =
     useState<RevisionPlanInterface | null>(null);
 
-  const [isRevisionListLoading, setIsRevisionListLoading] =
+  const [isListLoading, setIsListLoading] =
     useState<boolean>(false);
   const [isRevisionLoading, setIsRevisionLoading] = useState<boolean>(false);
 
-  const [revisionListErrorMessage, setRevisionListErrorMessage] =
+  const [listErrorMessage, setListErrorMessage] =
     useState<string>("");
   const [revisionErrorMessage, setRevisionErrorMessage] = useState<string>("");
 
   const [update, setUpdate] = useState<boolean>(false);
 
   useEffect(() => {
-    setRevisionListErrorMessage("");
+    setListErrorMessage("");
   }, []);
 
   useEffect(() => {
     const fetchWorkPackages = async () => {
-      setIsRevisionListLoading(true);
+      setIsListLoading(true);
       setUpdate(false);
       const { data } = await axios.get(
         Constants.CSAT_PLANNING_URL +
@@ -45,25 +46,25 @@ const Dashboard = () => {
       setWorkPackageList([...data]);
     };
     fetchWorkPackages().then(() => {
-      setIsRevisionListLoading(false);
+      setIsListLoading(false);
     });
     fetchWorkPackages().catch((error) => {
-      setRevisionListErrorMessage(error.toString());
+      setListErrorMessage(error.toString());
     });
   }, [update]);
 
   useEffect(() => {
     const fetchRevisionPlanTitles = async () => {
-      setIsRevisionListLoading(true);
+      setIsListLoading(true);
       setUpdate(false);
       const { data } = await axios.get(Constants.REVISION_LIST);
       setRevisionPlanList([...data]);
     };
     fetchRevisionPlanTitles().then(() => {
-      setIsRevisionListLoading(false);
+      setIsListLoading(false);
     });
     fetchRevisionPlanTitles().catch((error) => {
-      setRevisionListErrorMessage(error.toString());
+      setListErrorMessage(error.toString());
     });
   }, [update]);
 
@@ -89,16 +90,32 @@ const Dashboard = () => {
     setUpdate(true);
   };
 
+  const renderWorkPackageList = () => {
+    return (
+      <React.Fragment>
+        {isListLoading && listErrorMessage && (
+          <p>{listErrorMessage}</p>
+        )}
+        {isListLoading && !listErrorMessage && (
+          <LoadingSpinnerIcon />
+        )}
+        {!isListLoading && (
+          <WorkPackageList workPackageList={workPackageList} />
+        )}
+      </React.Fragment>
+    );
+  };
+
   const renderRevisionList = () => {
     return (
       <React.Fragment>
-        {isRevisionListLoading && revisionListErrorMessage && (
-          <p>{revisionListErrorMessage}</p>
+        {isListLoading && listErrorMessage && (
+          <p>{listErrorMessage}</p>
         )}
-        {isRevisionListLoading && !revisionListErrorMessage && (
+        {isListLoading && !listErrorMessage && (
           <LoadingSpinnerIcon />
         )}
-        {!isRevisionListLoading && (
+        {!isListLoading && (
           <RevisionPlanList
             revisionPlanTitleList={revisionPlanList}
             handleRevisionPlanOnClick={handleRevisionPlanOnClick}
@@ -132,6 +149,10 @@ const Dashboard = () => {
         <br />
         <h2>Available Revision Plans</h2>
         {renderRevisionList()}
+        <br/>
+        <br/>
+        <h2>Available Work Packages</h2>
+        {renderWorkPackageList()}
         <button className={styles.button} onClick={handleUpdateClick}>
           Update
         </button>

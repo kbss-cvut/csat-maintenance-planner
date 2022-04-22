@@ -1,6 +1,8 @@
 .revisionPlanItems {
   overflow-y: scroll;
   padding: 1rem 1rem;
+  max-height: 35vh;
+  min-width: 20vw;
 }
 
 .revisionPlanItem {

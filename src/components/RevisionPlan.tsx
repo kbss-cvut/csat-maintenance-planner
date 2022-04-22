@@ -6,7 +6,20 @@ interface Props {
 }
 
 const RevisionPlan = ({ revisionPlanData }: Props) => {
-  return <div>{revisionPlanData.title}</div>;
+  return (
+    <div>
+      {revisionPlanData.title}
+      <br />
+      <br />
+      {revisionPlanData.type}
+      <br />
+      <br />
+      {revisionPlanData.id}
+      <br />
+      <br />
+      {revisionPlanData.duration}
+    </div>
+  );
 };
 
 export default RevisionPlan;

@@ -1,9 +1,11 @@
-.revisionPlanItems {
+.workPackageItems {
   overflow-y: scroll;
   padding: 1rem 1rem;
+  max-height: 35vh;
+  min-width: 20vw;
 }
 
-.revisionPlanItem {
+.workPackageItem {
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;
 
