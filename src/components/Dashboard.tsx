@@ -108,8 +108,16 @@ const Dashboard = () => {
     );
   };
 
-  const handleUpdateClick = () => {
-    setUpdate(true);
+  const renderRevisionPlan = () => {
+    return (
+      <React.Fragment>
+        {revisionErrorMessage && <p>{revisionErrorMessage}</p>}
+        {isRevisionLoading && !revisionErrorMessage && <LoadingSpinnerIcon />}
+        {!isRevisionLoading && revisionPlanData && !revisionErrorMessage && (
+          <RevisionPlan revisionPlanData={revisionPlanData} />
+        )}
+      </React.Fragment>
+    );
   };
 
   return (
@@ -128,14 +136,7 @@ const Dashboard = () => {
           Update
         </button>
       </div>
-      <div className={styles.planning}>
-        <img
-          height="100%"
-          width="100%"
-          alt="csat-planning"
-          src="https://thumbs.dreamstime.com/z/infographic-timeline-diagram-calendar-gantt-chart-template-business-modern-presentation-vector-212774519.jpg"
-        />
-      </div>
+      <div className={styles.planning}>{renderRevisionPlan()}</div>
     </div>
   );
 };
