@@ -11,6 +11,9 @@ import LoadingSpinnerIcon from "../styles/icons/LoadindSpinnerIcon";
 import RevisionPlanList from "./RevisionPlanList";
 import RevisionPlan from "./RevisionPlan";
 import WorkPackageList from "./WorkPackageList";
+import PlanningTool from "planning-tool";
+
+import "planning-tool/dist/PlanningTool.css";
 
 const Dashboard = () => {
   const [workPackageList, setWorkPackageList] = useState<
@@ -20,12 +23,10 @@ const Dashboard = () => {
   const [revisionPlanData, setRevisionPlanData] =
     useState<RevisionPlanInterface | null>(null);
 
-  const [isListLoading, setIsListLoading] =
-    useState<boolean>(false);
+  const [isListLoading, setIsListLoading] = useState<boolean>(false);
   const [isRevisionLoading, setIsRevisionLoading] = useState<boolean>(false);
 
-  const [listErrorMessage, setListErrorMessage] =
-    useState<string>("");
+  const [listErrorMessage, setListErrorMessage] = useState<string>("");
   const [revisionErrorMessage, setRevisionErrorMessage] = useState<string>("");
 
   const [update, setUpdate] = useState<boolean>(false);
@@ -93,12 +94,8 @@ const Dashboard = () => {
   const renderWorkPackageList = () => {
     return (
       <React.Fragment>
-        {isListLoading && listErrorMessage && (
-          <p>{listErrorMessage}</p>
-        )}
-        {isListLoading && !listErrorMessage && (
-          <LoadingSpinnerIcon />
-        )}
+        {isListLoading && listErrorMessage && <p>{listErrorMessage}</p>}
+        {isListLoading && !listErrorMessage && <LoadingSpinnerIcon />}
         {!isListLoading && (
           <WorkPackageList workPackageList={workPackageList} />
         )}
@@ -109,12 +106,8 @@ const Dashboard = () => {
   const renderRevisionList = () => {
     return (
       <React.Fragment>
-        {isListLoading && listErrorMessage && (
-          <p>{listErrorMessage}</p>
-        )}
-        {isListLoading && !listErrorMessage && (
-          <LoadingSpinnerIcon />
-        )}
+        {isListLoading && listErrorMessage && <p>{listErrorMessage}</p>}
+        {isListLoading && !listErrorMessage && <LoadingSpinnerIcon />}
         {!isListLoading && (
           <RevisionPlanList
             revisionPlanTitleList={revisionPlanList}
@@ -149,15 +142,17 @@ const Dashboard = () => {
         <br />
         <h2>Available Revision Plans</h2>
         {renderRevisionList()}
-        <br/>
-        <br/>
+        <br />
+        <br />
         <h2>Available Work Packages</h2>
         {renderWorkPackageList()}
         <button className={styles.button} onClick={handleUpdateClick}>
           Update
         </button>
       </div>
-      <div className={styles.planning}>{renderRevisionPlan()}</div>
+      <div className={styles.planning}>
+        <PlanningTool />
+      </div>
     </div>
   );
 };
