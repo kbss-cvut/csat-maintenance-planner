@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
 import Constants from "../utils/Constants";
-import { WorkPackageInterface } from "../utils/Interfaces";
+import {
+  WorkPackageInterface,
+  RevisionPlanInterface,
+} from "../utils/Interfaces";
 
 import styles from "./Dashboard.module.scss";
 import LoadingSpinnerIcon from "../styles/icons/LoadindSpinnerIcon";
@@ -17,9 +20,9 @@ const Dashboard = () => {
     Array<WorkPackageInterface>
   >([]);
   const [revisionPlanList, setRevisionPlanList] = useState<Array<string>>([]);
-  const [revisionPlanData, setRevisionPlanData] = useState<Array<any> | null>(
-    data
-  );
+  const [revisionPlan, setRevisionPlan] = useState<
+    RevisionPlanInterface[] | null
+  >(null);
 
   const [isListLoading, setIsListLoading] = useState<boolean>(false);
   const [isRevisionLoading, setIsRevisionLoading] = useState<boolean>(false);
@@ -78,9 +81,7 @@ const Dashboard = () => {
         .replaceAll("+", "%2B")
         .split(",")[0];
       const { data } = await axios.get(Constants.REVISION_ID + revisionId);
-      let planData: any[] = [];
-      planData.push(data);
-      setRevisionPlanData(planData);
+      setRevisionPlan([data]);
     };
     fetchRevisionPlanData().then(() => {
       setIsRevisionLoading(false);
@@ -127,7 +128,7 @@ const Dashboard = () => {
       <React.Fragment>
         {revisionErrorMessage && <p>{revisionErrorMessage}</p>}
         {isRevisionLoading && !revisionErrorMessage && <LoadingSpinnerIcon />}
-        {!isRevisionLoading && revisionPlanData && !revisionErrorMessage && (
+        {!isRevisionLoading && revisionPlan && !revisionErrorMessage && (
           <PlanningTool items={items} groups={groups} />
         )}
       </React.Fragment>
@@ -221,7 +222,7 @@ const Dashboard = () => {
     }
   };
 
-  buildData(revisionPlanData, groupsMap, items, 0, null);
+  buildData(revisionPlan, groupsMap, items, 0, null);
   const groups = Array.from(groupsMap, ([key, values]) => values);
 
   return (
