@@ -6,9 +6,9 @@ import "../src/styles/global.css";
 import Dashboard from "./components/Dashboard";
 
 ReactDOM.render(
-    <React.StrictMode>
+    <React.Fragment>
         <Dashboard />
-    </React.StrictMode>,
+    </React.Fragment>,
     document.getElementById("root")
 );
 
