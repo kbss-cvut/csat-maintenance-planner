@@ -5,3 +5,7 @@
   text-decoration: none;
   color: white;
 }
+
+.react-calendar-timeline .rct-dateHeader{
+  background-color: #c32020 !important;
+}
