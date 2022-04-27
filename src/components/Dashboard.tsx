@@ -8,7 +8,7 @@ import {
 } from "../utils/Interfaces";
 
 import styles from "./Dashboard.module.scss";
-import LoadingSpinnerIcon from "../styles/icons/LoadindSpinnerIcon";
+import LoadingSpinnerIcon from "../styles/icons/LoadingSpinnerIcon";
 import RevisionPlanList from "./RevisionPlanList";
 import WorkPackageList from "./WorkPackageList";
 import PlanningTool from "planning-tool";
@@ -21,8 +21,8 @@ const Dashboard = () => {
   >([]);
   const [revisionPlanList, setRevisionPlanList] = useState<Array<string>>([]);
   const [revisionPlan, setRevisionPlan] = useState<
-    RevisionPlanInterface[] | null
-  >(null);
+    RevisionPlanInterface[] | null | typeof data
+  >(data);
 
   const [isListLoading, setIsListLoading] = useState<boolean>(false);
   const [isRevisionLoading, setIsRevisionLoading] = useState<boolean>(false);
@@ -154,7 +154,7 @@ const Dashboard = () => {
     }
   };
 
-  const buildData = (data, groupsMap, items, level, groupParentId) => {
+  const buildData = (data, groupsMap, items, level, groupParentId, itemParentId) => {
     if (!data || !Array.isArray(data)) {
       return;
     }
@@ -197,6 +197,7 @@ const Dashboard = () => {
         title: item.title,
         start: date,
         end: endDate,
+        parent: itemParentId,
         className: "item",
         bgColor: getTaskBackground(item),
         color: "#fff",
@@ -216,13 +217,14 @@ const Dashboard = () => {
           groupsMap,
           items,
           level + 1,
-          groupsMap.get(resourceId).id
+          groupsMap.get(resourceId).id,
+          itemId
         );
       }
     }
   };
 
-  buildData(revisionPlan, groupsMap, items, 0, null);
+  buildData(revisionPlan, groupsMap, items, 0, null, null);
   const groups = Array.from(groupsMap, ([key, values]) => values);
 
   return (

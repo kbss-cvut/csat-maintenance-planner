@@ -34,6 +34,7 @@ const WorkPackageList = ({ workPackageList }: Props) => {
               Constants.CSAT_PLANNING_WORKPACKAGE_DASHBOARD +
               workPackage.objectIdentifier
             }
+            rel="noreferrer"
           >
             {workPackage.identifier}
           </a>
