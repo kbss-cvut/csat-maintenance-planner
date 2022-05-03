@@ -12,8 +12,9 @@ import LoadingSpinnerIcon from "../styles/icons/LoadingSpinnerIcon";
 import RevisionPlanList from "./RevisionPlanList";
 import WorkPackageList from "./WorkPackageList";
 import PlanningTool from "planning-tool";
+
 import "planning-tool/dist/PlanningTool.css";
-import data from "./data3.json";
+import data from "../data.json";
 
 const Dashboard = () => {
   const [workPackageList, setWorkPackageList] = useState<
@@ -154,7 +155,14 @@ const Dashboard = () => {
     }
   };
 
-  const buildData = (data, groupsMap, items, level, groupParentId, itemParentId) => {
+  const buildData = (
+    data,
+    groupsMap,
+    items,
+    level,
+    groupParentId,
+    itemParentId
+  ) => {
     if (!data || !Array.isArray(data)) {
       return;
     }
