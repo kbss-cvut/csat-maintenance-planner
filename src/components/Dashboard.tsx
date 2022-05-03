@@ -11,9 +11,9 @@ import styles from "./Dashboard.module.scss";
 import LoadingSpinnerIcon from "../styles/icons/LoadingSpinnerIcon";
 import RevisionPlanList from "./RevisionPlanList";
 import WorkPackageList from "./WorkPackageList";
-import PlanningTool from "planning-tool";
+import PlanningTool from "react-maintenance-planner";
 
-import "planning-tool/dist/PlanningTool.css";
+import "react-maintenance-planner/dist/PlanningTool.css";
 import data from "../data.json";
 
 const Dashboard = () => {

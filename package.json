@@ -36,7 +36,7 @@
     "@types/react-dom": "^17.0.14",
     "axios": "^0.26.1",
     "classnames": "^2.3.1",
-    "planning-tool": "/home/chopamax/Projects/CVUT/KBSS/react-maintenance-planner/planning-tool-0.1.0.tgz",
+    "react-maintenance-planner": "https://kbss.felk.cvut.cz/dist/planning-tool-0.1.0.tgz",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^4.0.3",
