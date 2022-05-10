@@ -1,6 +1,6 @@
-touch .env
+#!/usr/bin/env sh
+set -eu
 
-for envvar in "$@"
-do
-   echo "$envvar" >> .env
-done
+envsubst '${API_URL} ${APP_TITLE} ${LANGUAGE} ${NAVIGATOR_LANGUAGE} ${BASENAME}' < /etc/nginx/config.js.template > /var/www/config.js
+
+exec "$@"
