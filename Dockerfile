@@ -1,8 +1,12 @@
 # BASE STAGE
 # Prepare node, copy package.json
 FROM node:16-alpine AS base
+
+ARG REACT_APP_ENDPOINT
+
 WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
+COPY create-env-file.sh ./create-env-file.sh
 
 # DEPENDENCIES STAGE
 # Install production and dev dependencies
@@ -10,6 +14,8 @@ FROM base AS dependencies
 # install node packages
 #RUN npm set progress=false && npm config set depth 0
 RUN npm install
+
+RUN sh create-env-file.sh REACT_APP_ENDPOINT=$REACT_APP_ENDPOINT
 
 # BUILD STAGE
 # run NPM build
