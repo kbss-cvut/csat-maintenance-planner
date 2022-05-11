@@ -22,5 +22,19 @@ RUN set -ex; \
 
 # RELEASE STAGE
 # Only include the static files in the final image
-FROM nginx
+FROM nginx:1.17.0-alpine
+
+# Copy the react build from Build Stage
+COPY --from=build /usr/src/app/build /var/www
+
+# Copy our custom nginx config
+COPY .docker/config.js.template /etc/nginx/config.js.template
+
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
+
+# from the outside.
+EXPOSE 80
+
+COPY .docker/docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["nginx", "-g", "daemon off;"]
