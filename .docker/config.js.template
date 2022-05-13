@@ -1,7 +1,4 @@
 // Dynamic configuration
 window.__config__ = {
-  APP_DOMAIN: '${API_DOMAIN}',
-  APP_TITLE: '${APP_TITLE}',
-  LANGUAGE: '${LANGUAGE}',
-  NAVIGATOR_LANGUAGE: '${NAVIGATOR_LANGUAGE}'
+  REACT_APP_DOMAIN: '${REACT_APP_DOMAIN}'
 }

@@ -1,0 +1,12 @@
+version: "3"
+services:
+  plan-manager:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: plan-manager:latest
+    container_name: plan-manager
+    ports:
+      - "8080:80"
+    environment:
+      - REACT_APP_DOMAIN=http://localhost:8080/csat

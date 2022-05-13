@@ -27,10 +27,14 @@ FROM nginx:1.17.0-alpine
 # Copy the react build from Build Stage
 COPY --from=build /usr/src/app/build /var/www
 
+# Copy error page
+COPY .docker/error.html /usr/share/nginx/html
+
+# Copy our custom nginx config
+COPY .docker/nginx.conf /etc/nginx/nginx.conf
+
 # Copy our custom nginx config
 COPY .docker/config.js.template /etc/nginx/config.js.template
-
-COPY --from=build /usr/src/app/build /usr/share/nginx/html
 
 # from the outside.
 EXPOSE 80
@@ -38,3 +42,4 @@ EXPOSE 80
 COPY .docker/docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
+

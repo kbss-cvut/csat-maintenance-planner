@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 set -eu
 
-envsubst '${API_URL} ${APP_TITLE} ${LANGUAGE} ${NAVIGATOR_LANGUAGE} ${BASENAME}' < /etc/nginx/config.js.template > /var/www/config.js
+envsubst '${REACT_APP_DOMAIN}' < /etc/nginx/config.js.template > /var/www/config.js
 
 exec "$@"
