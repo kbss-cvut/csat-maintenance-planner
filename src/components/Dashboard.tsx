@@ -41,11 +41,7 @@ const Dashboard = () => {
     const fetchWorkPackages = async () => {
       setIsListLoading(true);
       setUpdate(false);
-      const { data } = await axios.get(
-        Constants.CSAT_PLANNING_URL +
-          Constants.API +
-          Constants.CSAT_PLANNING_WORKPACKAGES_LIST_URL
-      );
+      const { data } = await axios.get(Constants.SERVER_URL_WORKPACKAGE_LIST);
       setWorkPackageList([...data]);
     };
     fetchWorkPackages().then(() => {
@@ -60,7 +56,7 @@ const Dashboard = () => {
     const fetchRevisionPlanTitles = async () => {
       setIsListLoading(true);
       setUpdate(false);
-      const { data } = await axios.get(Constants.REVISION_LIST);
+      const { data } = await axios.get(Constants.SERVER_URL_REVISION_LIST);
       setRevisionPlanList([...data]);
     };
     fetchRevisionPlanTitles().then(() => {
@@ -81,7 +77,9 @@ const Dashboard = () => {
         .replaceAll("/", "%2F")
         .replaceAll("+", "%2B")
         .split(",")[0];
-      const { data } = await axios.get(Constants.REVISION_ID + revisionId);
+      const { data } = await axios.get(
+        Constants.SERVER_URL_REVISION_ID + revisionId
+      );
       setRevisionPlan([data]);
     };
     fetchRevisionPlanData().then(() => {

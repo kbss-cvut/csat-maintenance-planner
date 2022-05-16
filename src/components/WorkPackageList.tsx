@@ -30,8 +30,7 @@ const WorkPackageList = ({ workPackageList }: Props) => {
           <a
             target="_blank"
             href={
-              Constants.CSAT_PLANNING_URL +
-              Constants.CSAT_PLANNING_WORKPACKAGE_DASHBOARD +
+              Constants.SERVER_URL_WORKPACKAGE_DASHBOARD +
               workPackage.objectIdentifier
             }
             rel="noreferrer"

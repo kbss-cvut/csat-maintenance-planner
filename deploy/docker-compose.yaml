@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+
+  plan-manager:
+    image: plan-manager:latest
+    container_name: csat-plan-manager
+    restart: always
+    ports:
+      - "8091:80"
+    environment:
+      - SERVER_URL_REVISION_LIST=https://kbss.felk.cvut.cz/csat/api2/revisions/
+      - SERVER_URL_REVISION_ID=https://kbss.felk.cvut.cz/csat/api2/revision-plans-induced-by-revision-execution?revisionId=
+      - SERVER_URL_WORKPACKAGE_LIST=https://kbss.felk.cvut.cz/csat/api/workpackages/list
+      - SERVER_URL_WORKPACKAGE_DASHBOARD=https://kbss.felk.cvut.cz/csat/dashboard.html?wp=
+
+  nginx:
+    image: nginx:latest
+    container_name: csat-planning-nginx
+    ports:
+      - "8090:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
