@@ -3,23 +3,16 @@ version: '2'
 services:
 
   plan-manager:
-    image: docker.pkg.github.com/kbss-cvut/csat-maintenance-planner/csat-maintenance-planner:latest
+    image: plan-manager:latest
     container_name: csat-plan-manager
     restart: always
     ports:
       - "8091:80"
     environment:
-      - REACT_APP_DOMAIN=http://localhost:8080/csat
-    #  PLANNING_SERVICE_URL: ${PLANNING_SERVICE_URL:-http://planning:8080}
-
-#  planning:
-#    image: docker.pkg.github.com/kbss-cvut/aircraft-maintenance-planning-system/aircraft-maintenance-planning:latest
-#    container_name: aircraft-maintenance-planning
-#    restart: always
-#    environment:
-#      REPOSITORY_DATA_URL: ${REPOSITORY_DATA_URL:-http://rdf4j:8080/rdf4j-server/repositories/csat-planning-data}
-#      REPOSITORY_DATA_USERNAME: ${REPOSITORY_DATA_USERNAME-}
-#      REPOSITORY_DATA_PASSWORD: ${REPOSITORY_DATA_PASSWORD-}
+      - SERVER_URL_REVISION_LIST=https://kbss.felk.cvut.cz/csat/api2/revisions/
+      - SERVER_URL_REVISION_ID=https://kbss.felk.cvut.cz/csat/api2/revision-plans-induced-by-revision-execution?revisionId=
+      - SERVER_URL_WORKPACKAGE_LIST=https://kbss.felk.cvut.cz/csat/api/workpackages/list
+      - SERVER_URL_WORKPACKAGE_DASHBOARD=https://kbss.felk.cvut.cz/csat/dashboard.html?wp=
 
   nginx:
     image: nginx:latest
