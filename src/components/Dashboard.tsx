@@ -18,7 +18,7 @@ const Dashboard = () => {
     Array<WorkPackageInterface>
   >([]);
   const [revisionPlanList, setRevisionPlanList] = useState<Array<string>>([]);
-  const [revisionPlan, setRevisionPlan] = useState<any>([]);
+  const [revisionPlan, setRevisionPlan] = useState<any>([data]);
 
   const [isListLoading, setIsListLoading] = useState<boolean>(false);
   const [isRevisionLoading, setIsRevisionLoading] = useState<boolean>(false);
@@ -133,15 +133,16 @@ const Dashboard = () => {
   const groupsMap = new Map();
 
   const getTaskBackground = (task) => {
-    if (!task["task-type"]) {
+    if (!task.taskType) {
       return "#2196F3";
     }
-    switch (task["task-type"]["task-category"]) {
-      case "scheduled_wo":
+    console.log(task.taskType["task-category"]);
+    switch (task.taskType["task-category"]) {
+      case "scheduled-wo":
         return "#aa0000";
-      case "task_card":
+      case "task-card":
         return "#00aa00";
-      case "maintenance_wo":
+      case "maintenance-wo":
         return "#0000aa";
       default:
         return "#2196F3";
@@ -162,18 +163,12 @@ const Dashboard = () => {
 
     for (const item of data) {
       const resourceId =
-        item["http://onto.fel.cvut.cz/ontologies/csat-maintenance/id"] +
-        " - " +
-        item[
-          "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type"
-        ];
+        item.resource?.id + " - " + item.resource?.applicationType;
       if (!groupsMap.has(resourceId)) {
         groupsMap.set(resourceId, {
           id: groupsMap.size,
-          title: item["http://www.w3.org/2000/01/rdf-schema#label"],
-          hasChildren:
-            item["http://onto.fel.cvut.cz/ontologies/ufo/has-part"] &&
-            item["http://onto.fel.cvut.cz/ontologies/ufo/has-part"].length > 0,
+          title: item.resource?.title ? item.resource?.title : "-",
+          hasChildren: item.planParts && item.planParts.length > 0,
           parent: groupParentId,
           open: level < 1,
           show: level < 2,
@@ -182,17 +177,17 @@ const Dashboard = () => {
       }
 
       const date = moment(
-        item["@type"] === "SessionPlan"
-          ? item["start-time"]
-          : item["planned-start-time"]
+        item.applicationType === "SessionPlan"
+          ? item.startTime
+          : item.plannedStartTime
       )
         .add("1", "year")
         .add("2", "month")
         .add("27", "day");
       const endDate = moment(
-        item["@type"] === "SessionPlan"
-          ? item["end-time"]
-          : item["planned-end-time"]
+        item.applicationType === "SessionPlan"
+          ? item.endTime
+          : item.plannedEndTime
       )
         .add("1", "year")
         .add("2", "month")
@@ -202,11 +197,9 @@ const Dashboard = () => {
       items.push({
         id: itemId,
         group: groupsMap.get(resourceId).id,
-        title: item["http://www.w3.org/2000/01/rdf-schema#label"]
-          ? item["http://www.w3.org/2000/01/rdf-schema#label"]
-          : "",
-        start: Date.now(),
-        end: Date.now() + 100000000,
+        title: item.title ? item.title : "",
+        start: date,
+        end: endDate,
         parent: itemParentId,
         className: "item",
         bgColor: getTaskBackground(item),
@@ -221,12 +214,9 @@ const Dashboard = () => {
         minimumDuration: 0, //minutes
       });
 
-      if (
-        item["http://onto.fel.cvut.cz/ontologies/ufo/has-part"] &&
-        item["http://onto.fel.cvut.cz/ontologies/ufo/has-part"].length > 0
-      ) {
+      if (item.planParts && item.planParts.length > 0) {
         buildData(
-          item["http://onto.fel.cvut.cz/ontologies/ufo/has-part"],
+          item.planParts,
           groupsMap,
           items,
           level + 1,
