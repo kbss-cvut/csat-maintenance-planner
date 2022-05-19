@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
 import Constants from "../utils/Constants";
-import {
-  WorkPackageInterface,
-  RevisionPlanInterface,
-} from "../utils/Interfaces";
+import { WorkPackageInterface } from "../utils/Interfaces";
 
 import styles from "./Dashboard.module.scss";
 import LoadingSpinnerIcon from "../styles/icons/LoadingSpinnerIcon";
@@ -21,9 +18,7 @@ const Dashboard = () => {
     Array<WorkPackageInterface>
   >([]);
   const [revisionPlanList, setRevisionPlanList] = useState<Array<string>>([]);
-  const [revisionPlan, setRevisionPlan] = useState<
-    RevisionPlanInterface[] | null | typeof data
-  >(data);
+  const [revisionPlan, setRevisionPlan] = useState<any>([]);
 
   const [isListLoading, setIsListLoading] = useState<boolean>(false);
   const [isRevisionLoading, setIsRevisionLoading] = useState<boolean>(false);
@@ -161,17 +156,24 @@ const Dashboard = () => {
     groupParentId,
     itemParentId
   ) => {
-    if (!data || !Array.isArray(data)) {
+    if (!data) {
       return;
     }
 
     for (const item of data) {
-      const resourceId = item.resource.id + " - " + item.resource.type;
+      const resourceId =
+        item["http://onto.fel.cvut.cz/ontologies/csat-maintenance/id"] +
+        " - " +
+        item[
+          "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type"
+        ];
       if (!groupsMap.has(resourceId)) {
         groupsMap.set(resourceId, {
           id: groupsMap.size,
-          title: item.resource ? item.resource.title : "",
-          hasChildren: item.planParts && item.planParts.length > 0,
+          title: item["http://www.w3.org/2000/01/rdf-schema#label"],
+          hasChildren:
+            item["http://onto.fel.cvut.cz/ontologies/ufo/has-part"] &&
+            item["http://onto.fel.cvut.cz/ontologies/ufo/has-part"].length > 0,
           parent: groupParentId,
           open: level < 1,
           show: level < 2,
@@ -180,7 +182,7 @@ const Dashboard = () => {
       }
 
       const date = moment(
-        item.type === "SessionPlan"
+        item["@type"] === "SessionPlan"
           ? item["start-time"]
           : item["planned-start-time"]
       )
@@ -188,7 +190,7 @@ const Dashboard = () => {
         .add("2", "month")
         .add("27", "day");
       const endDate = moment(
-        item.type === "SessionPlan"
+        item["@type"] === "SessionPlan"
           ? item["end-time"]
           : item["planned-end-time"]
       )
@@ -200,9 +202,11 @@ const Dashboard = () => {
       items.push({
         id: itemId,
         group: groupsMap.get(resourceId).id,
-        title: item.title,
-        start: date,
-        end: endDate,
+        title: item["http://www.w3.org/2000/01/rdf-schema#label"]
+          ? item["http://www.w3.org/2000/01/rdf-schema#label"]
+          : "",
+        start: Date.now(),
+        end: Date.now() + 100000000,
         parent: itemParentId,
         className: "item",
         bgColor: getTaskBackground(item),
@@ -214,12 +218,15 @@ const Dashboard = () => {
         highlight: false,
         canMove: level > 1 && level !== 3,
         canResize: "both", //'left','right','both', false
-        minimumDuration: 120, //minutes
+        minimumDuration: 0, //minutes
       });
 
-      if (item.planParts && item.planParts.length > 0) {
+      if (
+        item["http://onto.fel.cvut.cz/ontologies/ufo/has-part"] &&
+        item["http://onto.fel.cvut.cz/ontologies/ufo/has-part"].length > 0
+      ) {
         buildData(
-          item.planParts,
+          item["http://onto.fel.cvut.cz/ontologies/ufo/has-part"],
           groupsMap,
           items,
           level + 1,

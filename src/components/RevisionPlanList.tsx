@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./RevisonPlanList.module.scss";
 
 interface Props {
-  revisionPlanTitleList: Array<string>;
+  revisionPlanTitleList: any;
   handleRevisionPlanOnClick: (index: number) => void;
 }
 

@@ -1,0 +1,1540 @@
+{
+  "@id": "_:1601684611",
+  "@type": [
+    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/workpackage-plan"
+  ],
+  "http://www.w3.org/2000/01/rdf-schema#label": "OK-TSI/H-21 AV10Y+LDG",
+  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1584154723,
+  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "RevisionPlan",
+  "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+    {
+      "@id": "_:952764011",
+      "@type": [
+        "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/phase-plan"
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#label": "",
+      "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063267,
+      "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "PhasePlan",
+      "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+        {
+          "@id": "_:1391077435",
+          "@type": [
+            "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/general-task-plan"
+          ],
+          "http://www.w3.org/2000/01/rdf-schema#label": "",
+          "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063268,
+          "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "GeneralTaskPlan",
+          "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+            {
+              "@id": "_:1811491171",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "79-010-02-01\nPERFORM AN OPERATIONAL CHECK OF THE RIGHT ENGINE T",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063398,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:454277383",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "PERFORM AN OPERATIONAL CHECK OF THE RIGHT ENGINE T",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "79-010-02-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-ENG",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73J",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1626003687",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063603,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1633829819",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063400,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1072309457",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063638,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:117185454",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063537,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1934772903",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063633,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1404683124",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063533,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:585676544",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "74-020-02-01\nDISCARD RIGHT ENGINE HPT DISK AT MANUFACTURER`S LI",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063564,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:1264129973",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "DISCARD RIGHT ENGINE HPT DISK AT MANUFACTURER`S LI",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "74-020-02-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-ENG",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73H",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:2060689928",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063665,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:558663291",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063660,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1997225482",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063566,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:779595984",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063670,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1567967772",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063585,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1482940723",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063576,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:1778187040",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "32-020-01-01\nSERVICE THE LEFT MAIN LANDING GEAR SHOCK STRUT",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063499,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:1398484742",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "SERVICE THE LEFT MAIN LANDING GEAR SHOCK STRUT",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "32-020-01-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-LDG",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73H",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:540646001",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063501,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:802315708",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "79-040-02-01\nOIL SCAVENGE FILTER ELEMENT - RIGHT ENGINE",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063526,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:820394919",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "OIL SCAVENGE FILTER ELEMENT - RIGHT ENGINE",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "79-040-02-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-ENG",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73W",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:937635369",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063692,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1605569036",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063697,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1458231546",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063612,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:166900348",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063528,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:336128753",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063607,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:274423669",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "57-351-01-01\nLEFT WINGLET",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063364,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:476587581",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "LEFT WINGLET",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "57-351-01-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-EXT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73W",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:917824345",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063405,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1124468661",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063389,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1078759404",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063366,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:549651346",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063375,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:74555983",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063384,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:1742774981",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "28-060-01-01\nOPERATIONALLY (LEAK) CHECK FWD LAVATORY POTABLE WA",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063454,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:703799225",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "OPERATIONALLY (LEAK) CHECK FWD LAVATORY POTABLE WA",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "28-060-01-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-EXT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73H",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1984350373",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063456,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:902613363",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "27-186-00-01\nPERFORM A DETAIL VISUAL INSPECTION OF THE PARKING",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063319,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:75249766",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "PERFORM A DETAIL VISUAL INSPECTION OF THE PARKING",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "27-186-00-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-EXT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73H",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1337783713",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063321,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:1167186513",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "53-822-00-01\nAIR CONDITIONING DISTRIBUTION BAY",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063441,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:612394645",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "AIR CONDITIONING DISTRIBUTION BAY",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "53-822-00-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-INT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73W",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1384933995",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063443,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:147108725",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "73-010-02-01\nBORESCOPE INSPECTION OF THE RIGHT ENGINE HPT BLADE",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063542,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:1723174086",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "BORESCOPE INSPECTION OF THE RIGHT ENGINE HPT BLADE",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "73-010-02-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-ENG",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73H",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:64602923",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063683,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:675178348",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063544,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:86558148",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063589,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1182383702",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063598,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:432785485",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063688,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:952060838",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "28-060-02-01\nRESTORE (CLEAN) THE RIGHT MAIN FUEL TANK WATER SCA",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063485,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:1463712944",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "RESTORE (CLEAN) THE RIGHT MAIN FUEL TANK WATER SCA",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "28-060-02-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-EXT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73W",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:922948828",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063487,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:2057068762",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "73-010-01-01\nBORESCOPE INSPECTION OF THE LEFT ENGINE HPT BLADE",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063512,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:915502447",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "BORESCOPE INSPECTION OF THE LEFT ENGINE HPT BLADE",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "73-010-01-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-ENG",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73H",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1749327838",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063629,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1340041161",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063624,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:44735416",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063515,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:8939348",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063701,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1757286279",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063706,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:1240105164",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "72-025-02-01\nENGINE - 2,  STAGE 1 FAN BLADE INSPECTION AND LUBR",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063351,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:77951032",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "ENGINE - 2,  STAGE 1 FAN BLADE INSPECTION AND LUBR",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "72-025-02-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-ENG",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73W",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:165835217",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063353,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:1968448684",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "79-010-01-01\nPERFORM AN OPERATIONAL CHECK OF THE LEFT ENGINE T/",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063420,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:540409117",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "PERFORM AN OPERATIONAL CHECK OF THE LEFT ENGINE T/",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "79-010-01-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-ENG",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73J",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:2095523479",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063594,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1810955947",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063553,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1378460262",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063647,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1791080807",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063548,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1252492960",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063423,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1337194478",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063642,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:989997659",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "25-190-01-01\nINSPECT (DETAILED) THE LEFT EMERGENCY EXIT HATCH E",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063332,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:654234192",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "INSPECT (DETAILED) THE LEFT EMERGENCY EXIT HATCH E",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "25-190-01-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-INT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73W",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1836519024",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063334,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:89810047",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "32-340-00-01\nPERFORM A FUNCTIONAL BLEED DOWN CHECK OF THE PARKI",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063409,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:1538213453",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "PERFORM A FUNCTIONAL BLEED DOWN CHECK OF THE PARKI",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "32-340-00-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-LDG",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73H",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1668146086",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063411,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:1796707154",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "57-351-02-01\nRIGHT WINGLET",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063357,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:1315042397",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "RIGHT WINGLET",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "57-351-02-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-EXT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73W",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1223899340",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063393,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1070190631",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063360,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:728420040",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063371,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:246470264",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063416,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1335551756",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063380,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:213580781",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "27-138-00-02\nOPERATIONAL CHECK STANDBY HYDRAULIC ELECTRIC MOTOR",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063313,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:1140160939",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "OPERATIONAL CHECK STANDBY HYDRAULIC ELECTRIC MOTOR",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "27-138-00-02",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-EXT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73J",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1025561133",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063315,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:554913233",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "32-020-02-01\nSERVICE THE RIGHT MAIN LANDING GEAR SHOCK STRUT.",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063492,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:967017332",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "SERVICE THE RIGHT MAIN LANDING GEAR SHOCK STRUT.",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "32-020-02-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-LDG",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73W",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:444446569",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063494,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:304627294",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "27-182-02-01\nPERFORM AN OPERATIONAL CHECK OF THE ALTERNATE BRAK",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063286,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:1465127814",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "PERFORM AN OPERATIONAL CHECK OF THE ALTERNATE BRAK",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "27-182-02-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-EXT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73J",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:55810378",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063288,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:414561134",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "25-190-02-01\nINSPECT (DETAILED) THE RIGHT EMERGENCY EXIT HATCH",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063325,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:1664946219",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "INSPECT (DETAILED) THE RIGHT EMERGENCY EXIT HATCH",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "25-190-02-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-INT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73W",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1019210093",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063327,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:469619794",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "27-228-00-02\nFLIGHT CONTROL CABLES - LOWER NOSE COMPARTMENT",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063345,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:97481374",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "FLIGHT CONTROL CABLES - LOWER NOSE COMPARTMENT",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "27-228-00-02",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-EXT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73H",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1960303439",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063347,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:1219792369",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "32-070-00-01\nSERVICE THE NOSE LANDING GEAR SHOCK STRUT",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063505,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:1446369460",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "SERVICE THE NOSE LANDING GEAR SHOCK STRUT",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "32-070-00-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-LDG",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73W",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1147468542",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063508,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:1866481177",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "29-070-00-02\nINTERNAL - DETAILED: FLIGHT DECK SECURITY DOOR PAN",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063710,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:1510957592",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "INTERNAL - DETAILED: FLIGHT DECK SECURITY DOOR PAN",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "29-070-00-02",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-LDG",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73J",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1321231716",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063713,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:862983026",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "27-228-00-05\nFLIGHT CONTROL CABLES - FORWARD CARGO COMPARTMENT",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063338,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:1093260036",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "FLIGHT CONTROL CABLES - FORWARD CARGO COMPARTMENT",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "27-228-00-05",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-EXT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73W",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:2064163860",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063341,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:1646424142",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "K-00-0766\nB737 VERIFICATION CHECK",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063448,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:842988961",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "B737 VERIFICATION CHECK",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "K-00-0766",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "AVIO",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73H",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:104882678",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063717,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:748060920",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063450,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:1942854427",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "32-240-00-01\nOPERATIONALLY CHECK THE LANDING GEAR TRANSFER VALV",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063427,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:898083829",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "OPERATIONALLY CHECK THE LANDING GEAR TRANSFER VALV",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "32-240-00-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-LDG",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73W",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1219734290",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063429,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:1948929928",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "79-040-01-01\nOIL SCAVENGE FILTER ELEMENT - LEFT ENGINE",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063519,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:539159203",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "OIL SCAVENGE FILTER ELEMENT - LEFT ENGINE",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "79-040-01-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-ENG",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73W",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:85005758",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063521,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1866384698",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063616,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:942499369",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063651,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1558792943",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063656,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1845652342",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063620,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:984394276",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "57-800-00-01\nRESTORE (CLEAN) THE RIGHT MAIN FUEL TANK WATER SCA",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063271,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:2068323831",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "RESTORE (CLEAN) THE RIGHT MAIN FUEL TANK WATER SCA",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "57-800-00-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-EXT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73J",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1944324585",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063275,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:669125919",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "27-170-02-01\nLUBRICATE THE RIGHT WING TRAILING EDGE FLAP ACTUAT",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063299,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:1981491735",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "LUBRICATE THE RIGHT WING TRAILING EDGE FLAP ACTUAT",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "27-170-02-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-EXT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73H",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:190100726",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063301,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:428741283",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "28-060-03-01\nRESTORE THE WASTE DRAIN BALL-VALVE BY REPLACING TH",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063460,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:231359689",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "RESTORE THE WASTE DRAIN BALL-VALVE BY REPLACING TH",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "28-060-03-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-EXT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73H",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1574379843",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063462,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:1611194720",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "56-010-00-01\nVISUALLY CHECK ENGINE FIRE BOTTLE PRESSURE GAUGE F",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063478,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:21058368",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "VISUALLY CHECK ENGINE FIRE BOTTLE PRESSURE GAUGE F",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "56-010-00-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-INT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73J",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:2021123887",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063480,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:759195835",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "27-136-02-01\nREMOVE THE B SYSTEM RUDDER FUSE FOR FUNCTIONAL CHE",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063306,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:1107036188",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "REMOVE THE B SYSTEM RUDDER FUSE FOR FUNCTIONAL CHE",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "27-136-02-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-EXT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73H",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:484333443",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063308,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:280435841",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "27-174-02-01\nPERFORM A FUNCTIONAL CHECK OF THE LEFT AND RIGHT M",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063292,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:1112644880",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "PERFORM A FUNCTIONAL CHECK OF THE LEFT AND RIGHT M",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "27-174-02-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-EXT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73J",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:165488720",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063295,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:1056883186",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "27-182-00-01\nPERFORM A DETAIL VISUAL INSPECTION OF THE FORWARD",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063279,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:1450488637",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "PERFORM A DETAIL VISUAL INSPECTION OF THE FORWARD",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "27-182-00-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-EXT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73H",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:349140107",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063281,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:814394893",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "29-250-00-01\nINTERNAL - DETAILED: ENTRY AND GALLEY SERVICE DOOR",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063434,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:1954409894",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "INTERNAL - DETAILED: ENTRY AND GALLEY SERVICE DOOR",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "29-250-00-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-LDG",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73H",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1400799030",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063436,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:2036662022",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "25-340-00-01\nLUBRICATE THE ELEVATOR MECHANICAL CONTROL PAT",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063467,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:745504297",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "LUBRICATE THE ELEVATOR MECHANICAL CONTROL PAT",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "25-340-00-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-INT",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73H",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1598923442",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063469,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:534996663",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063474,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            },
+            {
+              "@id": "_:1638779239",
+              "@type": [
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-plan"
+              ],
+              "http://www.w3.org/2000/01/rdf-schema#label": "74-020-01-01\nDISCARD LEFT ENGINE HPT DISK AT MANUFACTURER`S LIF",
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063557,
+              "http://onto.fel.cvut.cz/ontologies/csat-maintenance/task-type": {
+                "@id": "_:1378594090",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/maintenance-schema/Maintenance_task",
+                  "http://onto.fel.cvut.cz/ontologies/ufo/event-type"
+                ],
+                "http://www.w3.org/2000/01/rdf-schema#label": "DISCARD LEFT ENGINE HPT DISK AT MANUFACTURER`S LIF",
+                "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": "74-020-01-01",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/has-main-scope": "MECH-ENG",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/task-for-model": "73H",
+                "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskType"
+              },
+              "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "TaskPlan",
+              "http://onto.fel.cvut.cz/ontologies/ufo/has-part": [
+                {
+                  "@id": "_:1975609134",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063571,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1628168129",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063560,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:788823738",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063580,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1262777182",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063674,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                },
+                {
+                  "@id": "_:1029281503",
+                  "@type": [
+                    "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/work-session-plan"
+                  ],
+                  "http://onto.fel.cvut.cz/ontologies/csat-maintenance/id": 1652899063679,
+                  "http://onto.fel.cvut.cz/ontologies/aircraft-maintenance-planning/application-type": "SessionPlan"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
