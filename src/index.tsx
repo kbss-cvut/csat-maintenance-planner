@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import PlanManager from "./components/PlanManager";
 
 import "../src/styles/global.css";
-import Dashboard from "./components/Dashboard";
 
 ReactDOM.render(
   <React.Fragment>
-    <Dashboard />
+    <PlanManager />
   </React.Fragment>,
   document.getElementById("root")
 );

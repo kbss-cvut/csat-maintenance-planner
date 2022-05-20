@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import moment from "moment";
 import Constants from "../utils/Constants";
 import { WorkPackageInterface } from "../utils/Interfaces";
 
-import styles from "./Dashboard.module.scss";
+import styles from "./PlanManager.module.scss";
 import LoadingSpinnerIcon from "../styles/icons/LoadingSpinnerIcon";
 import RevisionPlanList from "./RevisionPlanList";
 import WorkPackageList from "./WorkPackageList";
-import PlanningTool from "react-maintenance-planner";
+import PlanEditor from "./PlanEditor";
 
-import "react-maintenance-planner/dist/PlanningTool.css";
-import data from "../data.json";
+import data from "../assets/realDataSample.json";
 
-const Dashboard = () => {
+const PlanManager = () => {
   const [workPackageList, setWorkPackageList] = useState<
     Array<WorkPackageInterface>
   >([]);
@@ -123,112 +121,11 @@ const Dashboard = () => {
         {revisionErrorMessage && <p>{revisionErrorMessage}</p>}
         {isRevisionLoading && !revisionErrorMessage && <LoadingSpinnerIcon />}
         {!isRevisionLoading && revisionPlan && !revisionErrorMessage && (
-          <PlanningTool items={items} groups={groups} />
+          <PlanEditor revisionPlan={revisionPlan} />
         )}
       </React.Fragment>
     );
   };
-
-  const items = [];
-  const groupsMap = new Map();
-
-  const getTaskBackground = (task) => {
-    if (!task.taskType) {
-      return "#2196F3";
-    }
-    console.log(task.taskType["task-category"]);
-    switch (task.taskType["task-category"]) {
-      case "scheduled-wo":
-        return "#aa0000";
-      case "task-card":
-        return "#00aa00";
-      case "maintenance-wo":
-        return "#0000aa";
-      default:
-        return "#2196F3";
-    }
-  };
-
-  const buildData = (
-    data,
-    groupsMap,
-    items,
-    level,
-    groupParentId,
-    itemParentId
-  ) => {
-    if (!data) {
-      return;
-    }
-
-    for (const item of data) {
-      const resourceId =
-        item.resource?.id + " - " + item.resource?.applicationType;
-      if (!groupsMap.has(resourceId)) {
-        groupsMap.set(resourceId, {
-          id: groupsMap.size,
-          title: item.resource?.title ? item.resource?.title : "-",
-          hasChildren: item.planParts && item.planParts.length > 0,
-          parent: groupParentId,
-          open: level < 1,
-          show: level < 2,
-          level: level,
-        });
-      }
-
-      const date = moment(
-        item.applicationType === "SessionPlan"
-          ? item.startTime
-          : item.plannedStartTime
-      )
-        .add("1", "year")
-        .add("2", "month")
-        .add("27", "day");
-      const endDate = moment(
-        item.applicationType === "SessionPlan"
-          ? item.endTime
-          : item.plannedEndTime
-      )
-        .add("1", "year")
-        .add("2", "month")
-        .add("27", "day");
-      const itemId = items.length + 1;
-
-      items.push({
-        id: itemId,
-        group: groupsMap.get(resourceId).id,
-        title: item.title ? item.title : "",
-        start: date,
-        end: endDate,
-        parent: itemParentId,
-        className: "item",
-        bgColor: getTaskBackground(item),
-        color: "#fff",
-        selectedBgColor: "#FFC107",
-        selectedColor: "#000",
-        draggingBgColor: "#f00",
-        highlightBgColor: "#FFA500",
-        highlight: false,
-        canMove: level > 1 && level !== 3,
-        canResize: "both", //'left','right','both', false
-        minimumDuration: 0, //minutes
-      });
-
-      if (item.planParts && item.planParts.length > 0) {
-        buildData(
-          item.planParts,
-          groupsMap,
-          items,
-          level + 1,
-          groupsMap.get(resourceId).id,
-          itemId
-        );
-      }
-    }
-  };
-
-  buildData(revisionPlan, groupsMap, items, 0, null, null);
-  const groups = Array.from(groupsMap, ([key, values]) => values);
 
   return (
     <div className={styles.container}>
@@ -255,4 +152,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default PlanManager;
