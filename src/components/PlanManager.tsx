@@ -30,20 +30,20 @@ const PlanManager = () => {
     setListErrorMessage("");
   }, []);
 
-  useEffect(() => {
-    const fetchWorkPackages = async () => {
-      setIsListLoading(true);
-      setUpdate(false);
-      const { data } = await axios.get(Constants.SERVER_URL_WORKPACKAGE_LIST);
-      setWorkPackageList([...data]);
-    };
-    fetchWorkPackages().then(() => {
-      setIsListLoading(false);
-    });
-    fetchWorkPackages().catch((error) => {
-      setListErrorMessage(error.toString());
-    });
-  }, [update]);
+  // useEffect(() => {
+  //   const fetchWorkPackages = async () => {
+  //     setIsListLoading(true);
+  //     setUpdate(false);
+  //     const { data } = await axios.get(Constants.SERVER_URL_WORKPACKAGE_LIST);
+  //     setWorkPackageList([...data]);
+  //   };
+  //   fetchWorkPackages().then(() => {
+  //     setIsListLoading(false);
+  //   });
+  //   fetchWorkPackages().catch((error) => {
+  //     setListErrorMessage(error.toString());
+  //   });
+  // }, [update]);
 
   useEffect(() => {
     const fetchRevisionPlanTitles = async () => {
@@ -88,17 +88,17 @@ const PlanManager = () => {
     setUpdate(true);
   };
 
-  const renderWorkPackageList = () => {
-    return (
-      <React.Fragment>
-        {isListLoading && listErrorMessage && <p>{listErrorMessage}</p>}
-        {isListLoading && !listErrorMessage && <LoadingSpinnerIcon />}
-        {!isListLoading && (
-          <WorkPackageList workPackageList={workPackageList} />
-        )}
-      </React.Fragment>
-    );
-  };
+  // const renderWorkPackageList = () => {
+  //   return (
+  //     <React.Fragment>
+  //       {isListLoading && listErrorMessage && <p>{listErrorMessage}</p>}
+  //       {isListLoading && !listErrorMessage && <LoadingSpinnerIcon />}
+  //       {!isListLoading && (
+  //         <WorkPackageList workPackageList={workPackageList} />
+  //       )}
+  //     </React.Fragment>
+  //   );
+  // };
 
   const renderRevisionList = () => {
     return (
@@ -138,11 +138,12 @@ const PlanManager = () => {
         </div>
         <br />
         <h2>Available Revision Plans</h2>
+        <br />
         {renderRevisionList()}
-        <br />
-        <br />
-        <h2>Available Work Packages</h2>
-        {renderWorkPackageList()}
+        {/*<br />*/}
+        {/*<br />*/}
+        {/*<h2>Available Work Packages</h2>*/}
+        {/*{renderWorkPackageList()}*/}
         <button className={styles.button} onClick={handleUpdateClick}>
           Update
         </button>
