@@ -1,8 +1,8 @@
 import React from "react";
-import PlanningTool from "planning-tool";
+import PlanningTool from "react-maintenance-planner";
 import moment from "moment";
 
-import "planning-tool/dist/PlanningTool.css";
+import "react-maintenance-planner/dist/PlanningTool.css";
 
 interface Props {
   revisionPlan: any;
