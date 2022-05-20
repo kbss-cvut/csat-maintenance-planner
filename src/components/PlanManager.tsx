@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Constants from "../utils/Constants";
-import { WorkPackageInterface } from "../utils/Interfaces";
 
 import styles from "./PlanManager.module.scss";
 import LoadingSpinnerIcon from "../styles/icons/LoadingSpinnerIcon";
 import RevisionPlanList from "./RevisionPlanList";
-import WorkPackageList from "./WorkPackageList";
 import PlanEditor from "./PlanEditor";
 
 import data from "../assets/realDataSample.json";
 
 const PlanManager = () => {
-  const [workPackageList, setWorkPackageList] = useState<
-    Array<WorkPackageInterface>
-  >([]);
+  // const [workPackageList, setWorkPackageList] = useState<
+  //   Array<WorkPackageInterface>
+  // >([]);
   const [revisionPlanList, setRevisionPlanList] = useState<Array<string>>([]);
   const [revisionPlan, setRevisionPlan] = useState<any>([data]);
 
@@ -52,9 +50,11 @@ const PlanManager = () => {
       const { data } = await axios.get(Constants.SERVER_URL_REVISION_LIST);
       setRevisionPlanList([...data]);
     };
+
     fetchRevisionPlanTitles().then(() => {
       setIsListLoading(false);
     });
+
     fetchRevisionPlanTitles().catch((error) => {
       setListErrorMessage(error.toString());
     });
@@ -63,6 +63,7 @@ const PlanManager = () => {
   const handleRevisionPlanOnClick = (index: number) => {
     setIsRevisionLoading(true);
     setRevisionErrorMessage("");
+
     const fetchRevisionPlanData = async () => {
       const revisionTitle = revisionPlanList[index];
       const revisionId = revisionTitle
@@ -75,9 +76,11 @@ const PlanManager = () => {
       );
       setRevisionPlan([data]);
     };
+
     fetchRevisionPlanData().then(() => {
       setIsRevisionLoading(false);
     });
+
     fetchRevisionPlanData().catch((error) => {
       setRevisionErrorMessage(error.toString());
       setIsRevisionLoading(false);
