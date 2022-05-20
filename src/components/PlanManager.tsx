@@ -16,13 +16,20 @@ const PlanManager = () => {
   // TODO: Set revision plan interface
   const [revisionPlan, setRevisionPlan] = useState<any>([]);
 
-  const [listErrorMessage, setListErrorMessage] = useState<string>("");
-  const [revisionErrorMessage, setRevisionErrorMessage] = useState<string>("");
+  const [isRevisionPlanListLoading, setIsRevisionPlanListLoading] =
+    useState<boolean>(false);
+  const [isRevisionPlanLoading, setIsRevisionPlanLoading] =
+    useState<boolean>(false);
+
+  const [revisionPlanListErrorMessage, setRevisionPlanListErrorMessage] =
+    useState<string>("");
+  const [revisionPlanErrorMessage, setRevisionPlanErrorMessage] =
+    useState<string>("");
 
   const [update, setUpdate] = useState<boolean>(false);
 
   useEffect(() => {
-    setListErrorMessage("");
+    setRevisionPlanListErrorMessage("");
   }, []);
 
   // useEffect(() => {
@@ -42,18 +49,18 @@ const PlanManager = () => {
 
   useEffect(() => {
     const fetchRevisionPlanTitles = async () => {
-      setIsListLoading(true);
+      setIsRevisionPlanListLoading(true);
       setUpdate(false);
       const { data } = await axios.get(Constants.SERVER_URL_REVISION_LIST);
       setRevisionPlanList([...data]);
     };
 
     fetchRevisionPlanTitles().then(() => {
-      setIsListLoading(false);
+      setIsRevisionPlanListLoading(false);
     });
 
     fetchRevisionPlanTitles().catch((error) => {
-      setListErrorMessage(error.toString());
+      setRevisionPlanListErrorMessage(error.toString());
     });
   }, [update]);
 
@@ -100,8 +107,8 @@ const PlanManager = () => {
   }, [window.location.pathname]);
 
   const handleRevisionPlanOnClick = (index: number) => {
-    setIsRevisionLoading(true);
-    setRevisionErrorMessage("");
+    setIsRevisionPlanLoading(true);
+    setRevisionPlanErrorMessage("");
 
     const fetchRevisionPlanData = async () => {
       const revisionTitle = revisionPlanList[index];
@@ -117,12 +124,12 @@ const PlanManager = () => {
     };
 
     fetchRevisionPlanData().then(() => {
-      setIsRevisionLoading(false);
+      setIsRevisionPlanLoading(false);
     });
 
     fetchRevisionPlanData().catch((error) => {
-      setRevisionErrorMessage(error.toString());
-      setIsRevisionLoading(false);
+      setRevisionPlanErrorMessage(error.toString());
+      setIsRevisionPlanLoading(false);
     });
   };
 
@@ -145,9 +152,13 @@ const PlanManager = () => {
   const renderRevisionList = () => {
     return (
       <React.Fragment>
-        {isListLoading && listErrorMessage && <p>{listErrorMessage}</p>}
-        {isListLoading && !listErrorMessage && <LoadingSpinnerIcon />}
-        {!isListLoading && (
+        {isRevisionPlanListLoading && revisionPlanListErrorMessage && (
+          <p>{revisionPlanListErrorMessage}</p>
+        )}
+        {isRevisionPlanListLoading && !revisionPlanListErrorMessage && (
+          <LoadingSpinnerIcon />
+        )}
+        {!isRevisionPlanListLoading && (
           <RevisionPlanList
             revisionPlanTitleList={revisionPlanList}
             handleRevisionPlanOnClick={handleRevisionPlanOnClick}
@@ -157,14 +168,18 @@ const PlanManager = () => {
     );
   };
 
-  const renderPlanningTool = () => {
+  const renderPlanEditor = () => {
     return (
       <React.Fragment>
-        {revisionErrorMessage && <p>{revisionErrorMessage}</p>}
-        {isRevisionLoading && !revisionErrorMessage && <LoadingSpinnerIcon />}
-        {!isRevisionLoading && revisionPlan && !revisionErrorMessage && (
-          <PlanEditor revisionPlan={revisionPlan} />
+        {revisionPlanErrorMessage && <p>{revisionPlanErrorMessage}</p>}
+        {isRevisionPlanLoading && !revisionPlanErrorMessage && (
+          <LoadingSpinnerIcon />
         )}
+        {!isRevisionPlanLoading &&
+          revisionPlan &&
+          !revisionPlanErrorMessage && (
+            <PlanEditor revisionPlan={revisionPlan} />
+          )}
       </React.Fragment>
     );
   };
@@ -190,7 +205,7 @@ const PlanManager = () => {
           Update
         </button>
       </div>
-      <div className={styles.planning}>{renderPlanningTool()}</div>
+      <div className={styles.planning}>{renderPlanEditor()}</div>
     </div>
   );
 };
