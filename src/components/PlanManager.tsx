@@ -7,17 +7,14 @@ import LoadingSpinnerIcon from "../styles/icons/LoadingSpinnerIcon";
 import RevisionPlanList from "./RevisionPlanList";
 import PlanEditor from "./PlanEditor";
 
-import data from "../assets/realDataSample.json";
-
 const PlanManager = () => {
   // const [workPackageList, setWorkPackageList] = useState<
   //   Array<WorkPackageInterface>
   // >([]);
   const [revisionPlanList, setRevisionPlanList] = useState<Array<string>>([]);
-  const [revisionPlan, setRevisionPlan] = useState<any>([data]);
 
-  const [isListLoading, setIsListLoading] = useState<boolean>(false);
-  const [isRevisionLoading, setIsRevisionLoading] = useState<boolean>(false);
+  // TODO: Set revision plan interface
+  const [revisionPlan, setRevisionPlan] = useState<any>([]);
 
   const [listErrorMessage, setListErrorMessage] = useState<string>("");
   const [revisionErrorMessage, setRevisionErrorMessage] = useState<string>("");
@@ -59,6 +56,48 @@ const PlanManager = () => {
       setListErrorMessage(error.toString());
     });
   }, [update]);
+
+  useEffect(() => {
+    const handleRevisionPlanByURL = () => {
+      setIsRevisionPlanLoading(true);
+      setRevisionPlanErrorMessage("");
+
+      const fetchRevisionPlanData = async () => {
+        const revisionTitle = window.location.pathname
+          .replaceAll(Constants.BASENAME, "")
+          .replace("/", "");
+
+        const revisionId = revisionTitle
+          .replaceAll(Constants.BASENAME, "")
+          .replace("/", "")
+          .replaceAll(" ", "%20")
+          .replaceAll("/", "%2F")
+          .replaceAll("+", "%2B")
+          .split(",")[0];
+
+        const { data } = await axios.get(
+          Constants.SERVER_URL_REVISION_ID + revisionId
+        );
+        setRevisionPlan([data]);
+      };
+
+      fetchRevisionPlanData().then(() => {
+        setIsRevisionPlanLoading(false);
+      });
+
+      fetchRevisionPlanData().catch((error) => {
+        setRevisionPlanErrorMessage(error.toString());
+        setIsRevisionPlanLoading(false);
+      });
+    };
+    if (
+      window.location.pathname !== "/" &&
+      window.location.pathname !== Constants.BASENAME
+    ) {
+      handleRevisionPlanByURL();
+    }
+    return;
+  }, [window.location.pathname]);
 
   const handleRevisionPlanOnClick = (index: number) => {
     setIsRevisionLoading(true);

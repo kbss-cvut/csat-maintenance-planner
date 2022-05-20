@@ -40,6 +40,7 @@ const Constants = {
     "SERVER_URL_REVISION_ID",
     "https://kbss.felk.cvut.cz/csat/api2/plans/revision-plans-induced-by-revision-execution?revisionId="
   ),
+  BASENAME: "/plan-manager/",
 };
 
 export default Constants;

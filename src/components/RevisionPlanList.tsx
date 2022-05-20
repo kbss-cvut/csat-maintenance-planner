@@ -1,6 +1,8 @@
 import React from "react";
 
 import styles from "./RevisonPlanList.module.scss";
+import { Link } from "react-router-dom";
+import Constants from "../utils/Constants";
 
 interface Props {
   revisionPlanTitleList: any;
@@ -14,13 +16,17 @@ const RevisionPlanList = ({
   return (
     <ul className={styles.revisionPlanItems}>
       {revisionPlanTitleList.map((revisionPlanTitle: string, index: number) => (
-        <li
+        <Link
           key={index}
-          className={styles.revisionPlanItem}
-          onClick={() => handleRevisionPlanOnClick(index)}
+          to={Constants.BASENAME + revisionPlanTitle.replaceAll("/", "%2F")}
         >
-          {revisionPlanTitle}
-        </li>
+          <li
+            className={styles.revisionPlanItem}
+            onClick={() => handleRevisionPlanOnClick(index)}
+          >
+            {revisionPlanTitle}
+          </li>
+        </Link>
       ))}
     </ul>
   );
