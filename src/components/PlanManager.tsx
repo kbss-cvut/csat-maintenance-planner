@@ -75,7 +75,6 @@ const PlanManager = () => {
           .replace("/", "");
 
         const revisionId = revisionTitle
-          .replaceAll(Constants.BASENAME, "")
           .replace("/", "")
           .replaceAll(" ", "%20")
           .replaceAll("/", "%2F")
@@ -117,6 +116,7 @@ const PlanManager = () => {
         .replaceAll("/", "%2F")
         .replaceAll("+", "%2B")
         .split(",")[0];
+
       const { data } = await axios.get(
         Constants.SERVER_URL_REVISION_ID + revisionId
       );

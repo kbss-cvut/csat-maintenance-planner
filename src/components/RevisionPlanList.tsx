@@ -16,10 +16,7 @@ const RevisionPlanList = ({
   return (
     <ul className={styles.revisionPlanItems}>
       {revisionPlanTitleList.map((revisionPlanTitle: string, index: number) => (
-        <Link
-          key={index}
-          to={Constants.BASENAME + revisionPlanTitle.replaceAll("/", "%2F")}
-        >
+        <Link key={index} to={revisionPlanTitle.replaceAll("/", "%2F")}>
           <li
             className={styles.revisionPlanItem}
             onClick={() => handleRevisionPlanOnClick(index)}
