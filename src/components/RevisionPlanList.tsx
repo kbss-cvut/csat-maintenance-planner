@@ -2,7 +2,6 @@ import React from "react";
 
 import styles from "./RevisonPlanList.module.scss";
 import { Link } from "react-router-dom";
-import Constants from "../utils/Constants";
 
 interface Props {
   revisionPlanTitleList: any;
@@ -16,7 +15,10 @@ const RevisionPlanList = ({
   return (
     <ul className={styles.revisionPlanItems}>
       {revisionPlanTitleList.map((revisionPlanTitle: string, index: number) => (
-        <Link key={index} to={revisionPlanTitle.replaceAll("/", "%2F")}>
+        <Link
+          key={index}
+          to={encodeURIComponent(revisionPlanTitle.split(",")[0])}
+        >
           <li
             className={styles.revisionPlanItem}
             onClick={() => handleRevisionPlanOnClick(index)}

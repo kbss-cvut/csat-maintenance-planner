@@ -70,16 +70,9 @@ const PlanManager = () => {
       setRevisionPlanErrorMessage("");
 
       const fetchRevisionPlanData = async () => {
-        const revisionTitle = window.location.pathname
-          .replaceAll(Constants.BASENAME, "")
-          .replace("/", "");
-
-        const revisionId = revisionTitle
-          .replace("/", "")
-          .replaceAll(" ", "%20")
-          .replaceAll("/", "%2F")
-          .replaceAll("+", "%2B")
-          .split(",")[0];
+        const revisionId = window.location.pathname
+          .split(",")[0]
+          .replaceAll(Constants.BASENAME, "");
 
         const { data } = await axios.get(
           Constants.SERVER_URL_REVISION_ID + revisionId
@@ -103,19 +96,15 @@ const PlanManager = () => {
       handleRevisionPlanByURL();
     }
     return;
-  }, [window.location.pathname]);
+  }, []);
 
   const handleRevisionPlanOnClick = (index: number) => {
     setIsRevisionPlanLoading(true);
     setRevisionPlanErrorMessage("");
 
     const fetchRevisionPlanData = async () => {
-      const revisionTitle = revisionPlanList[index];
-      const revisionId = revisionTitle
-        .replaceAll(" ", "%20")
-        .replaceAll("/", "%2F")
-        .replaceAll("+", "%2B")
-        .split(",")[0];
+      const revisionTitle = revisionPlanList[index].split(",")[0];
+      const revisionId = encodeURIComponent(revisionTitle);
 
       const { data } = await axios.get(
         Constants.SERVER_URL_REVISION_ID + revisionId
