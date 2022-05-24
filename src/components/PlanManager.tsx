@@ -7,7 +7,11 @@ import LoadingSpinnerIcon from "../styles/icons/LoadingSpinnerIcon";
 import RevisionPlanList from "./RevisionPlanList";
 import PlanEditor from "./PlanEditor";
 
-const PlanManager = () => {
+interface Props {
+  basename: string;
+}
+
+const PlanManager = ({ basename }: Props) => {
   // const [workPackageList, setWorkPackageList] = useState<
   //   Array<WorkPackageInterface>
   // >([]);
@@ -70,9 +74,7 @@ const PlanManager = () => {
       setRevisionPlanErrorMessage("");
 
       const fetchRevisionPlanData = async () => {
-        const revisionId = window.location.pathname
-          .split(",")[0]
-          .replaceAll(Constants.BASENAME, "");
+        const revisionId = window.location.pathname.split("/").pop();
 
         const { data } = await axios.get(
           Constants.SERVER_URL_REVISION_ID + revisionId
@@ -91,7 +93,7 @@ const PlanManager = () => {
     };
     if (
       window.location.pathname !== "/" &&
-      window.location.pathname !== Constants.BASENAME
+      window.location.pathname !== basename
     ) {
       handleRevisionPlanByURL();
     }
