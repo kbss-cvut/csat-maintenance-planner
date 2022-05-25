@@ -92,12 +92,12 @@ const PlanManager = ({ basename }: Props) => {
       });
     };
     if (
-      window.location.pathname !== "/" &&
-      window.location.pathname !== basename
-    ) {
-      handleRevisionPlanByURL();
-    }
-    return;
+      window.location.pathname === "/" &&
+      window.location.pathname === basename
+    )
+      return;
+
+    handleRevisionPlanByURL();
   }, []);
 
   const handleRevisionPlanOnClick = (index: number) => {
