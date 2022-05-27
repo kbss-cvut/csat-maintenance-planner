@@ -49,7 +49,7 @@ const PlanEditor = ({ revisionPlan }: Props) => {
           title: item.resource?.title ? item.resource?.title : "-",
           hasChildren: item.planParts && item.planParts.length > 0,
           parent: groupParentId,
-          open: level < 1,
+          open: level < 0,
           show: level < 2,
           level: level,
         });
