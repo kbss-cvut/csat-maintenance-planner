@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Constants from "../utils/Constants";
-
-import styles from "./PlanManager.module.scss";
 import LoadingSpinnerIcon from "../styles/icons/LoadingSpinnerIcon";
 import RevisionPlanList from "./RevisionPlanList";
 import PlanEditor from "./PlanEditor";
+
+import dataTest from "../assets/data-test.json";
+import styles from "./PlanManager.module.scss";
 
 interface Props {
   basename: string;
@@ -18,7 +19,7 @@ const PlanManager = ({ basename }: Props) => {
   const [revisionPlanList, setRevisionPlanList] = useState<Array<string>>([]);
 
   // TODO: Set revision plan interface
-  const [revisionPlan, setRevisionPlan] = useState<any>([]);
+  const [revisionPlan, setRevisionPlan] = useState<any>([dataTest]);
 
   const [isRevisionPlanListLoading, setIsRevisionPlanListLoading] =
     useState<boolean>(false);
@@ -177,7 +178,7 @@ const PlanManager = ({ basename }: Props) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.dashboard}>
+      <div className={styles["revision-plans"]}>
         <div className={styles.header}>
           <img
             alt="CSAT logo"

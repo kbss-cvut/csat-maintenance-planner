@@ -1,0 +1,51 @@
+.container {
+}
+
+.resources-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    //align-items: start;
+    //justify-content: start;
+    background-color: #595959;
+    padding: 1rem;
+    border-radius: 20px;
+    //overflow: scroll;
+    max-height: 70vh;
+    max-width: 80vw;
+    width: 100%;
+}
+
+.items {
+    padding: 1rem;
+}
+
+li {
+    list-style-type: none;
+
+    &:hover {
+
+    }
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: row;
+
+    button {
+        margin: 1rem;
+    }
+
+    .confirm {
+        &:hover {
+            background-color: #00b050;
+            opacity: 120%;
+        }
+    }
+    .discard {
+        &:hover {
+            background-color: #ff0000;
+            opacity: 120%;
+        }
+    }
+}

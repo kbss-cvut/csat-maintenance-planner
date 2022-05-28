@@ -3,7 +3,7 @@ version: '2'
 services:
 
   plan-manager:
-    image: docker.pkg.github.com/kbss-cvut/csat-maintenance-planner/csat-maintenance-planner:latest
+    image: csat-maintenance-planner:latest
     container_name: csat-plan-manager
     restart: always
     ports:

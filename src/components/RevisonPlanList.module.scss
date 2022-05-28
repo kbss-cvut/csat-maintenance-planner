@@ -1,17 +1,10 @@
-.revisionPlanItems {
+.revision-plan-items {
   overflow-y: scroll;
   padding: 1rem 1rem;
-  max-height: 100vh;
-  min-width: 20vw;
 }
 
-.revisionPlanItem {
+.revision-plan-item {
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;
   cursor: pointer;
-
-  &:hover {
-    transition: 0.3s;
-    opacity: 20%;
-  }
 }

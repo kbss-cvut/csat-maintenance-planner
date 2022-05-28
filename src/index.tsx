@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import PlanManager from "./components/PlanManager";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import "../src/styles/global.css";
+import "./styles/global.scss";
 
 /**
  * React Router v6 with relative path deployment

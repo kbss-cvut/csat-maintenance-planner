@@ -1,16 +1,13 @@
 .container {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  flex-direction: row;
   align-items: flex-start;
   width: 100vw;
   height: 100vh;
-  background-color: #595959;
-  padding: 3rem;
-  overflow: hidden;
+  padding: 2rem;
 }
 
-.dashboard {
+.revision-plans {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,28 +21,13 @@
 }
 
 .button {
-  font-size: 1em;
-  padding: 0.35em 1.2em;
-  border: 0.1em solid #ffffff;
-  margin: 0.3em 0 0.3em 0;
-  border-radius: 0.12em;
-  font-weight: 300;
-  text-align: center;
   width: 100%;
-  cursor: pointer;
-  color: black;
-
-  &:hover {
-    transition: 0.3s;
-    opacity: 20%;
-  }
 }
 
 .planning {
   padding-top: 78px;
-  padding-left: 1rem;
+  padding-left: 3rem;
   height: 100%;
-  max-width: 70vw;
-  max-height: 90vh;
-  overflow-y: auto;
+  width: 100%;
+  max-width: 75vw;
 }

@@ -13,14 +13,14 @@ const RevisionPlanList = ({
   handleRevisionPlanOnClick,
 }: Props) => {
   return (
-    <ul className={styles.revisionPlanItems}>
+    <ul className={styles["revision-plan-items"]}>
       {revisionPlanTitleList.map((revisionPlanTitle: string, index: number) => (
         <Link
           key={index}
           to={encodeURIComponent(revisionPlanTitle.split(",")[0])}
         >
           <li
-            className={styles.revisionPlanItem}
+            className={styles["revision-plan-item"]}
             onClick={() => handleRevisionPlanOnClick(index)}
           >
             {revisionPlanTitle}
