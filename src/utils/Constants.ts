@@ -40,6 +40,12 @@ const Constants = {
     "SERVER_URL_REVISION_ID",
     "https://kbss.felk.cvut.cz/csat/api2/plans/revision-plans-induced-by-revision-execution?revisionId="
   ),
+
+  APPLICATION_TYPE: {
+    PHASE_PLAN: "PhasePlan",
+    GENERAL_TASK_PLAN: "GeneralTaskPlan",
+    SESSION_PLAN: "SessionPlan",
+  },
 };
 
 export default Constants;

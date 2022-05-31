@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PlanningTool from "react-maintenance-planner";
 import moment from "moment";
+import Constants from "../utils/Constants";
 
 import "react-maintenance-planner/dist/react-maintenance-planner.css";
 
@@ -13,11 +14,6 @@ const PlanEditor = ({ revisionPlan, extend }: Props) => {
   const [showEditRevisionPlan, setShowEditRevisionPlan] =
     useState<boolean>(false);
   const [keyValue, setKeyValue] = useState<number>(0);
-
-  // useEffect(() => {
-  //   setKeyValue(keyValue + 1);
-  // }, [extend]);
-
   const items = [];
   const groupsMap = new Map();
 
@@ -35,6 +31,19 @@ const PlanEditor = ({ revisionPlan, extend }: Props) => {
       default:
         return "#2196F3";
     }
+  };
+
+  const getItemTitle = (item) => {
+    if (!item.title) {
+      return "";
+    }
+    if (
+      item.applicationType === Constants.APPLICATION_TYPE.PHASE_PLAN ||
+      item.applicationType === Constants.APPLICATION_TYPE.GENERAL_TASK_PLAN
+    ) {
+      return item.applicationType + ": " + item.title;
+    }
+    return item.title;
   };
 
   const buildData = (
@@ -65,12 +74,12 @@ const PlanEditor = ({ revisionPlan, extend }: Props) => {
       }
 
       const startDate = moment(
-        item.applicationType === "SessionPlan"
+        item.applicationType === Constants.APPLICATION_TYPE.SESSION_PLAN
           ? item.startTime
           : item.plannedStartTime
       );
       const endDate = moment(
-        item.applicationType === "SessionPlan"
+        item.applicationType === Constants.APPLICATION_TYPE.SESSION_PLAN
           ? item.endTime
           : item.plannedEndTime
       );
@@ -79,7 +88,7 @@ const PlanEditor = ({ revisionPlan, extend }: Props) => {
       items.push({
         id: itemId,
         group: groupsMap.get(resourceId).id,
-        title: item.title ? item.title : "",
+        title: getItemTitle(item),
         start: startDate,
         end: endDate,
         parent: itemParentId,
@@ -112,18 +121,8 @@ const PlanEditor = ({ revisionPlan, extend }: Props) => {
   buildData(revisionPlan, groupsMap, items, 0, null, null);
   const groups = Array.from(groupsMap, ([key, values]) => values);
 
-  const handleGroupsOnClick = () => {
-    setShowEditRevisionPlan(!showEditRevisionPlan);
-  };
-
   return (
-    <div>
-      {/*<button onClick={handleGroupsOnClick}>Edit resources</button>*/}
-      {/*{showEditRevisionPlan && (*/}
-      {/*  <EditorModal groups={groups} handleClose={handleGroupsOnClick} />*/}
-      {/*)}*/}
-      {<PlanningTool key={keyValue} items={items} groups={groups} />}
-    </div>
+    <div>{<PlanningTool key={keyValue} items={items} groups={groups} />}</div>
   );
 };
 
