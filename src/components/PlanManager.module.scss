@@ -12,12 +12,33 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
-  overflow: hidden;
 }
 
 .header {
+  display: flex;
+  flex-direction: row;
   border-bottom: white solid 2px;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
+}
+
+.double-arrow-icon {
+  cursor: pointer;
+
+  &:hover {
+    opacity: .5;
+  }
+}
+
+.double-arrow-icon-active {
+  cursor: pointer;
+  margin-top: 25px;
+  -webkit-transform: rotateY(180deg);
+
+  &:hover {
+    opacity: .5;
+  }
 }
 
 .button {
@@ -25,9 +46,9 @@
 }
 
 .planning {
-  padding-top: 78px;
   padding-left: 3rem;
   height: 100%;
+  color: #263238;
   width: 100%;
-  max-width: 75vw;
+  overflow-x: hidden;
 }

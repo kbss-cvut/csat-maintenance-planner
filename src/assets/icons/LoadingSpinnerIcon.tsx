@@ -5,7 +5,7 @@ interface Props {
   width?: number;
 }
 
-const SvgLoading = ({ height = 250, width = 250 }: Props) => (
+const LoadingSpinnerIcon = ({ height = 250, width = 250 }: Props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -482,4 +482,4 @@ const SvgLoading = ({ height = 250, width = 250 }: Props) => (
   </svg>
 );
 
-export default SvgLoading;
+export default LoadingSpinnerIcon;

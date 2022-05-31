@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Constants from "../utils/Constants";
-import LoadingSpinnerIcon from "../styles/icons/LoadingSpinnerIcon";
 import RevisionPlanList from "./RevisionPlanList";
 import PlanEditor from "./PlanEditor";
+import LoadingSpinnerIcon from "../assets/icons/LoadingSpinnerIcon";
+import DoubleArrowIcon from "../assets/icons/DoubleArrowIcon";
 
 import dataTest from "../assets/data-test.json";
 import styles from "./PlanManager.module.scss";
@@ -32,6 +33,9 @@ const PlanManager = ({ basename }: Props) => {
     useState<string>("");
 
   const [update, setUpdate] = useState<boolean>(false);
+
+  const [showRevisionPlanList, setShowRevisionPlanList] =
+    useState<boolean>(true);
 
   useEffect(() => {
     setRevisionPlanListErrorMessage("");
@@ -141,6 +145,10 @@ const PlanManager = ({ basename }: Props) => {
   //   );
   // };
 
+  const handleShowRevisionPlanOnClick = () => {
+    setShowRevisionPlanList(!showRevisionPlanList);
+  };
+
   const renderRevisionList = () => {
     return (
       <React.Fragment>
@@ -170,33 +178,58 @@ const PlanManager = ({ basename }: Props) => {
         {!isRevisionPlanLoading &&
           revisionPlan &&
           !revisionPlanErrorMessage && (
-            <PlanEditor revisionPlan={revisionPlan} />
+            <PlanEditor
+              revisionPlan={revisionPlan}
+              extend={showRevisionPlanList}
+            />
           )}
       </React.Fragment>
     );
   };
 
+  const applyExtendedPlanningClassname = () => {
+    if (showRevisionPlanList) {
+      return "";
+    }
+    return "extended";
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles["revision-plans"]}>
-        <div className={styles.header}>
-          <img
-            alt="CSAT logo"
-            src="https://www.csatechnics.com/img/lower-logo.png"
-          />
+      {showRevisionPlanList ? (
+        <div className={styles["revision-plans"]}>
+          <div className={styles.header}>
+            <img
+              alt="CSAT logo"
+              src="https://www.csatechnics.com/img/lower-logo.png"
+            />
+            <span
+              className={styles["double-arrow-icon"]}
+              onClick={handleShowRevisionPlanOnClick}
+            >
+              <DoubleArrowIcon />
+            </span>
+          </div>
+          <br />
+          <h2>Work Packages</h2>
+          <br />
+          {renderRevisionList()}
+          {/*<br />*/}
+          {/*<br />*/}
+          {/*<h2>Available Work Packages</h2>*/}
+          {/*{renderWorkPackageList()}*/}
+          <button className={styles.button} onClick={handleUpdateClick}>
+            Update
+          </button>
         </div>
-        <br />
-        <h2>Available Revision Plans</h2>
-        <br />
-        {renderRevisionList()}
-        {/*<br />*/}
-        {/*<br />*/}
-        {/*<h2>Available Work Packages</h2>*/}
-        {/*{renderWorkPackageList()}*/}
-        <button className={styles.button} onClick={handleUpdateClick}>
-          Update
-        </button>
-      </div>
+      ) : (
+        <span
+          className={styles["double-arrow-icon-active"]}
+          onClick={handleShowRevisionPlanOnClick}
+        >
+          <DoubleArrowIcon />
+        </span>
+      )}
       <div className={styles.planning}>{renderPlanEditor()}</div>
     </div>
   );

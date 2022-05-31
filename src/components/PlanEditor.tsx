@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import PlanningTool from "react-maintenance-planner";
 import moment from "moment";
-import EditorModal from "./EditorModal";
 
-import styles from "./PlanEditor.module.scss";
 import "react-maintenance-planner/dist/react-maintenance-planner.css";
 
 interface Props {
   revisionPlan: any;
+  extend?: boolean;
 }
 
-const PlanEditor = ({ revisionPlan }: Props) => {
-  const items = [];
-  const groupsMap = new Map();
+const PlanEditor = ({ revisionPlan, extend }: Props) => {
   const [showEditRevisionPlan, setShowEditRevisionPlan] =
     useState<boolean>(false);
+  const [keyValue, setKeyValue] = useState<number>(0);
+
+  // useEffect(() => {
+  //   setKeyValue(keyValue + 1);
+  // }, [extend]);
+
+  const items = [];
+  const groupsMap = new Map();
 
   const getTaskBackground = (task) => {
     if (!task.taskType) {
@@ -113,11 +118,11 @@ const PlanEditor = ({ revisionPlan }: Props) => {
 
   return (
     <div>
-      <button onClick={handleGroupsOnClick}>Edit resources</button>
-      {showEditRevisionPlan && (
-        <EditorModal groups={groups} handleClose={handleGroupsOnClick} />
-      )}
-      <PlanningTool items={items} groups={groups} />
+      {/*<button onClick={handleGroupsOnClick}>Edit resources</button>*/}
+      {/*{showEditRevisionPlan && (*/}
+      {/*  <EditorModal groups={groups} handleClose={handleGroupsOnClick} />*/}
+      {/*)}*/}
+      {<PlanningTool key={keyValue} items={items} groups={groups} />}
     </div>
   );
 };
