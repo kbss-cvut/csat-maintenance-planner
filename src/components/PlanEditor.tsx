@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PlanningTool from "react-maintenance-planner";
 import moment from "moment";
 import Constants from "../utils/Constants";
@@ -16,6 +16,10 @@ const PlanEditor = ({ revisionPlan, extend }: Props) => {
   const [keyValue, setKeyValue] = useState<number>(0);
   const items = [];
   const groupsMap = new Map();
+
+  useEffect(() => {
+    setKeyValue(keyValue + 1);
+  }, [extend]);
 
   const getTaskBackground = (task) => {
     if (!task.taskType) {
