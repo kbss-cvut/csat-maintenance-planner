@@ -187,13 +187,6 @@ const PlanManager = ({ basename }: Props) => {
     );
   };
 
-  const applyExtendedPlanningClassname = () => {
-    if (showRevisionPlanList) {
-      return "";
-    }
-    return "extended";
-  };
-
   return (
     <div className={styles.container}>
       {showRevisionPlanList ? (
