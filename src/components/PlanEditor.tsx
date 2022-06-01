@@ -68,7 +68,7 @@ const PlanEditor = ({ revisionPlan, extend }: Props) => {
           hasChildren: item.planParts && item.planParts.length > 0,
           parent: groupParentId,
           open: level < 0,
-          show: level < 2,
+          show: level < 1,
           level: level,
         });
       }
@@ -118,7 +118,7 @@ const PlanEditor = ({ revisionPlan, extend }: Props) => {
     }
   };
 
-  buildData(revisionPlan, groupsMap, items, 0, null, null);
+  buildData(revisionPlan[0].planParts, groupsMap, items, 0, null, null);
   const groups = Array.from(groupsMap, ([key, values]) => values);
 
   return (
