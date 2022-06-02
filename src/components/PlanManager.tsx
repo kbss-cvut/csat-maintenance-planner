@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Constants from "../utils/Constants";
-import RevisionPlanList from "./RevisionPlanList";
+import WorkPackage from "./WorkPackage";
 import PlanEditor from "./PlanEditor";
 import LoadingSpinnerIcon from "../assets/icons/LoadingSpinnerIcon";
 import DoubleArrowIcon from "../assets/icons/DoubleArrowIcon";
@@ -17,28 +17,27 @@ const PlanManager = ({ basename }: Props) => {
   // const [workPackageList, setWorkPackageList] = useState<
   //   Array<WorkPackageInterface>
   // >([]);
-  const [revisionPlanList, setRevisionPlanList] = useState<Array<string>>([]);
+  const [workPackageList, setWorkPackageList] = useState<Array<string>>([]);
 
-  // TODO: Set revision plan interface
-  const [revisionPlan, setRevisionPlan] = useState<any>([dataTest]);
+  // TODO: Set work package interface
+  const [workPackage, setWorkPackage] = useState<any>([dataTest]);
 
-  const [isRevisionPlanListLoading, setIsRevisionPlanListLoading] =
+  const [isWorkPackageListLoading, setIsWorkPackageListLoading] =
     useState<boolean>(false);
-  const [isRevisionPlanLoading, setIsRevisionPlanLoading] =
+  const [isWorkPackageLoading, setIsWorkPackageLoading] =
     useState<boolean>(false);
 
-  const [revisionPlanListErrorMessage, setRevisionPlanListErrorMessage] =
+  const [workPackageListErrorMessage, setWorkPackageListErrorMessage] =
     useState<string>("");
-  const [revisionPlanErrorMessage, setRevisionPlanErrorMessage] =
+  const [workPackageErrorMessage, setWorkPackageErrorMessage] =
     useState<string>("");
 
   const [update, setUpdate] = useState<boolean>(false);
 
-  const [showRevisionPlanList, setShowRevisionPlanList] =
-    useState<boolean>(true);
+  const [showWorkPackageList, setShowWorkPackageList] = useState<boolean>(true);
 
   useEffect(() => {
-    setRevisionPlanListErrorMessage("");
+    setWorkPackageListErrorMessage("");
   }, []);
 
   // useEffect(() => {
@@ -57,43 +56,43 @@ const PlanManager = ({ basename }: Props) => {
   // }, [update]);
 
   useEffect(() => {
-    const fetchRevisionPlanTitles = async () => {
-      setIsRevisionPlanListLoading(true);
+    const fetchWorkPackageTitles = async () => {
+      setIsWorkPackageListLoading(true);
       setUpdate(false);
-      const { data } = await axios.get(Constants.SERVER_URL_REVISION_LIST);
-      setRevisionPlanList([...data]);
+      const { data } = await axios.get(Constants.SERVER_URL_WORKPACKAGE_LIST);
+      setWorkPackageList([...data]);
     };
 
-    fetchRevisionPlanTitles().then(() => {
-      setIsRevisionPlanListLoading(false);
+    fetchWorkPackageTitles().then(() => {
+      setIsWorkPackageListLoading(false);
     });
 
-    fetchRevisionPlanTitles().catch((error) => {
-      setRevisionPlanListErrorMessage(error.toString());
+    fetchWorkPackageTitles().catch((error) => {
+      setWorkPackageListErrorMessage(error.toString());
     });
   }, [update]);
 
   useEffect(() => {
-    const handleRevisionPlanByURL = () => {
-      setIsRevisionPlanLoading(true);
-      setRevisionPlanErrorMessage("");
+    const handleWorkPackageByURL = () => {
+      setIsWorkPackageLoading(true);
+      setWorkPackageErrorMessage("");
 
-      const fetchRevisionPlanData = async () => {
-        const revisionId = window.location.pathname.split("/").pop();
+      const fetchWorkPackage = async () => {
+        const workPackageId = window.location.pathname.split("/").pop();
 
         const { data } = await axios.get(
-          Constants.SERVER_URL_REVISION_ID + revisionId
+          Constants.SERVER_URL_WORKPACKAGE_ID + workPackageId
         );
-        setRevisionPlan([data]);
+        setWorkPackage([data]);
       };
 
-      fetchRevisionPlanData().then(() => {
-        setIsRevisionPlanLoading(false);
+      fetchWorkPackage().then(() => {
+        setIsWorkPackageLoading(false);
       });
 
-      fetchRevisionPlanData().catch((error) => {
-        setRevisionPlanErrorMessage(error.toString());
-        setIsRevisionPlanLoading(false);
+      fetchWorkPackage().catch((error) => {
+        setWorkPackageErrorMessage(error.toString());
+        setIsWorkPackageLoading(false);
       });
     };
     if (
@@ -102,31 +101,33 @@ const PlanManager = ({ basename }: Props) => {
     )
       return;
 
-    handleRevisionPlanByURL();
+    handleWorkPackageByURL();
   }, []);
 
-  const handleRevisionPlanOnClick = (index: number) => {
-    setIsRevisionPlanLoading(true);
-    setRevisionPlanErrorMessage("");
+  const handleWorkPackageOnClick = (index: number) => {
+    setIsWorkPackageLoading(true);
+    setWorkPackageErrorMessage("");
 
-    const fetchRevisionPlanData = async () => {
-      const revisionTitle = revisionPlanList[index].split(",")[0];
-      const revisionId = encodeURIComponent(revisionTitle);
+    const fetchWorkPackage = async () => {
+      const workPackageTitle = workPackageList[index].split(",")[0];
+      const workPackageId = encodeURIComponent(workPackageTitle);
 
       const { data } = await axios.get(
-        Constants.SERVER_URL_REVISION_ID + revisionId
+        Constants.SERVER_URL_WORKPACKAGE_ID + workPackageId
       );
-      setRevisionPlan([data]);
+      setWorkPackage([data]);
     };
 
-    fetchRevisionPlanData().then(() => {
-      setIsRevisionPlanLoading(false);
+    fetchWorkPackage().then(() => {
+      setIsWorkPackageLoading(false);
     });
 
-    fetchRevisionPlanData().catch((error) => {
-      setRevisionPlanErrorMessage(error.toString());
-      setIsRevisionPlanLoading(false);
+    fetchWorkPackage().catch((error) => {
+      setWorkPackageErrorMessage(error.toString());
+      setIsWorkPackageLoading(false);
     });
+
+    console.log(workPackage);
   };
 
   const handleUpdateClick = () => {
@@ -139,29 +140,29 @@ const PlanManager = ({ basename }: Props) => {
   //       {isListLoading && listErrorMessage && <p>{listErrorMessage}</p>}
   //       {isListLoading && !listErrorMessage && <LoadingSpinnerIcon />}
   //       {!isListLoading && (
-  //         <WorkPackageList workPackageList={workPackageList} />
+  //         <WorkPackageDashboardList workPackageList={workPackageList} />
   //       )}
   //     </React.Fragment>
   //   );
   // };
 
-  const handleShowRevisionPlanOnClick = () => {
-    setShowRevisionPlanList(!showRevisionPlanList);
+  const handleShowWorkPackageOnClick = () => {
+    setShowWorkPackageList(!showWorkPackageList);
   };
 
-  const renderRevisionList = () => {
+  const renderWorkPackageList = () => {
     return (
       <React.Fragment>
-        {isRevisionPlanListLoading && revisionPlanListErrorMessage && (
-          <p>{revisionPlanListErrorMessage}</p>
+        {isWorkPackageListLoading && workPackageListErrorMessage && (
+          <p>{workPackageListErrorMessage}</p>
         )}
-        {isRevisionPlanListLoading && !revisionPlanListErrorMessage && (
+        {isWorkPackageListLoading && !workPackageListErrorMessage && (
           <LoadingSpinnerIcon />
         )}
-        {!isRevisionPlanListLoading && (
-          <RevisionPlanList
-            revisionPlanTitleList={revisionPlanList}
-            handleRevisionPlanOnClick={handleRevisionPlanOnClick}
+        {!isWorkPackageListLoading && (
+          <WorkPackage
+            workPackageList={workPackageList}
+            handleWorkPackageOnClick={handleWorkPackageOnClick}
           />
         )}
       </React.Fragment>
@@ -171,26 +172,21 @@ const PlanManager = ({ basename }: Props) => {
   const renderPlanEditor = () => {
     return (
       <React.Fragment>
-        {revisionPlanErrorMessage && <p>{revisionPlanErrorMessage}</p>}
-        {isRevisionPlanLoading && !revisionPlanErrorMessage && (
+        {workPackageErrorMessage && <p>{workPackageErrorMessage}</p>}
+        {isWorkPackageLoading && !workPackageErrorMessage && (
           <LoadingSpinnerIcon />
         )}
-        {!isRevisionPlanLoading &&
-          revisionPlan &&
-          !revisionPlanErrorMessage && (
-            <PlanEditor
-              revisionPlan={revisionPlan}
-              extend={showRevisionPlanList}
-            />
-          )}
+        {!isWorkPackageLoading && workPackage && !workPackageErrorMessage && (
+          <PlanEditor workPackage={workPackage} extend={showWorkPackageList} />
+        )}
       </React.Fragment>
     );
   };
 
   return (
     <div className={styles.container}>
-      {showRevisionPlanList ? (
-        <div className={styles["revision-plans"]}>
+      {showWorkPackageList ? (
+        <div className={styles["work-packages"]}>
           <div className={styles.header}>
             <img
               alt="CSAT logo"
@@ -198,7 +194,7 @@ const PlanManager = ({ basename }: Props) => {
             />
             <span
               className={styles["double-arrow-icon"]}
-              onClick={handleShowRevisionPlanOnClick}
+              onClick={handleShowWorkPackageOnClick}
             >
               <DoubleArrowIcon />
             </span>
@@ -206,7 +202,7 @@ const PlanManager = ({ basename }: Props) => {
           <br />
           <h2>Work Packages</h2>
           <br />
-          {renderRevisionList()}
+          {renderWorkPackageList()}
           {/*<br />*/}
           {/*<br />*/}
           {/*<h2>Available Work Packages</h2>*/}
@@ -218,7 +214,7 @@ const PlanManager = ({ basename }: Props) => {
       ) : (
         <span
           className={styles["double-arrow-icon-active"]}
-          onClick={handleShowRevisionPlanOnClick}
+          onClick={handleShowWorkPackageOnClick}
         >
           <DoubleArrowIcon />
         </span>

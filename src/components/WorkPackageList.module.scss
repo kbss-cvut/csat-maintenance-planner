@@ -1,32 +1,11 @@
-.workPackageItems {
+.revision-plan-items {
   overflow-y: scroll;
   padding: 1rem 1rem;
-  max-height: 35vh;
-  min-width: 20vw;
+  width: 20vw;
 }
 
-.workPackageItem {
+.revision-plan-item {
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;
-
-  a:hover {
-    transition: 0.3s;
-    opacity: 20%;
-  }
-
-  &.wp-progress-status-AOS {
-    color: #00b050;
-  }
-  &.wp-progress-status-BS {
-    color: #b70d00;
-  }
-  &.wp-progress-status-OS {
-    color: #00b050;
-  }
-  &.wp-progress-status-ROD {
-    color: #ff6d34;
-  }
-  &.wp-progress-status-C {
-    color: #c2c2c2;
-  }
+  cursor: pointer;
 }

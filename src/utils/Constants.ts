@@ -24,19 +24,19 @@ export function getEnv(name: string, defaultValue?: string): string {
 }
 
 const Constants = {
-  SERVER_URL_WORKPACKAGE_LIST: getEnv(
+  SERVER_URL_WORKPACKAGE_DASHBOARD_LIST: getEnv(
     "SERVER_URL_WORKPACKAGE_LIST",
     "https://kbss.felk.cvut.cz/csat/api/workpackages/list"
   ),
-  SERVER_URL_WORKPACKAGE_DASHBOARD: getEnv(
+  SERVER_URL_WORKPACKAGE_DASHBOARD_ID: getEnv(
     "SERVER_URL_WORKPACKAGE_DASHBOARD",
     "https://kbss.felk.cvut.cz/csat/dashboard.html?wp="
   ),
-  SERVER_URL_REVISION_LIST: getEnv(
+  SERVER_URL_WORKPACKAGE_LIST: getEnv(
     "SERVER_URL_REVISION_LIST",
     "https://kbss.felk.cvut.cz/csat/api2/revisions/"
   ),
-  SERVER_URL_REVISION_ID: getEnv(
+  SERVER_URL_WORKPACKAGE_ID: getEnv(
     "SERVER_URL_REVISION_ID",
     "https://kbss.felk.cvut.cz/csat/api2/plans/revision-plans-induced-by-revision-execution?revisionId="
   ),

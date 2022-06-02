@@ -3,13 +3,13 @@ import { WorkPackageInterface } from "../utils/Interfaces";
 import Constants from "../utils/Constants";
 import classNames from "classnames/bind";
 
-import styles from "./WorkPackageList.module.scss";
+import styles from "./WorkPackageDashboardList.module.scss";
 
 interface Props {
   workPackageList: Array<WorkPackageInterface>;
 }
 
-const WorkPackageList = ({ workPackageList }: Props) => {
+const WorkPackageDashboardList = ({ workPackageList }: Props) => {
   const applyProgressStatusClass = (workPackage: WorkPackageInterface) => {
     const progressStatus = workPackage.progressStatus.toUpperCase();
     return "wp-progress-status-" + progressStatus;
@@ -30,7 +30,7 @@ const WorkPackageList = ({ workPackageList }: Props) => {
           <a
             target="_blank"
             href={
-              Constants.SERVER_URL_WORKPACKAGE_DASHBOARD +
+              Constants.SERVER_URL_WORKPACKAGE_DASHBOARD_ID +
               workPackage.objectIdentifier
             }
             rel="noreferrer"
@@ -43,4 +43,4 @@ const WorkPackageList = ({ workPackageList }: Props) => {
   );
 };
 
-export default WorkPackageList;
+export default WorkPackageDashboardList;

@@ -1,27 +1,24 @@
 import React from "react";
 
-import styles from "./RevisonPlanList.module.scss";
+import styles from "./WorkPackageList.module.scss";
 import { Link } from "react-router-dom";
 
 interface Props {
-  revisionPlanTitleList: any;
-  handleRevisionPlanOnClick: (index: number) => void;
+  workPackageList: any;
+  handleWorkPackageOnClick: (index: number) => void;
 }
 
-const RevisionPlanList = ({
-  revisionPlanTitleList,
-  handleRevisionPlanOnClick,
-}: Props) => {
+const WorkPackage = ({ workPackageList, handleWorkPackageOnClick }: Props) => {
   return (
     <ul className={styles["revision-plan-items"]}>
-      {revisionPlanTitleList.map((revisionPlanTitle: string, index: number) => (
+      {workPackageList.map((revisionPlanTitle: string, index: number) => (
         <Link
           key={index}
           to={encodeURIComponent(revisionPlanTitle.split(",")[0])}
         >
           <li
             className={styles["revision-plan-item"]}
-            onClick={() => handleRevisionPlanOnClick(index)}
+            onClick={() => handleWorkPackageOnClick(index)}
           >
             {revisionPlanTitle}
           </li>
@@ -31,4 +28,4 @@ const RevisionPlanList = ({
   );
 };
 
-export default RevisionPlanList;
+export default WorkPackage;

@@ -6,11 +6,11 @@ import Constants from "../utils/Constants";
 import "react-maintenance-planner/dist/react-maintenance-planner.css";
 
 interface Props {
-  revisionPlan: any;
+  workPackage: any;
   extend?: boolean;
 }
 
-const PlanEditor = ({ revisionPlan, extend }: Props) => {
+const PlanEditor = ({ workPackage, extend }: Props) => {
   const [showEditRevisionPlan, setShowEditRevisionPlan] =
     useState<boolean>(false);
   const [keyValue, setKeyValue] = useState<number>(0);
@@ -40,12 +40,6 @@ const PlanEditor = ({ revisionPlan, extend }: Props) => {
   const getItemTitle = (item) => {
     if (!item.title) {
       return "";
-    }
-    if (
-      item.applicationType === Constants.APPLICATION_TYPE.PHASE_PLAN ||
-      item.applicationType === Constants.APPLICATION_TYPE.GENERAL_TASK_PLAN
-    ) {
-      return item.applicationType + ": " + item.title;
     }
     return item.title;
   };
@@ -122,7 +116,7 @@ const PlanEditor = ({ revisionPlan, extend }: Props) => {
     }
   };
 
-  buildData(revisionPlan[0].planParts, groupsMap, items, 0, null, null);
+  buildData(workPackage[0].planParts, groupsMap, items, 0, null, null);
   const groups = Array.from(groupsMap, ([key, values]) => values);
 
   return (
