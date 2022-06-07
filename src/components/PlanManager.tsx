@@ -36,12 +36,7 @@ const PlanManager = ({ basename }: Props) => {
 
   const [update, setUpdate] = useState<boolean>(false);
 
-  const [showWorkPackageList, setShowWorkPackageList] =
-    useState<boolean>(false);
-
-  useEffect(() => {
-    setShowWorkPackageList(true);
-  }, []);
+  const [showWorkPackageList, setShowWorkPackageList] = useState<boolean>(true);
 
   useEffect(() => {
     setWorkPackageListErrorMessage("");
@@ -184,7 +179,10 @@ const PlanManager = ({ basename }: Props) => {
           <LoadingSpinnerIcon />
         )}
         {!isWorkPackageLoading && workPackage && !workPackageErrorMessage && (
-          <PlanEditor workPackage={workPackage} />
+          <PlanEditor
+            workPackage={workPackage}
+            hidePopup={showWorkPackageList}
+          />
         )}
       </React.Fragment>
     );

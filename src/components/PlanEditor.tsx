@@ -8,9 +8,10 @@ import * as styles from "./PlanEditor.module.scss";
 
 interface Props {
   workPackage: any;
+  hidePopup?: boolean;
 }
 
-const PlanEditor = ({ workPackage }: Props) => {
+const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
   const items = [];
   const groupsMap = new Map();
 
@@ -114,8 +115,15 @@ const PlanEditor = ({ workPackage }: Props) => {
   buildData(workPackage[0].planParts, groupsMap, items, 0, null, null);
   const groups = Array.from(groupsMap, ([key, values]) => values);
 
+  const getStyle = () => {
+    if (hidePopup) {
+      return { ["--display" as string]: "none" };
+    }
+    return {};
+  };
+
   return (
-    <div className={styles["container"]}>
+    <div className={styles["container"]} style={getStyle()}>
       <PlanningTool items={items} groups={groups} />
     </div>
   );

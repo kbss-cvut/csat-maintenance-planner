@@ -17,15 +17,11 @@ const Animations = {
 
   planEditorAnimation: {
     hide: {
-      x: "-18vw",
-      clipPath: "inset(0% 0% 0% 0%)",
+      x: "-20vw",
       transition: transition,
     },
     show: {
-      scale: 1,
-      y: 0,
       x: 0,
-      clipPath: "inset(0% 25% 0% 0%)",
       transition: transition,
     },
   },
@@ -33,7 +29,7 @@ const Animations = {
   doubleArrowAnimation: {
     hide: {
       rotate: 180,
-      x: "21vw",
+      x: "20.5vw",
       transition: transition,
     },
     show: {
