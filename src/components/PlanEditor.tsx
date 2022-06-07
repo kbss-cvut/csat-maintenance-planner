@@ -1,25 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PlanningTool from "react-maintenance-planner";
 import moment from "moment";
 import Constants from "../utils/Constants";
 
 import "react-maintenance-planner/dist/react-maintenance-planner.css";
+import * as styles from "./PlanEditor.module.scss";
 
 interface Props {
   workPackage: any;
-  extend?: boolean;
 }
 
-const PlanEditor = ({ workPackage, extend }: Props) => {
-  const [showEditRevisionPlan, setShowEditRevisionPlan] =
-    useState<boolean>(false);
-  const [keyValue, setKeyValue] = useState<number>(0);
+const PlanEditor = ({ workPackage }: Props) => {
   const items = [];
   const groupsMap = new Map();
-
-  useEffect(() => {
-    setKeyValue(keyValue + 1);
-  }, [extend]);
 
   const getTaskBackground = (task) => {
     if (!task.taskType) {
@@ -101,6 +94,8 @@ const PlanEditor = ({ workPackage, extend }: Props) => {
         canMove: level > 1 && level !== 3,
         canResize: "both", //'left','right','both', false
         minimumDuration: 0, //minutes
+        workTime: item.workTime,
+        plannedWorkTime: item.plannedWorkTime,
       });
 
       if (item.planParts && item.planParts.length > 0) {
@@ -120,7 +115,9 @@ const PlanEditor = ({ workPackage, extend }: Props) => {
   const groups = Array.from(groupsMap, ([key, values]) => values);
 
   return (
-    <div>{<PlanningTool key={keyValue} items={items} groups={groups} />}</div>
+    <div className={styles["container"]}>
+      <PlanningTool items={items} groups={groups} />
+    </div>
   );
 };
 

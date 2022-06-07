@@ -1,4 +1,9 @@
-//.container {
-//  max-height: 100vh;
-//  overflow: scroll;
-//}
+.container {
+  max-height: 95vh;
+  width: 95vw;
+  padding-left: 1rem;
+  height: 100%;
+  color: #263238;
+  min-width: 100%;
+  overflow-y: scroll;
+}

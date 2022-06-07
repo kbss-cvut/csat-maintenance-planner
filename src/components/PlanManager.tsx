@@ -4,7 +4,9 @@ import Constants from "../utils/Constants";
 import WorkPackage from "./WorkPackage";
 import PlanEditor from "./PlanEditor";
 import LoadingSpinnerIcon from "../assets/icons/LoadingSpinnerIcon";
-import DoubleArrowIcon from "../assets/icons/DoubleArrowIcon";
+import { CgChevronDoubleLeftO } from "react-icons/cg";
+import { motion } from "framer-motion/dist/framer-motion";
+import Animations from "../utils/Animations";
 
 import dataTest from "../assets/data-test.json";
 import styles from "./PlanManager.module.scss";
@@ -34,7 +36,12 @@ const PlanManager = ({ basename }: Props) => {
 
   const [update, setUpdate] = useState<boolean>(false);
 
-  const [showWorkPackageList, setShowWorkPackageList] = useState<boolean>(true);
+  const [showWorkPackageList, setShowWorkPackageList] =
+    useState<boolean>(false);
+
+  useEffect(() => {
+    setShowWorkPackageList(true);
+  }, []);
 
   useEffect(() => {
     setWorkPackageListErrorMessage("");
@@ -177,7 +184,7 @@ const PlanManager = ({ basename }: Props) => {
           <LoadingSpinnerIcon />
         )}
         {!isWorkPackageLoading && workPackage && !workPackageErrorMessage && (
-          <PlanEditor workPackage={workPackage} extend={showWorkPackageList} />
+          <PlanEditor workPackage={workPackage} />
         )}
       </React.Fragment>
     );
@@ -185,41 +192,44 @@ const PlanManager = ({ basename }: Props) => {
 
   return (
     <div className={styles.container}>
-      {showWorkPackageList ? (
-        <div className={styles["work-packages"]}>
-          <div className={styles.header}>
-            <img
-              alt="CSAT logo"
-              src="https://www.csatechnics.com/img/lower-logo.png"
-            />
-            <span
-              className={styles["double-arrow-icon"]}
-              onClick={handleShowWorkPackageOnClick}
-            >
-              <DoubleArrowIcon />
-            </span>
-          </div>
-          <br />
-          <h2>Work Packages</h2>
-          <br />
-          {renderWorkPackageList()}
-          {/*<br />*/}
-          {/*<br />*/}
-          {/*<h2>Available Work Packages</h2>*/}
-          {/*{renderWorkPackageList()}*/}
-          <button className={styles.button} onClick={handleUpdateClick}>
-            Update
-          </button>
+      <motion.div
+        className={styles["work-packages"]}
+        variants={Animations.workPackageListAnimation}
+        animate={showWorkPackageList ? "show" : "hide"}
+      >
+        <div className={styles.header}>
+          <img
+            alt="CSAT logo"
+            src="https://www.csatechnics.com/img/lower-logo.png"
+          />
+          <motion.span
+            whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
+            onClick={() => setShowWorkPackageList(!showWorkPackageList)}
+            variants={Animations.doubleArrowAnimation}
+            animate={showWorkPackageList ? "show" : "hide"}
+            className={styles["double-arrow-icon"]}
+          >
+            <CgChevronDoubleLeftO />
+          </motion.span>
         </div>
-      ) : (
-        <span
-          className={styles["double-arrow-icon-active"]}
-          onClick={handleShowWorkPackageOnClick}
-        >
-          <DoubleArrowIcon />
-        </span>
-      )}
-      <div className={styles.planning}>{renderPlanEditor()}</div>
+        <br />
+        <h2>Work Packages</h2>
+        <br />
+        {renderWorkPackageList()}
+        {/*<br />*/}
+        {/*<br />*/}
+        {/*<h2>Available Work Packages</h2>*/}
+        {/*{renderWorkPackageList()}*/}
+        <button className={styles.button} onClick={handleUpdateClick}>
+          Update
+        </button>
+      </motion.div>
+      <motion.span
+        variants={Animations.planEditorAnimation}
+        animate={showWorkPackageList ? "show" : "hide"}
+      >
+        {renderPlanEditor()}
+      </motion.span>
     </div>
   );
 };
