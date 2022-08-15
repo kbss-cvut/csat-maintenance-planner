@@ -36,10 +36,13 @@ COPY .docker/nginx.conf /etc/nginx/nginx.conf
 # Copy our custom nginx config
 COPY .docker/config.js.template /etc/nginx/config.js.template
 
+# Add bash
+RUN apk add --no-cache bash
+
 # from the outside.
 EXPOSE 80
 
 COPY .docker/docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["nginx", "-g", "daemon off;"]
+RUN chmod +x docker-entrypoint.sh
+CMD ["/bin/bash", "-c", "/docker-entrypoint.sh && nginx -g \"daemon off;\""]
 
