@@ -10,15 +10,15 @@ import Animations from "../utils/Animations";
 
 import dataTest from "../assets/data-test.json";
 import styles from "./PlanManager.module.scss";
+import { useKeycloak } from "@react-keycloak/web";
 
 interface Props {
   basename: string;
 }
 
 const PlanManager = ({ basename }: Props) => {
-  // const [workPackageList, setWorkPackageList] = useState<
-  //   Array<WorkPackageInterface>
-  // >([]);
+  const { keycloak, initialized } = useKeycloak();
+
   const [workPackageList, setWorkPackageList] = useState<Array<string>>([]);
 
   // TODO: Set work package interface
@@ -41,21 +41,6 @@ const PlanManager = ({ basename }: Props) => {
   useEffect(() => {
     setWorkPackageListErrorMessage("");
   }, []);
-
-  // useEffect(() => {
-  //   const fetchWorkPackages = async () => {
-  //     setIsListLoading(true);
-  //     setUpdate(false);
-  //     const { data } = await axios.get(Constants.SERVER_URL_WORKPACKAGE_LIST);
-  //     setWorkPackageList([...data]);
-  //   };
-  //   fetchWorkPackages().then(() => {
-  //     setIsListLoading(false);
-  //   });
-  //   fetchWorkPackages().catch((error) => {
-  //     setListErrorMessage(error.toString());
-  //   });
-  // }, [update]);
 
   useEffect(() => {
     const fetchWorkPackageTitles = async () => {
@@ -136,22 +121,6 @@ const PlanManager = ({ basename }: Props) => {
     setUpdate(true);
   };
 
-  // const renderWorkPackageList = () => {
-  //   return (
-  //     <React.Fragment>
-  //       {isListLoading && listErrorMessage && <p>{listErrorMessage}</p>}
-  //       {isListLoading && !listErrorMessage && <LoadingSpinnerIcon />}
-  //       {!isListLoading && (
-  //         <WorkPackageDashboardList workPackageList={workPackageList} />
-  //       )}
-  //     </React.Fragment>
-  //   );
-  // };
-
-  const handleShowWorkPackageOnClick = () => {
-    setShowWorkPackageList(!showWorkPackageList);
-  };
-
   const renderWorkPackageList = () => {
     return (
       <React.Fragment>
@@ -209,18 +178,29 @@ const PlanManager = ({ basename }: Props) => {
           >
             <CgChevronDoubleLeftO />
           </motion.span>
+          <div className="login">
+            {keycloak.authenticated ? (
+              <button type="button" onClick={() => keycloak.logout()}>
+                Logout
+              </button>
+            ) : (
+              <button type="button" onClick={() => keycloak.login()}>
+                Login
+              </button>
+            )}
+          </div>
         </div>
         <br />
         <h2>Work Packages</h2>
         <br />
-        {renderWorkPackageList()}
-        {/*<br />*/}
-        {/*<br />*/}
-        {/*<h2>Available Work Packages</h2>*/}
-        {/*{renderWorkPackageList()}*/}
-        <button className={styles.button} onClick={handleUpdateClick}>
-          Update
-        </button>
+        {
+          <React.Fragment>
+            {renderWorkPackageList()}
+            <button className={styles.button} onClick={handleUpdateClick}>
+              Update
+            </button>
+          </React.Fragment>
+        }
       </motion.div>
       <motion.span
         variants={Animations.planEditorAnimation}
