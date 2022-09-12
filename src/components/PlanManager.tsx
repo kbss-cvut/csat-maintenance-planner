@@ -22,7 +22,7 @@ const PlanManager = ({ basename }: Props) => {
   const [workPackageList, setWorkPackageList] = useState<Array<string>>([]);
 
   // TODO: Set work package interface
-  const [workPackage, setWorkPackage] = useState<any>([dataTest]);
+  const [workPackage, setWorkPackage] = useState<any>(null);
 
   const [isWorkPackageListLoading, setIsWorkPackageListLoading] =
     useState<boolean>(false);
@@ -66,11 +66,12 @@ const PlanManager = ({ basename }: Props) => {
 
       const fetchWorkPackage = async () => {
         const workPackageId = window.location.pathname.split("/").pop();
-
-        const { data } = await axios.get(
-          Constants.SERVER_URL_WORKPACKAGE_ID + workPackageId
-        );
-        setWorkPackage([data]);
+        if (workPackageId) {
+          const { data } = await axios.get(
+            Constants.SERVER_URL_WORKPACKAGE_ID + workPackageId
+          );
+          setWorkPackage([data]);
+        }
       };
 
       fetchWorkPackage().then(() => {
@@ -178,17 +179,18 @@ const PlanManager = ({ basename }: Props) => {
           >
             <CgChevronDoubleLeftO />
           </motion.span>
-          <div className="login">
-            {keycloak.authenticated ? (
-              <button type="button" onClick={() => keycloak.logout()}>
-                Logout
-              </button>
-            ) : (
-              <button type="button" onClick={() => keycloak.login()}>
-                Login
-              </button>
-            )}
-          </div>
+          {/*TODO: Add Login Button when keycloak is fixed*/}
+          {/*<div className="login">*/}
+          {/*  {keycloak.authenticated ? (*/}
+          {/*    <button type="button" onClick={() => keycloak.logout()}>*/}
+          {/*      Logout*/}
+          {/*    </button>*/}
+          {/*  ) : (*/}
+          {/*    <button type="button" onClick={() => keycloak.login()}>*/}
+          {/*      Login*/}
+          {/*    </button>*/}
+          {/*  )}*/}
+          {/*</div>*/}
         </div>
         <br />
         <h2>Work Packages</h2>
