@@ -112,7 +112,7 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
     }
   };
 
-  buildData(workPackage[0].planParts, groupsMap, items, 0, null, null);
+  // buildData(workPackage[0].planParts, groupsMap, items, 0, null, null);
   const groups = Array.from(groupsMap, ([key, values]) => values);
 
   const getStyle = () => {
@@ -124,7 +124,7 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
 
   return (
     <div className={styles["container"]} style={getStyle()}>
-      <PlanningTool items={items} groups={groups} />
+      {/*<PlanningTool items={items} groups={groups} />*/}
     </div>
   );
 };

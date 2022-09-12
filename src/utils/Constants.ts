@@ -46,6 +46,19 @@ const Constants = {
     GENERAL_TASK_PLAN: "GeneralTaskPlan",
     SESSION_PLAN: "SessionPlan",
   },
+
+  KEYCLOAK_CONFIG: {
+    PROD: {
+      URL: "https://kbss.felk.cvut.cz/csat/keycloak/",
+      REALM: "csat-planning",
+      CLIENT_ID: "csat-maintenance-planner",
+    },
+    DEV: {
+      URL: "http://localhost:8080/auth",
+      REALM: "csat-planning",
+      CLIENT_ID: "csat-maintenance-planner",
+    },
+  },
 };
 
 export default Constants;
