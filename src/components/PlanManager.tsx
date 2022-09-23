@@ -179,30 +179,23 @@ const PlanManager = ({ basename }: Props) => {
           >
             <CgChevronDoubleLeftO />
           </motion.span>
-          {/*TODO: Add Login Button when keycloak is fixed*/}
-          {/*<div className="login">*/}
-          {/*  {keycloak.authenticated ? (*/}
-          {/*    <button type="button" onClick={() => keycloak.logout()}>*/}
-          {/*      Logout*/}
-          {/*    </button>*/}
-          {/*  ) : (*/}
-          {/*    <button type="button" onClick={() => keycloak.login()}>*/}
-          {/*      Login*/}
-          {/*    </button>*/}
-          {/*  )}*/}
-          {/*</div>*/}
         </div>
-        <br />
-        <h2>Work Packages</h2>
-        <br />
-        {
-          <React.Fragment>
-            {renderWorkPackageList()}
-            <button className={styles.button} onClick={handleUpdateClick}>
-              Update
+
+        <div>
+          <h2>Work Packages</h2>
+          {keycloak.authenticated ? (
+            <React.Fragment>
+              {renderWorkPackageList()}
+              <button className={styles.button} onClick={handleUpdateClick}>
+                Update
+              </button>
+            </React.Fragment>
+          ) : (
+            <button className={styles.button} onClick={() => keycloak.login()}>
+              Login to access Work Packages
             </button>
-          </React.Fragment>
-        }
+          )}
+        </div>
       </motion.div>
       <motion.span
         variants={Animations.planEditorAnimation}
