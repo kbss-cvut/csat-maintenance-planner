@@ -114,8 +114,6 @@ const PlanManager = ({ basename }: Props) => {
       setWorkPackageErrorMessage(error.toString());
       setIsWorkPackageLoading(false);
     });
-
-    console.log(workPackage);
   };
 
   const handleUpdateClick = () => {
@@ -158,6 +156,10 @@ const PlanManager = ({ basename }: Props) => {
     );
   };
 
+  if (!initialized) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
     <div className={styles.container}>
       <motion.div
@@ -181,21 +183,27 @@ const PlanManager = ({ basename }: Props) => {
           </motion.span>
         </div>
 
-        <div>
+        <div className={styles.login}>
           <h2>Work Packages</h2>
+
           {keycloak.authenticated ? (
-            <React.Fragment>
-              {renderWorkPackageList()}
-              <button className={styles.button} onClick={handleUpdateClick}>
-                Update
-              </button>
-            </React.Fragment>
+            <button type="button" onClick={() => keycloak.logout()}>
+              Logout
+            </button>
           ) : (
-            <button className={styles.button} onClick={() => keycloak.login()}>
-              Login to access Work Packages
+            <button type="button" onClick={() => keycloak.login()}>
+              Login
             </button>
           )}
         </div>
+        {keycloak.authenticated && (
+          <React.Fragment>
+            {renderWorkPackageList()}
+            <button className={styles.button} onClick={handleUpdateClick}>
+              Update
+            </button>
+          </React.Fragment>
+        )}
       </motion.div>
       <motion.span
         variants={Animations.planEditorAnimation}
