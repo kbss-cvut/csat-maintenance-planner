@@ -12,10 +12,23 @@ import "./styles/global.scss";
  */
 const basename = window.location.pathname.replace(/(\/[^/]+)$/, "");
 
+const eventLogger = (event: unknown, error: unknown) => {
+  console.log("onKeycloakEvent", event, error);
+};
+
+const tokenLogger = (tokens: unknown) => {
+  console.log("onKeycloakTokens", tokens);
+};
+
 const AppRouter = () => {
   return (
     <React.Fragment>
-      <ReactKeycloakProvider authClient={keycloak}>
+      <ReactKeycloakProvider
+        authClient={keycloak}
+        onEvent={eventLogger}
+        onTokens={tokenLogger}
+        initOptions={{ checkLoginIframe: false }}
+      >
         <BrowserRouter basename={basename}>
           <Routes>
             <Route path="/*" element={<PlanManager basename={basename} />} />
