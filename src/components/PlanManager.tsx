@@ -39,6 +39,12 @@ const PlanManager = ({ basename }: Props) => {
   const [showWorkPackageList, setShowWorkPackageList] = useState<boolean>(true);
 
   useEffect(() => {
+    if (initialized && !keycloak.authenticated) {
+      keycloak.login();
+    }
+  }, [initialized]);
+
+  useEffect(() => {
     setWorkPackageListErrorMessage("");
   }, []);
 
@@ -183,19 +189,7 @@ const PlanManager = ({ basename }: Props) => {
           </motion.span>
         </div>
 
-        <div className={styles.login}>
-          <h2>Work Packages</h2>
-
-          {keycloak.authenticated ? (
-            <button type="button" onClick={() => keycloak.logout()}>
-              Logout
-            </button>
-          ) : (
-            <button type="button" onClick={() => keycloak.login()}>
-              Login
-            </button>
-          )}
-        </div>
+        <h2>Work Packages</h2>
         {keycloak.authenticated && (
           <React.Fragment>
             {renderWorkPackageList()}
