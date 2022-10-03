@@ -17,13 +17,22 @@
   max-height: 95vh;
 }
 
-.header {
+.header-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   border-bottom: white solid 2px;
-  align-items: center;
-  justify-content: space-between;
   width: 100%;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
 }
 
 .double-arrow-icon {

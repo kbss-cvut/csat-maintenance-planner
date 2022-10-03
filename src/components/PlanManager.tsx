@@ -38,10 +38,17 @@ const PlanManager = ({ basename }: Props) => {
 
   const [showWorkPackageList, setShowWorkPackageList] = useState<boolean>(true);
 
+  const [documentTitle, setDocumentTitle] = useState<string>(
+    "CSAT Maintenance Planner"
+  );
+
   useEffect(() => {
-    if (initialized && !keycloak.authenticated) {
-      keycloak.login();
-    }
+    const initializeKeycloak = () => {
+      if (initialized && !keycloak.authenticated) {
+        keycloak.login();
+      }
+    };
+    initializeKeycloak();
   }, [initialized]);
 
   useEffect(() => {
@@ -77,6 +84,7 @@ const PlanManager = ({ basename }: Props) => {
             Constants.SERVER_URL_WORKPACKAGE_ID + workPackageId
           );
           setWorkPackage([data]);
+          setDocumentTitle(workPackageId);
         }
       };
 
@@ -98,6 +106,13 @@ const PlanManager = ({ basename }: Props) => {
     handleWorkPackageByURL();
   }, []);
 
+  useEffect(() => {
+    const changeDocumentTitle = () => {
+      document.title = documentTitle;
+    };
+    changeDocumentTitle();
+  }, [documentTitle]);
+
   const handleWorkPackageOnClick = (index: number) => {
     setIsWorkPackageLoading(true);
     setWorkPackageErrorMessage("");
@@ -110,6 +125,7 @@ const PlanManager = ({ basename }: Props) => {
         Constants.SERVER_URL_WORKPACKAGE_ID + workPackageId
       );
       setWorkPackage([data]);
+      setDocumentTitle(workPackageTitle);
     };
 
     fetchWorkPackage().then(() => {
@@ -173,20 +189,23 @@ const PlanManager = ({ basename }: Props) => {
         variants={Animations.workPackageListAnimation}
         animate={showWorkPackageList ? "show" : "hide"}
       >
-        <div className={styles.header}>
-          <img
-            alt="CSAT logo"
-            src="https://www.csatechnics.com/img/lower-logo.png"
-          />
-          <motion.span
-            whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
-            onClick={() => setShowWorkPackageList(!showWorkPackageList)}
-            variants={Animations.doubleArrowAnimation}
-            animate={showWorkPackageList ? "show" : "hide"}
-            className={styles["double-arrow-icon"]}
-          >
-            <CgChevronDoubleLeftO />
-          </motion.span>
+        <div className={styles["header-container"]}>
+          <div className={styles.header}>
+            <img
+              alt="CSAT logo"
+              src="https://www.csatechnics.com/img/lower-logo.png"
+            />
+            <motion.span
+              whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
+              onClick={() => setShowWorkPackageList(!showWorkPackageList)}
+              variants={Animations.doubleArrowAnimation}
+              animate={showWorkPackageList ? "show" : "hide"}
+              className={styles["double-arrow-icon"]}
+            >
+              <CgChevronDoubleLeftO />
+            </motion.span>
+          </div>
+          <h3>{documentTitle}</h3>
         </div>
 
         <h2>Work Packages</h2>
