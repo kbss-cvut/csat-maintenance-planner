@@ -17,11 +17,11 @@ svg {
 
 li {
   color: white;
+  cursor: pointer;
 
   &:hover {
     transition: 0.3s;
-    opacity: 20%;
-    cursor: pointer;
+    opacity: 0.5;
   }
 }
 
@@ -38,7 +38,7 @@ button {
 
   &:hover {
     transition: 0.3s;
-    opacity: 20%;
+    opacity: 0.5;
   }
 }
 

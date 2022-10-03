@@ -6,4 +6,12 @@
   color: #263238;
   min-width: 100%;
   overflow-y: scroll;
+
+  li {
+    color: #000000;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
