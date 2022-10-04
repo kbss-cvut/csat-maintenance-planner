@@ -11,18 +11,8 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-svg {
-  fill: white;
-}
-
-li {
-  color: white;
-  cursor: pointer;
-
-  &:hover {
-    transition: 0.3s;
-    opacity: 0.5;
-  }
+.explanatory-notes-container {
+  display: var(--display);
 }
 
 button {
@@ -42,11 +32,11 @@ button {
   }
 }
 
-.resource {
+.resource-group {
   color: white;
 }
 
-.explanatory-notes-container {
-  display: var(--display);
+.time--input {
+  width: 2.25rem !important;
 }
 
