@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Constants from "../utils/Constants";
-import WorkPackage from "./WorkPackage";
+import WorkPackageList from "./WorkPackageList";
 import PlanEditor from "./PlanEditor";
 import LoadingSpinnerIcon from "../assets/icons/LoadingSpinnerIcon";
 import { CgChevronDoubleLeftO } from "react-icons/cg";
 import { motion } from "framer-motion/dist/framer-motion";
 import Animations from "../utils/Animations";
+import { useKeycloak } from "@react-keycloak/web";
 
 import dataTest from "../assets/data-test.json";
 import styles from "./PlanManager.module.scss";
-import { useKeycloak } from "@react-keycloak/web";
 
 interface Props {
   basename: string;
@@ -152,7 +152,7 @@ const PlanManager = ({ basename }: Props) => {
           <LoadingSpinnerIcon />
         )}
         {!isWorkPackageListLoading && (
-          <WorkPackage
+          <WorkPackageList
             workPackageList={workPackageList}
             handleWorkPackageOnClick={handleWorkPackageOnClick}
           />

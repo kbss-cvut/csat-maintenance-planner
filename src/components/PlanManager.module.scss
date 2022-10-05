@@ -19,16 +19,6 @@
       fill: white;
     }
 
-    li {
-      color: white;
-      cursor: pointer;
-
-      &:hover {
-        transition: 0.3s;
-        opacity: 0.5;
-      }
-    }
-
     .header-container {
       display: flex;
       flex-direction: column;
