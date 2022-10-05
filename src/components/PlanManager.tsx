@@ -9,7 +9,6 @@ import { motion } from "framer-motion/dist/framer-motion";
 import Animations from "../utils/Animations";
 import { useKeycloak } from "@react-keycloak/web";
 
-import dataTest from "../assets/data-test.json";
 import styles from "./PlanManager.module.scss";
 
 interface Props {
