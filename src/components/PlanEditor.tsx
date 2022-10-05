@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import PlanningTool from "react-maintenance-planner";
 import moment from "moment";
-import Constants from "../utils/Constants";
+import { Constants, LEGEND_ITEMS } from "../utils/Constants";
 
 import "react-maintenance-planner/dist/react-maintenance-planner.css";
 import * as styles from "./PlanEditor.module.scss";
@@ -15,19 +15,19 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
   const items = [];
   const groupsMap = new Map();
 
-  const getTaskBackground = (task) => {
-    if (!task.taskType) {
-      return "#2196F3";
+  const getItemBackground = (item) => {
+    if (item.taskType) {
+      return (
+        LEGEND_ITEMS.find((o) => o.code === item.taskType["task-category"])
+          ?.color || "#CFCBC8"
+      );
     }
-    switch (task.taskType["task-category"]) {
-      case "scheduled-wo":
-        return "#aa0000";
-      case "task-card":
-        return "#00aa00";
-      case "maintenance-wo":
-        return "#0000aa";
-      default:
-        return "#2196F3";
+
+    if (item.applicationType) {
+      return (
+        LEGEND_ITEMS.find((o) => o.code === item.applicationType)?.color ||
+        "#CFCBC8"
+      );
     }
   };
 
@@ -85,7 +85,7 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
         end: endDate,
         parent: itemParentId,
         className: "item",
-        bgColor: getTaskBackground(item),
+        bgColor: getItemBackground(item),
         color: "#fff",
         selectedBgColor: "#FFC107",
         selectedColor: "#000",
@@ -124,7 +124,7 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
 
   return (
     <div className={styles["container"]} style={getStyle()}>
-      <PlanningTool items={items} groups={groups} />
+      <PlanningTool items={items} groups={groups} legendItems={LEGEND_ITEMS} />
     </div>
   );
 };

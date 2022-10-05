@@ -1,6 +1,6 @@
 import React from "react";
 import { WorkPackageInterface } from "../utils/Interfaces";
-import Constants from "../utils/Constants";
+import { Constants } from "../utils/Constants";
 import classNames from "classnames/bind";
 
 import styles from "./WorkPackageDashboardList.module.scss";
