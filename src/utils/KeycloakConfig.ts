@@ -1,6 +1,5 @@
 import Keycloak from "keycloak-js";
-import Constants from "./Constants";
-
+import { Constants } from "./Constants";
 const keycloakConfig = {
   url: Constants.KEYCLOAK_CONFIG.URL,
   realm: Constants.KEYCLOAK_CONFIG.REALM,

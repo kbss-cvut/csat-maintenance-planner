@@ -43,8 +43,14 @@ const Constants = {
 
   APPLICATION_TYPE: {
     PHASE_PLAN: "PhasePlan",
-    GENERAL_TASK_PLAN: "GeneralTaskPlan",
+    TASK_CARD_TYPE_GROUP: "GeneralTaskPlan",
     SESSION_PLAN: "SessionPlan",
+    TASK_PLAN: "TaskPlan",
+  },
+  TASK_CATEGORY: {
+    TASK_CARD: "task-card",
+    MAINTENANCE_WO: "maintenance-work-order",
+    SCHEDULED_WO: "scheduled-work-order",
   },
 
   KEYCLOAK_CONFIG: {
@@ -54,4 +60,37 @@ const Constants = {
   },
 };
 
-export default Constants;
+const LEGEND_ITEMS = [
+  {
+    code: Constants.APPLICATION_TYPE.PHASE_PLAN,
+    name: "Phase Plan",
+    color: "#00718F",
+  },
+  {
+    code: Constants.APPLICATION_TYPE.TASK_CARD_TYPE_GROUP,
+    name: "Task Card Type Group",
+    color: "#0BA5BE",
+  },
+  {
+    code: Constants.TASK_CATEGORY.TASK_CARD,
+    name: "Task Card",
+    color: "#00a900",
+  },
+  {
+    code: Constants.TASK_CATEGORY.SCHEDULED_WO,
+    name: "Scheduled Work Order",
+    color: "#576319",
+  },
+  {
+    code: Constants.TASK_CATEGORY.MAINTENANCE_WO,
+    name: "Maintenance Work Order",
+    color: "#a90000",
+  },
+  {
+    code: "Mechanic",
+    name: "Mechanic",
+    color: "#CFCBC8",
+  },
+];
+
+export { Constants, LEGEND_ITEMS };

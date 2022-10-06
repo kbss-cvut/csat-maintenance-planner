@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Constants from "../utils/Constants";
+import { Constants } from "../utils/Constants";
+import WorkPackage from "./WorkPackage";
 import WorkPackageList from "./WorkPackageList";
 import PlanEditor from "./PlanEditor";
 import LoadingSpinnerIcon from "../assets/icons/LoadingSpinnerIcon";
