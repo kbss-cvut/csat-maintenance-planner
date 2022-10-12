@@ -73,7 +73,8 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
     }
 
     for (const item of data) {
-      const resourceId = item.resource?.id;
+      const resourceId =
+        item.resource?.id + " - " + item.resource?.applicationType;
 
       if (!groupsMap.has(resourceId)) {
         groupsMap.set(resourceId, {
