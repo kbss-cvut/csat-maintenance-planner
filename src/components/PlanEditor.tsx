@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PlanningTool from "react-maintenance-planner";
 import moment from "moment";
 import Constants from "../utils/Constants";
@@ -13,7 +13,10 @@ interface Props {
 
 const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
   const items = [];
+  const unknownItems = [];
+
   const groupsMap = new Map();
+  const unknownGroupsMaps = new Map();
 
   const getTaskBackground = (task) => {
     if (!task.taskType) {
@@ -38,21 +41,40 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
     return item.title;
   };
 
-  const buildData = (
-    data,
-    groupsMap,
-    items,
-    level,
-    groupParentId,
-    itemParentId
-  ) => {
+  const mapUnknownResources = (groupsMap, unknownGroupsMaps) => {
+    for (const [key, value] of groupsMap.entries()) {
+      if (value.title === "unknown") {
+        unknownGroupsMaps.set(key, value);
+        groupsMap.delete(key);
+      }
+
+      for (const [key2, value2] of unknownGroupsMaps.entries()) {
+        if (value.parent === value2.id) {
+          unknownGroupsMaps.set(key, value);
+          groupsMap.delete(key);
+        }
+      }
+    }
+  };
+
+  const pushUnknownItems = (unknownGroupsMap, items, unknownItems) => {
+    for (const item of items) {
+      for (const [key, value] of unknownGroupsMap.entries()) {
+        if (value.id === item.group) {
+          unknownItems.push(item);
+        }
+      }
+    }
+  };
+
+  const buildData = (data, items, level, groupParentId, itemParentId) => {
     if (!data) {
       return;
     }
 
     for (const item of data) {
-      const resourceId =
-        item.resource?.id + " - " + item.resource?.applicationType;
+      const resourceId = item.resource?.id;
+
       if (!groupsMap.has(resourceId)) {
         groupsMap.set(resourceId, {
           id: groupsMap.size,
@@ -79,7 +101,7 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
 
       items.push({
         id: itemId,
-        group: groupsMap.get(resourceId).id,
+        group: groupsMap.get(resourceId)?.id,
         title: getItemTitle(item),
         start: startDate,
         end: endDate,
@@ -102,17 +124,19 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
       if (item.planParts && item.planParts.length > 0) {
         buildData(
           item.planParts,
-          groupsMap,
           items,
           level + 1,
-          groupsMap.get(resourceId).id,
+          groupsMap.get(resourceId)?.id,
           itemId
         );
       }
     }
   };
 
-  buildData(workPackage[0]?.planParts, groupsMap, items, 0, null, null);
+  buildData(workPackage[0]?.planParts, items, 0, null, null);
+  mapUnknownResources(groupsMap, unknownGroupsMaps);
+  pushUnknownItems(unknownGroupsMaps, items, unknownItems);
+
   const groups = Array.from(groupsMap, ([key, values]) => values);
 
   const getStyle = () => {
