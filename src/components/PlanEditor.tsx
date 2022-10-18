@@ -97,6 +97,7 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
         minimumDuration: 0, //minutes
         workTime: item.workTime,
         plannedWorkTime: item.plannedWorkTime,
+        removable: false,
       });
 
       if (item.planParts && item.planParts.length > 0) {
