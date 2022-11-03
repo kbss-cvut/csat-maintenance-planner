@@ -1,10 +1,12 @@
-import React from "react";
-import PlanningTool from "react-maintenance-planner";
+import React, { useState } from "react";
+import PlanningTool, { Popup } from "react-maintenance-planner";
 import moment from "moment";
 import Constants from "../utils/Constants";
 
 import "react-maintenance-planner/dist/react-maintenance-planner.css";
 import * as styles from "./PlanEditor.module.scss";
+
+import DropdownTreeSelect from "react-dropdown-tree-select";
 
 interface Props {
   workPackage: any;
@@ -12,11 +14,24 @@ interface Props {
 }
 
 const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
-  const items = [];
-  const unknownItems = [];
+  const [isActive, setIsActive] = useState({
+    planEditor: true,
+    // unknownTasks: false,
+    tasks: false,
+  });
+
+  const [popup, setPopup] = useState({
+    open: false,
+    item: null,
+    group: null,
+  });
+
+  const items: any = [];
+  // const unknownItems = [];
+  const taskList = [];
 
   const groupsMap = new Map();
-  const unknownGroupsMaps = new Map();
+  // const unknownGroupsMaps = new Map();
 
   const getTaskBackground = (task) => {
     if (!task.taskType) {
@@ -41,28 +56,43 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
     return item.title;
   };
 
-  const mapUnknownResources = (groupsMap, unknownGroupsMaps) => {
-    for (const [key, value] of groupsMap.entries()) {
-      if (value.title === "unknown") {
-        unknownGroupsMaps.set(key, value);
-        groupsMap.delete(key);
-      }
+  // const mapUnknownResources = (groupsMap, unknownGroupsMaps) => {
+  //   for (const [key, value] of groupsMap.entries()) {
+  //     if (value.title === "unknown") {
+  //       unknownGroupsMaps.set(key, value);
+  //       groupsMap.delete(key);
+  //     }
+  //
+  //     for (const [key2, value2] of unknownGroupsMaps.entries()) {
+  //       if (value.parent === value2.id) {
+  //         unknownGroupsMaps.set(key, value);
+  //         groupsMap.delete(key);
+  //       }
+  //     }
+  //   }
+  // };
 
-      for (const [key2, value2] of unknownGroupsMaps.entries()) {
-        if (value.parent === value2.id) {
-          unknownGroupsMaps.set(key, value);
-          groupsMap.delete(key);
-        }
-      }
-    }
-  };
+  // const pushUnknownItems = (unknownGroupsMap, items, unknownItems) => {
+  //   for (const item of items) {
+  //     for (const [key, value] of unknownGroupsMap.entries()) {
+  //       if (value.id === item.group) {
+  //         unknownItems.push({
+  //           label: item.title || "Unknown",
+  //           ...item,
+  //         });
+  //       }
+  //     }
+  //   }
+  // };
 
-  const pushUnknownItems = (unknownGroupsMap, items, unknownItems) => {
+  const pushTaskList = (items, taskList) => {
     for (const item of items) {
-      for (const [key, value] of unknownGroupsMap.entries()) {
-        if (value.id === item.group) {
-          unknownItems.push(item);
-        }
+      if (
+        item.applicationType !== Constants.APPLICATION_TYPE.RESTRICTION_PLAN &&
+        item.applicationType !== Constants.APPLICATION_TYPE.GENERAL_TASK_PLAN &&
+        item.applicationType !== Constants.APPLICATION_TYPE.PHASE_PLAN
+      ) {
+        taskList.push(item);
       }
     }
   };
@@ -104,6 +134,7 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
         id: itemId,
         group: groupsMap.get(resourceId)?.id,
         title: getItemTitle(item),
+        label: getItemTitle(item) || "Unknown",
         start: startDate,
         end: endDate,
         parent: itemParentId,
@@ -120,6 +151,8 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
         minimumDuration: 0, //minutes
         workTime: item.workTime,
         plannedWorkTime: item.plannedWorkTime,
+        applicationType: item.applicationType,
+        duration: item.duration,
       });
 
       if (item.planParts && item.planParts.length > 0) {
@@ -135,8 +168,10 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
   };
 
   buildData(workPackage[0]?.planParts, items, 0, null, null);
-  mapUnknownResources(groupsMap, unknownGroupsMaps);
-  pushUnknownItems(unknownGroupsMaps, items, unknownItems);
+  pushTaskList(items, taskList);
+
+  // mapUnknownResources(groupsMap, unknownGroupsMaps);
+  // pushUnknownItems(unknownGroupsMaps, items, unknownItems);
 
   const groups = Array.from(groupsMap, ([key, values]) => values);
 
@@ -147,9 +182,105 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
     return {};
   };
 
+  const viewPlanEditorOnClick = () => {
+    setIsActive({
+      planEditor: true,
+      // unknownTasks: false,
+      tasks: false,
+    });
+  };
+
+  // const viewUnknownTasksOnClick = () => {
+  //   setIsActive({
+  //     planEditor: false,
+  //     unknownTasks: true,
+  //     tasks: false,
+  //   });
+  // }
+
+  const viewAllTasksOnClick = () => {
+    setIsActive({
+      planEditor: false,
+      // unknownTasks: false,
+      tasks: true,
+    });
+  };
+
+  const getTaskProgress = (item) => {
+    const plannedWorkedTime = item.plannedWorkTime;
+    const workedTime = item.workTime;
+    const taskProgress = workedTime / plannedWorkedTime;
+    if (!taskProgress) return 0;
+    return taskProgress;
+  };
+
+  const onChange = (currentNode) => {
+    setPopup({
+      open: true,
+      item: currentNode || null,
+      group: groups.find((i) => i.id === currentNode.group),
+    });
+  };
+
   return (
-    <div className={styles["container"]} style={getStyle()}>
-      <PlanningTool items={items} groups={groups} />
+    <div className={styles["container"]}>
+      <div className={styles["header"]}>
+        <button
+          className={isActive.planEditor && styles["active"]}
+          onClick={viewPlanEditorOnClick}
+        >
+          Plan Editor
+        </button>
+        {/*<button*/}
+        {/*  className={isActive.unknownTasks && styles["active"]}*/}
+        {/*  onClick={viewUnknownTasksOnClick}*/}
+        {/*>*/}
+        {/*  Unknown tasks*/}
+        {/*</button>*/}
+        <button
+          className={isActive.tasks && styles["active"]}
+          onClick={viewAllTasksOnClick}
+        >
+          Tasks
+        </button>
+      </div>
+      {isActive.planEditor && (
+        <div style={getStyle()}>
+          <PlanningTool items={items} groups={groups} />
+        </div>
+      )}
+      {/*{isActive.unknownTasks && (*/}
+      {/*  <div className={styles["tree-select-container"]}>*/}
+      {/*    <DropdownTreeSelect*/}
+      {/*      className={styles["mdl-demo"]}*/}
+      {/*      data={updatedWp}*/}
+      {/*      showDropdown={"initial"}*/}
+      {/*      inlineSearchInput={true}*/}
+      {/*      onChange={onChange}*/}
+      {/*    />*/}
+      {/*  </div>*/}
+      {/*)}*/}
+      {isActive.tasks && (
+        <div className={styles["tree-select-container"]}>
+          <DropdownTreeSelect
+            className={"mdl-demo"}
+            data={taskList}
+            showDropdown={"always"}
+            keepOpenOnSelect={true}
+            mode={"simpleSelect"}
+            onChange={onChange}
+          />
+          {popup.item && popup.group && (
+            <div className={styles["popup-container"]}>
+              <Popup
+                item={popup.item}
+                group={popup.group}
+                progress={getTaskProgress(popup.item)}
+              />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

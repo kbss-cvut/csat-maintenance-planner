@@ -115,6 +115,7 @@ const PlanManager = ({ basename }: Props) => {
   const handleWorkPackageOnClick = (index: number) => {
     setIsWorkPackageLoading(true);
     setWorkPackageErrorMessage("");
+    setShowWorkPackageList(false);
 
     const fetchWorkPackage = async () => {
       const workPackageTitle = workPackageList[index].split(",")[0];

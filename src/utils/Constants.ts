@@ -45,6 +45,7 @@ const Constants = {
     PHASE_PLAN: "PhasePlan",
     GENERAL_TASK_PLAN: "GeneralTaskPlan",
     SESSION_PLAN: "SessionPlan",
+    RESTRICTION_PLAN: "RestrictionPlan",
   },
 
   KEYCLOAK_CONFIG: {
