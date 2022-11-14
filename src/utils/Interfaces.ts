@@ -14,37 +14,39 @@ export interface RevisionPlanInterface {
   title?: string;
   resource?: Resource;
   duration?: number;
-  planParts?: PlanPart[];
-  "planned-start-time"?: number;
-  "planned-end-time"?: number;
-  "planned-duration"?: number;
-  "planned-work-time"?: number;
-  "start-time"?: number;
-  "end-time"?: number;
-  "work-time"?: number;
+  planParts?: PlanPartInterface[];
+  plannedStartTime?: number | null;
+  plannedEndTime?: number | null;
+  plannedDuration?: null;
+  plannedWorkTime?: number | null;
+  startTime?: number | null;
+  endTime?: number | null;
+  workTime?: number;
 }
 
-export interface PlanPart {
+export interface PlanPartInterface {
   type?: PlanPartType;
   id?: number;
   title?: null | string;
   resource?: Resource;
   duration?: number | null;
-  planParts?: PlanPart[];
-  "planned-start-time"?: number | null;
-  "planned-end-time"?: number | null;
-  "planned-duration"?: null;
-  "planned-work-time"?: number | null;
-  "start-time"?: number | null;
-  "end-time"?: number | null;
-  "work-time"?: number;
-  "task-type"?: TaskType;
+  planParts?: PlanPartInterface[];
+  plannedStartTime?: number | null;
+  plannedEndTime?: number | null;
+  plannedDuration?: null;
+  plannedWorkTime?: number | null;
+  startTime?: number | null;
+  endTime?: number | null;
+  workTime?: number;
+  taskType?: TaskType;
 }
 
 export interface Resource {
-  type?: ResourceType;
+  types?: ResourceType;
   id?: number;
   title?: string;
+  entityURI?: null | string;
+  applicationType?: string;
 }
 
 export enum ResourceType {

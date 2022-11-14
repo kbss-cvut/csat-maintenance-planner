@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import PlanningTool, { Popup } from "react-maintenance-planner";
+import PlanningTool from "react-maintenance-planner";
 import moment from "moment";
 import Constants from "../utils/Constants";
+import { Cell, Column, HeaderCell, SortType, Table } from "rsuite-table";
 
+import "rsuite-table/dist/css/rsuite-table.css";
 import "react-maintenance-planner/dist/react-maintenance-planner.css";
 import * as styles from "./PlanEditor.module.scss";
-
-import DropdownTreeSelect from "react-dropdown-tree-select";
+import { PlanPartInterface } from "../utils/Interfaces";
 
 interface Props {
   workPackage: any;
@@ -16,19 +17,21 @@ interface Props {
 const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
   const [isActive, setIsActive] = useState({
     planEditor: true,
-    // unknownTasks: false,
-    tasks: false,
+    table: false,
+    taskList: false,
   });
-
-  const [popup, setPopup] = useState({
-    open: false,
-    item: null,
-    group: null,
-  });
+  // const [popup, setPopup] = useState({
+  //   open: false,
+  //   item: null,
+  //   group: null,
+  // });
+  const [sortColumn, setSortColumn] = useState("id");
+  const [sortType, setSortType] = useState<SortType | undefined | never>("asc");
+  const [isLoading, setIsLoading] = useState(false);
 
   const items: any = [];
   // const unknownItems = [];
-  const taskList = [];
+  const taskList: Array<PlanPartInterface> = [];
 
   const groupsMap = new Map();
   // const unknownGroupsMaps = new Map();
@@ -92,7 +95,10 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
         item.applicationType !== Constants.APPLICATION_TYPE.GENERAL_TASK_PLAN &&
         item.applicationType !== Constants.APPLICATION_TYPE.PHASE_PLAN
       ) {
-        taskList.push(item);
+        taskList.push({
+          resource: groups.find((i) => i.id === item.group),
+          ...item,
+        });
       }
     }
   };
@@ -153,6 +159,8 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
         plannedWorkTime: item.plannedWorkTime,
         applicationType: item.applicationType,
         duration: item.duration,
+        startTime: item.startTime,
+        endTime: item.endTime,
       });
 
       if (item.planParts && item.planParts.length > 0) {
@@ -168,12 +176,11 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
   };
 
   buildData(workPackage[0]?.planParts, items, 0, null, null);
-  pushTaskList(items, taskList);
-
   // mapUnknownResources(groupsMap, unknownGroupsMaps);
   // pushUnknownItems(unknownGroupsMaps, items, unknownItems);
 
   const groups = Array.from(groupsMap, ([key, values]) => values);
+  pushTaskList(items, taskList);
 
   const getStyle = () => {
     if (hidePopup) {
@@ -185,24 +192,24 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
   const viewPlanEditorOnClick = () => {
     setIsActive({
       planEditor: true,
-      // unknownTasks: false,
-      tasks: false,
+      table: false,
+      taskList: false,
     });
   };
 
-  // const viewUnknownTasksOnClick = () => {
-  //   setIsActive({
-  //     planEditor: false,
-  //     unknownTasks: true,
-  //     tasks: false,
-  //   });
-  // }
+  const viewUnknownTasksOnClick = () => {
+    setIsActive({
+      planEditor: false,
+      table: true,
+      taskList: false,
+    });
+  };
 
   const viewAllTasksOnClick = () => {
     setIsActive({
       planEditor: false,
-      // unknownTasks: false,
-      tasks: true,
+      table: false,
+      taskList: true,
     });
   };
 
@@ -214,12 +221,50 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
     return taskProgress;
   };
 
-  const onChange = (currentNode) => {
-    setPopup({
-      open: true,
-      item: currentNode || null,
-      group: groups.find((i) => i.id === currentNode.group),
-    });
+  // const onChange = (currentNode) => {
+  //   setPopup({
+  //     open: true,
+  //     item: currentNode || null,
+  //     group: groups.find((i) => i.id === currentNode.group),
+  //   });
+  // };
+
+  const sortData = (data) => {
+    if (sortColumn && sortType && taskList) {
+      return data.sort((a, b) => {
+        let x = a[sortColumn];
+        let y = b[sortColumn];
+
+        if (!x) {
+          x = a.resource.title;
+        }
+        if (!y) {
+          y = b.resource.title;
+        }
+
+        if (typeof x === "string") {
+          x = x.charCodeAt(0);
+        }
+        if (typeof y === "string") {
+          y = y.charCodeAt(0);
+        }
+        if (sortType === "asc") {
+          return x - y;
+        } else {
+          return y - x;
+        }
+      });
+    }
+    return data;
+  };
+
+  const handleSortColumn = (sortColumn, sortType) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setSortColumn(sortColumn);
+      setSortType(sortType);
+      setIsLoading(false);
+    }, 500);
   };
 
   return (
@@ -231,56 +276,99 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
         >
           Plan Editor
         </button>
-        {/*<button*/}
-        {/*  className={isActive.unknownTasks && styles["active"]}*/}
-        {/*  onClick={viewUnknownTasksOnClick}*/}
-        {/*>*/}
-        {/*  Unknown tasks*/}
-        {/*</button>*/}
         <button
-          className={isActive.tasks && styles["active"]}
-          onClick={viewAllTasksOnClick}
+          className={isActive.table && styles["active"]}
+          onClick={viewUnknownTasksOnClick}
         >
-          Tasks
+          Table
         </button>
+        {/*<button*/}
+        {/*  className={isActive.taskList && styles["active"]}*/}
+        {/*  onClick={viewAllTasksOnClick}*/}
+        {/*>*/}
+        {/*  Tasks*/}
+        {/*</button>*/}
       </div>
       {isActive.planEditor && (
         <div style={getStyle()}>
           <PlanningTool items={items} groups={groups} />
         </div>
       )}
-      {/*{isActive.unknownTasks && (*/}
-      {/*  <div className={styles["tree-select-container"]}>*/}
-      {/*    <DropdownTreeSelect*/}
-      {/*      className={styles["mdl-demo"]}*/}
-      {/*      data={updatedWp}*/}
-      {/*      showDropdown={"initial"}*/}
-      {/*      inlineSearchInput={true}*/}
-      {/*      onChange={onChange}*/}
-      {/*    />*/}
-      {/*  </div>*/}
-      {/*)}*/}
-      {isActive.tasks && (
-        <div className={styles["tree-select-container"]}>
-          <DropdownTreeSelect
-            className={"mdl-demo"}
-            data={taskList}
-            showDropdown={"always"}
-            keepOpenOnSelect={true}
-            mode={"simpleSelect"}
-            onChange={onChange}
-          />
-          {popup.item && popup.group && (
-            <div className={styles["popup-container"]}>
-              <Popup
-                item={popup.item}
-                group={popup.group}
-                progress={getTaskProgress(popup.item)}
-              />
-            </div>
-          )}
+      {isActive.table && (
+        <div className={styles["table"]}>
+          <Table
+            data={sortData(taskList)}
+            sortColumn={sortColumn}
+            sortType={sortType}
+            onSortColumn={handleSortColumn}
+            virtualized={true}
+            fillHeight={true}
+            loading={isLoading}
+          >
+            <Column flexGrow={1} sortable>
+              <HeaderCell>ID</HeaderCell>
+              <Cell dataKey="id" />
+            </Column>
+
+            <Column flexGrow={2} sortable>
+              <HeaderCell>Resource</HeaderCell>
+              <Cell dataKey="resource.title" />
+            </Column>
+
+            <Column flexGrow={1} sortable>
+              <HeaderCell>Start</HeaderCell>
+              <Cell dataKey="startTime">
+                {(rowData, rowIndex) => {
+                  return (
+                    <div>
+                      {new Date(rowData.startTime).toLocaleDateString("en-GB")}
+                    </div>
+                  );
+                }}
+              </Cell>
+            </Column>
+
+            <Column flexGrow={1} sortable>
+              <HeaderCell>End</HeaderCell>
+              <Cell dataKey="endTime">
+                {(rowData, rowIndex) => {
+                  return (
+                    <div>
+                      {new Date(rowData.endTime).toLocaleDateString("en-GB")}
+                    </div>
+                  );
+                }}
+              </Cell>
+            </Column>
+
+            <Column flexGrow={5} sortable>
+              <HeaderCell>Title / Description</HeaderCell>
+              <Cell dataKey={"label" ? "label" : "title"} />
+            </Column>
+          </Table>
         </div>
       )}
+      {/*{isActive.taskList && (*/}
+      {/*  <div className={styles["tree-select-container"]}>*/}
+      {/*    <DropdownTreeSelect*/}
+      {/*      className={"mdl-demo"}*/}
+      {/*      data={taskList}*/}
+      {/*      showDropdown={"always"}*/}
+      {/*      keepOpenOnSelect={true}*/}
+      {/*      mode={"simpleSelect"}*/}
+      {/*      onChange={onChange}*/}
+      {/*    />*/}
+      {/*    {popup.item && popup.group && (*/}
+      {/*      <div className={styles["popup-container"]}>*/}
+      {/*        /!*<Popup*!/*/}
+      {/*        /!*  item={popup.item}*!/*/}
+      {/*        /!*  group={popup.group}*!/*/}
+      {/*        /!*  progress={getTaskProgress(popup.item)}*!/*/}
+      {/*/>*/}
+      {/*      </div>*/}
+      {/*    )}*/}
+      {/*  </div>*/}
+      {/*)}*/}
     </div>
   );
 };
