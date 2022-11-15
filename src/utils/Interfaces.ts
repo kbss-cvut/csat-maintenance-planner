@@ -12,7 +12,7 @@ export interface RevisionPlanInterface {
   type?: string;
   id?: number;
   title?: string;
-  resource?: Resource;
+  resource?: ResourceInterface;
   duration?: number;
   planParts?: PlanPartInterface[];
   plannedStartTime?: number | null;
@@ -28,7 +28,7 @@ export interface PlanPartInterface {
   type?: PlanPartType;
   id?: number;
   title?: null | string;
-  resource?: Resource;
+  resource?: ResourceInterface;
   duration?: number | null;
   planParts?: PlanPartInterface[];
   plannedStartTime?: number | null;
@@ -39,9 +39,14 @@ export interface PlanPartInterface {
   endTime?: number | null;
   workTime?: number;
   taskType?: TaskType;
+  applicationType?: string;
+  group?: any;
+  start?: any;
+  end?: any;
+  parent?: any;
 }
 
-export interface Resource {
+export interface ResourceInterface {
   types?: ResourceType;
   id?: number;
   title?: string;

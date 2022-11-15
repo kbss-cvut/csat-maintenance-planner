@@ -1,7 +1,7 @@
 /**
  * Aggregated object of process.env and window.__config__ to allow dynamic configuration
  */
-export const ENV = {
+const ENV = {
   ...Object.keys(process.env).reduce<Record<string, string>>((acc, key) => {
     const strippedKey = key.replace("REACT_APP_", "");
     acc[strippedKey] = process.env[key]!;
@@ -99,4 +99,4 @@ const LEGEND_ITEMS = [
   },
 ];
 
-export { Constants, LEGEND_ITEMS };
+export { ENV, Constants, LEGEND_ITEMS };

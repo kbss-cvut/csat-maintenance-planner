@@ -126,7 +126,7 @@ const TasksTable = ({ taskList }: Props) => {
         {/*<Cell dataKey={"label" ? "label" : "title"} />*/}
         <EditableCell
           rowData={taskList}
-          dataKey={"label" ? "label" : "title"}
+          dataKey="title"
           onChange={handleChange}
         />
       </Column>
