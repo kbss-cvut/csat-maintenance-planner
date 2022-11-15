@@ -63,6 +63,11 @@ const Constants = {
 
 const LEGEND_ITEMS = [
   {
+    code: Constants.APPLICATION_TYPE.RESTRICTION_PLAN,
+    name: "Restriction Plan",
+    color: "#ff0000",
+  },
+  {
     code: Constants.APPLICATION_TYPE.PHASE_PLAN,
     name: "Phase Plan",
     color: "#00718F",
