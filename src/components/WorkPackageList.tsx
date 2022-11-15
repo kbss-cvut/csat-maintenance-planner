@@ -16,11 +16,11 @@ const WorkPackageList = ({
     <ul className={styles["revision-plan-items"]}>
       {workPackageList.map((revisionPlanTitle: string, index: number) => (
         <li
+          key={index}
           className={styles["revision-plan-item"]}
           onClick={() => handleWorkPackageOnClick(index)}
         >
           <NavLink
-            key={index}
             to={encodeURIComponent(revisionPlanTitle.split(",")[0])}
             style={({ isActive }) => {
               return {

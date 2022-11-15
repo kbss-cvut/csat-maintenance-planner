@@ -46,6 +46,7 @@
     "react-maintenance-planner": "^0.1.2-beta-62500e6.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^4.0.3",
+    "rsuite-table": "^5.8.0",
     "typescript": "^4.4.4"
   },
   "devDependencies": {

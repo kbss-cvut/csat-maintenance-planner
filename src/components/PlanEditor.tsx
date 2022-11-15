@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import PlanningTool from "react-maintenance-planner";
 import moment from "moment";
 import { Constants, LEGEND_ITEMS } from "../utils/Constants";
+import TasksTable from "./table/TasksTable";
+
+import { PlanPartInterface } from "../utils/Interfaces";
 
 import "react-maintenance-planner/dist/react-maintenance-planner.css";
 import * as styles from "./PlanEditor.module.scss";
@@ -12,8 +15,23 @@ interface Props {
 }
 
 const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
-  const items = [];
+  const [isActive, setIsActive] = useState({
+    planEditor: true,
+    table: false,
+    taskList: false,
+  });
+  // const [popup, setPopup] = useState({
+  //   open: false,
+  //   item: null,
+  //   group: null,
+  // });
+
+  const items: any = [];
+  // const unknownItems = [];
+  const taskList: Array<PlanPartInterface> = [];
+
   const groupsMap = new Map();
+  // const unknownGroupsMaps = new Map();
 
   const getItemBackground = (item) => {
     if (item.taskType) {
@@ -38,14 +56,45 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
     return item.title;
   };
 
-  const buildData = (
-    data,
-    groupsMap,
-    items,
-    level,
-    groupParentId,
-    itemParentId
-  ) => {
+  // const mapUnknownResources = (groupsMap, unknownGroupsMaps) => {
+  //   for (const [key, value] of groupsMap.entries()) {
+  //     if (value.title === "unknown") {
+  //       unknownGroupsMaps.set(key, value);
+  //       groupsMap.delete(key);
+  //     }
+  //
+  //     for (const [key2, value2] of unknownGroupsMaps.entries()) {
+  //       if (value.parent === value2.id) {
+  //         unknownGroupsMaps.set(key, value);
+  //         groupsMap.delete(key);
+  //       }
+  //     }
+  //   }
+  // };
+
+  // const pushUnknownItems = (unknownGroupsMap, items, unknownItems) => {
+  //   for (const item of items) {
+  //     for (const [key, value] of unknownGroupsMap.entries()) {
+  //       if (value.id === item.group) {
+  //         unknownItems.push({
+  //           label: item.title || "Unknown",
+  //           ...item,
+  //         });
+  //       }
+  //     }
+  //   }
+  // };
+
+  const pushTaskList = (items, taskList) => {
+    for (const item of items) {
+      taskList.push({
+        children: [groups.find((i) => i.id === item.group)],
+        ...item,
+      });
+    }
+  };
+
+  const buildData = (data, items, level, groupParentId, itemParentId) => {
     if (!data) {
       return;
     }
@@ -79,8 +128,9 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
 
       items.push({
         id: itemId,
-        group: groupsMap.get(resourceId).id,
+        group: groupsMap.get(resourceId)?.id,
         title: getItemTitle(item),
+        label: getItemTitle(item) || "Unknown",
         start: startDate,
         end: endDate,
         parent: itemParentId,
@@ -97,24 +147,31 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
         minimumDuration: 0, //minutes
         workTime: item.workTime,
         plannedWorkTime: item.plannedWorkTime,
+        applicationType: item.applicationType,
+        duration: item.duration,
+        startTime: item.startTime,
+        endTime: item.endTime,
         removable: false,
       });
 
       if (item.planParts && item.planParts.length > 0) {
         buildData(
           item.planParts,
-          groupsMap,
           items,
           level + 1,
-          groupsMap.get(resourceId).id,
+          groupsMap.get(resourceId)?.id,
           itemId
         );
       }
     }
   };
 
-  buildData(workPackage[0]?.planParts, groupsMap, items, 0, null, null);
+  buildData(workPackage[0]?.planParts, items, 0, null, null);
+  // mapUnknownResources(groupsMap, unknownGroupsMaps);
+  // pushUnknownItems(unknownGroupsMaps, items, unknownItems);
+
   const groups = Array.from(groupsMap, ([key, values]) => values);
+  pushTaskList(items, taskList);
 
   const getStyle = () => {
     if (hidePopup) {
@@ -123,9 +180,91 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
     return {};
   };
 
+  const viewPlanEditorOnClick = () => {
+    setIsActive({
+      planEditor: true,
+      table: false,
+      taskList: false,
+    });
+  };
+
+  const viewUnknownTasksOnClick = () => {
+    setIsActive({
+      planEditor: false,
+      table: true,
+      taskList: false,
+    });
+  };
+
+  const viewAllTasksOnClick = () => {
+    setIsActive({
+      planEditor: false,
+      table: false,
+      taskList: true,
+    });
+  };
+
+  // const onChange = (currentNode) => {
+  //   setPopup({
+  //     open: true,
+  //     item: currentNode || null,
+  //     group: groups.find((i) => i.id === currentNode.group),
+  //   });
+  // };
+
   return (
-    <div className={styles["container"]} style={getStyle()}>
-      <PlanningTool items={items} groups={groups} legendItems={LEGEND_ITEMS} />
+    <div className={styles["container"]}>
+      <div className={styles["header"]}>
+        <button
+          className={isActive.planEditor && styles["active"]}
+          onClick={viewPlanEditorOnClick}
+        >
+          Plan Editor
+        </button>
+        <button
+          className={isActive.table && styles["active"]}
+          onClick={viewUnknownTasksOnClick}
+        >
+          Table
+        </button>
+        {/*<button*/}
+        {/*  className={isActive.taskList && styles["active"]}*/}
+        {/*  onClick={viewAllTasksOnClick}*/}
+        {/*>*/}
+        {/*  Tasks*/}
+        {/*</button>*/}
+      </div>
+      {isActive.planEditor && (
+        <div style={getStyle()}>
+          <PlanningTool items={taskList} groups={groups} legendItems={LEGEND_ITEMS} />
+        </div>
+      )}
+      {isActive.table && (
+        <div className={styles["table"]}>
+          <TasksTable taskList={taskList} />
+        </div>
+      )}
+      {/*{isActive.taskList && (*/}
+      {/*  <div className={styles["tree-select-container"]}>*/}
+      {/*    <DropdownTreeSelect*/}
+      {/*      className={"mdl-demo"}*/}
+      {/*      data={taskList}*/}
+      {/*      showDropdown={"always"}*/}
+      {/*      keepOpenOnSelect={true}*/}
+      {/*      mode={"simpleSelect"}*/}
+      {/*      onChange={onChange}*/}
+      {/*    />*/}
+      {/*    {popup.item && popup.group && (*/}
+      {/*      <div className={styles["popup-container"]}>*/}
+      {/*        /!*<Popup*!/*/}
+      {/*        /!*  item={popup.item}*!/*/}
+      {/*        /!*  group={popup.group}*!/*/}
+      {/*        /!*  progress={getTaskProgress(popup.item)}*!/*/}
+      {/*/>*/}
+      {/*      </div>*/}
+      {/*    )}*/}
+      {/*  </div>*/}
+      {/*)}*/}
     </div>
   );
 };

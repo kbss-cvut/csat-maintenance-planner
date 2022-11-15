@@ -9,6 +9,8 @@ import { motion } from "framer-motion/dist/framer-motion";
 import Animations from "../utils/Animations";
 import { useKeycloak } from "@react-keycloak/web";
 
+import data from "../assets/data.json";
+
 import styles from "./PlanManager.module.scss";
 
 interface Props {
@@ -21,7 +23,7 @@ const PlanManager = ({ basename }: Props) => {
   const [workPackageList, setWorkPackageList] = useState<Array<string>>([]);
 
   // TODO: Set work package interface
-  const [workPackage, setWorkPackage] = useState<any>(null);
+  const [workPackage, setWorkPackage] = useState<any>([data]);
 
   const [isWorkPackageListLoading, setIsWorkPackageListLoading] =
     useState<boolean>(false);
@@ -115,6 +117,7 @@ const PlanManager = ({ basename }: Props) => {
   const handleWorkPackageOnClick = (index: number) => {
     setIsWorkPackageLoading(true);
     setWorkPackageErrorMessage("");
+    setShowWorkPackageList(false);
 
     const fetchWorkPackage = async () => {
       const workPackageTitle = workPackageList[index].split(",")[0];

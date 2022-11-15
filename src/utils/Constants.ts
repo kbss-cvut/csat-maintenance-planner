@@ -46,6 +46,7 @@ const Constants = {
     TASK_CARD_TYPE_GROUP: "GeneralTaskPlan",
     SESSION_PLAN: "SessionPlan",
     TASK_PLAN: "TaskPlan",
+    RESTRICTION_PLAN: "RestrictionPlan",
   },
   TASK_CATEGORY: {
     TASK_CARD: "task-card",
