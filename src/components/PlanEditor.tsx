@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import PlanningTool from "react-maintenance-planner";
 import moment from "moment";
 import Constants from "../utils/Constants";
-import { Cell, Column, HeaderCell, SortType, Table } from "rsuite-table";
+import TasksTable from "./table/TasksTable";
 
-import "rsuite-table/dist/css/rsuite-table.css";
+import { PlanPartInterface } from "../utils/Interfaces";
+
 import "react-maintenance-planner/dist/react-maintenance-planner.css";
 import * as styles from "./PlanEditor.module.scss";
-import { PlanPartInterface } from "../utils/Interfaces";
 
 interface Props {
   workPackage: any;
@@ -25,9 +25,6 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
   //   item: null,
   //   group: null,
   // });
-  const [sortColumn, setSortColumn] = useState("id");
-  const [sortType, setSortType] = useState<SortType | undefined | never>("asc");
-  const [isLoading, setIsLoading] = useState(false);
 
   const items: any = [];
   // const unknownItems = [];
@@ -90,16 +87,10 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
 
   const pushTaskList = (items, taskList) => {
     for (const item of items) {
-      if (
-        item.applicationType !== Constants.APPLICATION_TYPE.RESTRICTION_PLAN &&
-        item.applicationType !== Constants.APPLICATION_TYPE.GENERAL_TASK_PLAN &&
-        item.applicationType !== Constants.APPLICATION_TYPE.PHASE_PLAN
-      ) {
-        taskList.push({
-          resource: groups.find((i) => i.id === item.group),
-          ...item,
-        });
-      }
+      taskList.push({
+        children: [groups.find((i) => i.id === item.group)],
+        ...item,
+      });
     }
   };
 
@@ -213,14 +204,6 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
     });
   };
 
-  const getTaskProgress = (item) => {
-    const plannedWorkedTime = item.plannedWorkTime;
-    const workedTime = item.workTime;
-    const taskProgress = workedTime / plannedWorkedTime;
-    if (!taskProgress) return 0;
-    return taskProgress;
-  };
-
   // const onChange = (currentNode) => {
   //   setPopup({
   //     open: true,
@@ -228,44 +211,6 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
   //     group: groups.find((i) => i.id === currentNode.group),
   //   });
   // };
-
-  const sortData = (data) => {
-    if (sortColumn && sortType && taskList) {
-      return data.sort((a, b) => {
-        let x = a[sortColumn];
-        let y = b[sortColumn];
-
-        if (!x) {
-          x = a.resource.title;
-        }
-        if (!y) {
-          y = b.resource.title;
-        }
-
-        if (typeof x === "string") {
-          x = x.charCodeAt(0);
-        }
-        if (typeof y === "string") {
-          y = y.charCodeAt(0);
-        }
-        if (sortType === "asc") {
-          return x - y;
-        } else {
-          return y - x;
-        }
-      });
-    }
-    return data;
-  };
-
-  const handleSortColumn = (sortColumn, sortType) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setSortColumn(sortColumn);
-      setSortType(sortType);
-      setIsLoading(false);
-    }, 500);
-  };
 
   return (
     <div className={styles["container"]}>
@@ -291,61 +236,12 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
       </div>
       {isActive.planEditor && (
         <div style={getStyle()}>
-          <PlanningTool items={items} groups={groups} />
+          <PlanningTool items={taskList} groups={groups} />
         </div>
       )}
       {isActive.table && (
         <div className={styles["table"]}>
-          <Table
-            data={sortData(taskList)}
-            sortColumn={sortColumn}
-            sortType={sortType}
-            onSortColumn={handleSortColumn}
-            virtualized={true}
-            fillHeight={true}
-            loading={isLoading}
-          >
-            <Column flexGrow={1} sortable>
-              <HeaderCell>ID</HeaderCell>
-              <Cell dataKey="id" />
-            </Column>
-
-            <Column flexGrow={2} sortable>
-              <HeaderCell>Resource</HeaderCell>
-              <Cell dataKey="resource.title" />
-            </Column>
-
-            <Column flexGrow={1} sortable>
-              <HeaderCell>Start</HeaderCell>
-              <Cell dataKey="startTime">
-                {(rowData, rowIndex) => {
-                  return (
-                    <div>
-                      {new Date(rowData.startTime).toLocaleDateString("en-GB")}
-                    </div>
-                  );
-                }}
-              </Cell>
-            </Column>
-
-            <Column flexGrow={1} sortable>
-              <HeaderCell>End</HeaderCell>
-              <Cell dataKey="endTime">
-                {(rowData, rowIndex) => {
-                  return (
-                    <div>
-                      {new Date(rowData.endTime).toLocaleDateString("en-GB")}
-                    </div>
-                  );
-                }}
-              </Cell>
-            </Column>
-
-            <Column flexGrow={5} sortable>
-              <HeaderCell>Title / Description</HeaderCell>
-              <Cell dataKey={"label" ? "label" : "title"} />
-            </Column>
-          </Table>
+          <TasksTable taskList={taskList} />
         </div>
       )}
       {/*{isActive.taskList && (*/}
