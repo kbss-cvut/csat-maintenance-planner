@@ -36,7 +36,8 @@ const buildData = (
     if (!groupsMap.has(resourceId)) {
       groupsMap.set(resourceId, {
         id: groupsMap.size,
-        title: item.resource?.title ? item.resource?.title : "-",
+        title:
+          item.resource?.title !== "unknown" ? item.resource?.title : "Other",
         hasChildren: item.planParts && item.planParts.length > 0,
         parent: groupParentId,
         open: level < 0,
@@ -60,7 +61,7 @@ const buildData = (
     items.push({
       id: itemId,
       group: groupsMap.get(resourceId)?.id,
-      title: item.title ? item.title : "Unknown",
+      title: item.title ? item.title : "Other",
       start: startDate,
       end: endDate,
       parent: itemParentId,
