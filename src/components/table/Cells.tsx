@@ -1,6 +1,8 @@
 import React from "react";
 import { Cell } from "rsuite-table";
 
+import styles from "./TasksTable.module.scss";
+
 interface EditableCellProps {
   rowData: any;
   dataKey: string;
@@ -86,6 +88,7 @@ const ActionCell = ({
   return (
     <Cell {...props}>
       <a
+        className={styles["action-button"]}
         onClick={() => {
           onClick && onClick(rowData.id);
         }}

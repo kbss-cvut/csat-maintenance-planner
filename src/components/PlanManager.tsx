@@ -35,7 +35,7 @@ const PlanManager = ({ basename }: Props) => {
 
   const [update, setUpdate] = useState<boolean>(false);
 
-  const [showWorkPackageList, setShowWorkPackageList] = useState<boolean>(true);
+  const [isPlanFullScreen, setIsPlanFullScreen] = useState<boolean>(false);
 
   const [documentTitle, setDocumentTitle] = useState<string>(
     "CSAT Maintenance Planner"
@@ -115,7 +115,7 @@ const PlanManager = ({ basename }: Props) => {
   const handleWorkPackageOnClick = (index: number) => {
     setIsWorkPackageLoading(true);
     setWorkPackageErrorMessage("");
-    setShowWorkPackageList(false);
+    setIsPlanFullScreen(true);
 
     const fetchWorkPackage = async () => {
       const workPackageTitle = workPackageList[index].split(",")[0];
@@ -171,7 +171,7 @@ const PlanManager = ({ basename }: Props) => {
         {!isWorkPackageLoading && workPackage && !workPackageErrorMessage && (
           <PlanEditor
             workPackage={workPackage}
-            hidePopup={showWorkPackageList}
+            isFullScreen={isPlanFullScreen}
           />
         )}
       </React.Fragment>
@@ -187,7 +187,7 @@ const PlanManager = ({ basename }: Props) => {
       <motion.div
         className={styles["work-packages"]}
         variants={Animations.workPackageListAnimation}
-        animate={showWorkPackageList ? "show" : "hide"}
+        animate={isPlanFullScreen ? "hide" : "show"}
       >
         <div className={styles["header-container"]}>
           <div className={styles.header}>
@@ -197,9 +197,9 @@ const PlanManager = ({ basename }: Props) => {
             />
             <motion.span
               whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
-              onClick={() => setShowWorkPackageList(!showWorkPackageList)}
+              onClick={() => setIsPlanFullScreen(!isPlanFullScreen)}
               variants={Animations.doubleArrowAnimation}
-              animate={showWorkPackageList ? "show" : "hide"}
+              animate={isPlanFullScreen ? "hide" : "show"}
               className={styles["double-arrow-icon"]}
             >
               <CgChevronDoubleLeftO />
@@ -220,7 +220,7 @@ const PlanManager = ({ basename }: Props) => {
       </motion.div>
       <motion.span
         variants={Animations.planEditorAnimation}
-        animate={showWorkPackageList ? "show" : "hide"}
+        animate={isPlanFullScreen ? "hide" : "show"}
       >
         {renderPlanEditor()}
       </motion.span>

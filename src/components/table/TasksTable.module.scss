@@ -1,0 +1,8 @@
+.action-button {
+  color: black;
+  cursor: pointer;
+    &:hover {
+      transition: 0.3s;
+      opacity: 0.5;
+     }
+}

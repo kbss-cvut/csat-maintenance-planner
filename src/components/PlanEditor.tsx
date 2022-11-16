@@ -12,13 +12,14 @@ import {
 
 import "react-maintenance-planner/dist/react-maintenance-planner.css";
 import * as styles from "./PlanEditor.module.scss";
+import classNames from "classnames";
 
 interface Props {
   workPackage: RevisionPlanInterface;
-  hidePopup?: boolean;
+  isFullScreen?: boolean;
 }
 
-const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
+const PlanEditor = ({ workPackage, isFullScreen = false }: Props) => {
   const [isActive, setIsActive] = useState({
     planEditor: true,
     table: false,
@@ -51,7 +52,7 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
   pushResourcesToTaskList(workPackageItems, taskListWithResources, groups);
 
   const getStyle = () => {
-    if (hidePopup) {
+    if (!isFullScreen) {
       return { ["--display" as string]: "none" };
     }
     return {};
@@ -99,7 +100,12 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
         </div>
       )}
       {isActive.table && taskList.length > 0 && (
-        <div className={styles["table"]}>
+        <div
+          className={classNames([
+            styles["table"],
+            isFullScreen && styles["table-full-screen"],
+          ])}
+        >
           <TasksTable taskList={taskList} />
         </div>
       )}
