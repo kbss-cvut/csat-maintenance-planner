@@ -100,7 +100,7 @@ const buildData = (
 const pushResourcesToTaskList = (items, taskListWithResources, groups) => {
   for (const item of items) {
     taskListWithResources.push({
-      children: [groups.find((i) => i.id === item.group)],
+      resource: groups.find((i) => i.id === item.group),
       ...item,
     });
   }

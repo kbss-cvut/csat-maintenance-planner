@@ -4,7 +4,11 @@ import { LEGEND_ITEMS } from "../utils/Constants";
 import TasksTable from "./table/TasksTable";
 import { buildData, pushResourcesToTaskList } from "../utils/Utils";
 
-import { PlanPartInterface, RevisionPlanInterface } from "../utils/Interfaces";
+import {
+  PlanPartInterface,
+  ResourceInterface,
+  RevisionPlanInterface,
+} from "../utils/Interfaces";
 
 import "react-maintenance-planner/dist/react-maintenance-planner.css";
 import * as styles from "./PlanEditor.module.scss";
@@ -21,6 +25,7 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
     taskList: false,
   });
   const [taskList, setTaskList] = useState<Array<PlanPartInterface>>([]);
+  const [resources, setResources] = useState<Array<ResourceInterface>>([]);
 
   const workPackageItems: Array<PlanPartInterface> = [];
   const taskListWithResources: Array<PlanPartInterface> = [];
@@ -30,6 +35,7 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
 
   useEffect(() => {
     setTaskList([...taskListWithResources]);
+    setResources([...groups]);
   }, []);
 
   buildData(
@@ -87,7 +93,7 @@ const PlanEditor = ({ workPackage, hidePopup = false }: Props) => {
         <div style={getStyle()}>
           <PlanningTool
             items={taskList}
-            groups={groups}
+            groups={resources}
             legendItems={LEGEND_ITEMS}
           />
         </div>

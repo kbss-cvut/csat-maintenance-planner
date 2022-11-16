@@ -7,6 +7,18 @@ interface EditableCellProps {
   onChange: (dataId: string | number, dataKey: string, value: string) => void;
 }
 
+interface NestedCellProps {
+  rowData: any;
+  dataKey1: string;
+  dataKey2: string;
+  onChange: (
+    dataId: string | number,
+    dataKey1: string,
+    dataKey2: string,
+    value: string
+  ) => void;
+}
+
 interface ActionCellProps {
   rowData: any;
   dataKey: string;
@@ -37,6 +49,34 @@ const EditableCell = ({
   );
 };
 
+const NestedEditableCell = ({
+  rowData,
+  dataKey1,
+  dataKey2,
+  onChange,
+  ...props
+}: NestedCellProps) => {
+  const editing = rowData.status === "EDIT";
+  return (
+    <Cell {...props} className={editing ? "table-content-editing" : ""}>
+      {editing ? (
+        <input
+          className="rs-input"
+          defaultValue={rowData[dataKey1][dataKey2]}
+          onChange={(event) => {
+            onChange &&
+              onChange(rowData.id, dataKey1, dataKey2, event.target.value);
+          }}
+        />
+      ) : (
+        <span className="table-content-edit-span">
+          {rowData[dataKey1][dataKey2]}
+        </span>
+      )}
+    </Cell>
+  );
+};
+
 const ActionCell = ({
   rowData,
   dataKey,
@@ -56,4 +96,4 @@ const ActionCell = ({
   );
 };
 
-export { EditableCell, ActionCell };
+export { EditableCell, NestedEditableCell, ActionCell };

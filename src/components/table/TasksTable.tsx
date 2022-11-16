@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Cell, Column, HeaderCell, SortType, Table } from "rsuite-table";
 import { PlanPartInterface } from "../../utils/Interfaces";
-import { ActionCell, EditableCell } from "./Cells";
+import { ActionCell, EditableCell, NestedEditableCell } from "./Cells";
 
 import "rsuite-table/dist/css/rsuite-table.css";
 
@@ -68,6 +68,13 @@ const TasksTable = ({ taskList }: Props) => {
     setData(nextData);
   };
 
+  const handleChangeNestedChange = (id, key1, key2, value) => {
+    const nextData: Array<PlanPartInterface> = Object.assign([], data);
+    // @ts-ignore
+    nextData.find((item) => item.id === id)[key1][key2] = value;
+    setData(nextData);
+  };
+
   const handleEditState = (id) => {
     const nextData: Array<PlanPartInterface> = Object.assign([], data);
     const activeItem: PlanPartInterface | any = nextData.find(
@@ -94,7 +101,12 @@ const TasksTable = ({ taskList }: Props) => {
 
       <Column flexGrow={2} sortable>
         <HeaderCell>Resource</HeaderCell>
-        <Cell dataKey="children[0].title" />
+        <NestedEditableCell
+          rowData={taskList}
+          dataKey1="resource"
+          dataKey2="title"
+          onChange={handleChangeNestedChange}
+        />
       </Column>
 
       <Column flexGrow={1} sortable>
@@ -123,7 +135,6 @@ const TasksTable = ({ taskList }: Props) => {
 
       <Column flexGrow={5} sortable>
         <HeaderCell>Title / Description</HeaderCell>
-        {/*<Cell dataKey={"label" ? "label" : "title"} />*/}
         <EditableCell
           rowData={taskList}
           dataKey="title"
@@ -146,10 +157,10 @@ const TasksTable = ({ taskList }: Props) => {
         </Cell>
       </Column>
 
-      {/*<Column flexGrow={1}>*/}
-      {/*  <HeaderCell>...</HeaderCell>*/}
-      {/*  <ActionCell dataKey="id" rowData={taskList} onClick={handleEditState} />*/}
-      {/*</Column>*/}
+      <Column flexGrow={1}>
+        <HeaderCell>Actions</HeaderCell>
+        <ActionCell dataKey="id" rowData={taskList} onClick={handleEditState} />
+      </Column>
     </Table>
   );
 };
