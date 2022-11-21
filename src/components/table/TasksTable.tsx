@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { Cell, Column, HeaderCell, SortType, Table } from "rsuite-table";
 import { PlanPartInterface } from "../../utils/Interfaces";
-import { ActionCell, EditableCell, NestedEditableCell } from "./Cells";
+import {
+  ActionCell,
+  DateCell,
+  EditableCell,
+  NestedEditableCell,
+} from "./Cells";
 
 import "rsuite-table/dist/css/rsuite-table.css";
 
@@ -72,6 +77,11 @@ const TasksTable = ({ taskList }: Props) => {
     nextData.find((item) => item.id === id)[key1][key2] = value;
   };
 
+  const handleDateChange = (id, key, value) => {
+    // @ts-ignore
+    nextData.find((item) => item.id === id)[key] = value;
+  };
+
   const handleEditState = (id) => {
     const activeItem: PlanPartInterface | any = nextData.find(
       (item) => item.id === id
@@ -105,28 +115,22 @@ const TasksTable = ({ taskList }: Props) => {
         />
       </Column>
 
-      <Column flexGrow={1} sortable>
+      <Column flexGrow={1.5} sortable>
         <HeaderCell>Start</HeaderCell>
-        <Cell dataKey="startTime">
-          {(rowData, rowIndex) => {
-            return (
-              <div>
-                {new Date(rowData.startTime).toLocaleDateString("en-GB")}
-              </div>
-            );
-          }}
-        </Cell>
+        <DateCell
+          dataKey="start"
+          onChange={handleDateChange}
+          rowData={taskList}
+        />
       </Column>
 
-      <Column flexGrow={1} sortable>
+      <Column flexGrow={1.5} sortable>
         <HeaderCell>End</HeaderCell>
-        <Cell dataKey="endTime">
-          {(rowData, rowIndex) => {
-            return (
-              <div>{new Date(rowData.endTime).toLocaleDateString("en-GB")}</div>
-            );
-          }}
-        </Cell>
+        <DateCell
+          dataKey="end"
+          onChange={handleDateChange}
+          rowData={taskList}
+        />
       </Column>
 
       <Column flexGrow={5} sortable>

@@ -46,16 +46,23 @@ const buildData = (
       });
     }
 
-    const startDate = moment(
-      item.applicationType === Constants.APPLICATION_TYPE.SESSION_PLAN
-        ? item.startTime
-        : item.plannedStartTime
-    );
-    const endDate = moment(
-      item.applicationType === Constants.APPLICATION_TYPE.SESSION_PLAN
-        ? item.endTime
-        : item.plannedEndTime
-    );
+    let startDate;
+    if (!item.startTime && !item.plannedStartTime) {
+      startDate = null;
+    } else {
+      startDate = moment(
+        item.startTime ? item.startTime : item.plannedStartTime
+      );
+    }
+
+    let endDate;
+    if (!item.endTime && !item.plannedEndTime) {
+      endDate = null;
+    } else {
+      endDate = moment(
+        item.endTime ? item.plannedEndTime : item.plannedEndTime
+      );
+    }
     const itemId = items.length + 1;
 
     items.push({

@@ -1,5 +1,6 @@
 import React from "react";
 import { Cell } from "rsuite-table";
+import moment from "moment";
 
 import styles from "./TasksTable.module.scss";
 
@@ -79,6 +80,33 @@ const NestedEditableCell = ({
   );
 };
 
+const DateCell = ({ rowData, dataKey, onChange, ...props }: any) => {
+  const editing = rowData.status === "EDIT";
+  return (
+    <Cell {...props} className={editing ? "table-content-editing" : ""}>
+      {editing ? (
+        <input
+          className="rs-input"
+          defaultValue={moment(rowData[dataKey]["_d"]).format("DD/MM/YYYY")}
+          // defaultValue={rowData[dataKey]}
+          onChange={(event) => {
+            onChange &&
+              onChange(
+                rowData.id,
+                dataKey,
+                moment(event.target.value, "DD/MM/YYYY")
+              );
+          }}
+        />
+      ) : rowData[dataKey] ? (
+        moment(rowData[dataKey]["_d"]).format("DD/MM/YYYY")
+      ) : (
+        "NaN"
+      )}
+    </Cell>
+  );
+};
+
 const ActionCell = ({
   rowData,
   dataKey,
@@ -99,4 +127,4 @@ const ActionCell = ({
   );
 };
 
-export { EditableCell, NestedEditableCell, ActionCell };
+export { EditableCell, NestedEditableCell, ActionCell, DateCell };
