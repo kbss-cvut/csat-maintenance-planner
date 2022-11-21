@@ -14,6 +14,7 @@ const TasksTable = ({ taskList }: Props) => {
   const [sortType, setSortType] = useState<SortType | undefined | never>("asc");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<Array<PlanPartInterface>>(taskList);
+  const nextData: Array<PlanPartInterface> = Object.assign([], data);
 
   const sortData = (data) => {
     if (sortColumn && sortType && taskList) {
@@ -62,21 +63,16 @@ const TasksTable = ({ taskList }: Props) => {
   };
 
   const handleChange = (id, key, value) => {
-    const nextData: Array<PlanPartInterface> = Object.assign([], data);
     // @ts-ignore
     nextData.find((item) => item.id === id)[key] = value;
-    setData(nextData);
   };
 
-  const handleChangeNestedChange = (id, key1, key2, value) => {
-    const nextData: Array<PlanPartInterface> = Object.assign([], data);
+  const handleNestedChange = (id, key1, key2, value) => {
     // @ts-ignore
     nextData.find((item) => item.id === id)[key1][key2] = value;
-    setData(nextData);
   };
 
   const handleEditState = (id) => {
-    const nextData: Array<PlanPartInterface> = Object.assign([], data);
     const activeItem: PlanPartInterface | any = nextData.find(
       (item) => item.id === id
     );
@@ -105,7 +101,7 @@ const TasksTable = ({ taskList }: Props) => {
           rowData={taskList}
           dataKey1="resource"
           dataKey2="title"
-          onChange={handleChangeNestedChange}
+          onChange={handleNestedChange}
         />
       </Column>
 
