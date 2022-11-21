@@ -51,7 +51,7 @@ const PlanEditor = ({ workPackage, isFullScreen = false }: Props) => {
   const groups = Array.from(groupsMap, ([key, values]) => values);
   pushResourcesToTaskList(workPackageItems, taskListWithResources, groups);
 
-  const getStyle = () => {
+  const showPopUp = () => {
     if (!isFullScreen) {
       return { ["--display" as string]: "none" };
     }
@@ -91,7 +91,7 @@ const PlanEditor = ({ workPackage, isFullScreen = false }: Props) => {
         </button>
       </div>
       {isActive.planEditor && taskList.length > 0 && (
-        <div style={getStyle()}>
+        <div style={showPopUp()}>
           <PlanningTool
             items={taskList}
             groups={resources}
