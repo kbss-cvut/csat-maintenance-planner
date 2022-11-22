@@ -1,5 +1,5 @@
 import moment from "moment";
-import { Constants, LEGEND_ITEMS } from "./Constants";
+import { Constants, LEGEND_ITEMS, PHASE_PLAN_TITLES } from "./Constants";
 import { PlanPartInterface } from "./Interfaces";
 
 const getItemBackground = (item) => {
@@ -16,6 +16,19 @@ const getItemBackground = (item) => {
       "#CFCBC8"
     );
   }
+};
+
+const getItemTitle = (item) => {
+  const title = item.title;
+  if (item.applicationType === Constants.APPLICATION_TYPE.PHASE_PLAN) {
+    console.log(PHASE_PLAN_TITLES.find((o) => o.id === item.title)?.title);
+    return PHASE_PLAN_TITLES.find((o) => o.id === item.title)?.title || "Other";
+  }
+  if (!title || title.toUpperCase() === "UNKNOWN") {
+    return "Other";
+  }
+
+  return title;
 };
 
 const buildData = (
@@ -68,7 +81,7 @@ const buildData = (
     items.push({
       id: itemId,
       group: groupsMap.get(resourceId)?.id,
-      title: item.title ? item.title : "Other",
+      title: getItemTitle(item),
       start: startDate,
       end: endDate,
       parent: itemParentId,

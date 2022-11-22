@@ -61,6 +61,25 @@ const Constants = {
   },
 };
 
+const PHASE_PLAN_TITLES = [
+  {
+    id: "1",
+    title: "Incoming tests and inspections",
+  },
+  {
+    id: "2",
+    title: "Main inspection phase",
+  },
+  {
+    id: "3",
+    title: "Restoration/servicing and findings rectification",
+  },
+  {
+    id: "4",
+    title: "Final phase",
+  },
+];
+
 const LEGEND_ITEMS = [
   {
     code: Constants.APPLICATION_TYPE.RESTRICTION_PLAN,
@@ -99,4 +118,4 @@ const LEGEND_ITEMS = [
   },
 ];
 
-export { ENV, Constants, LEGEND_ITEMS };
+export { ENV, Constants, LEGEND_ITEMS, PHASE_PLAN_TITLES };
