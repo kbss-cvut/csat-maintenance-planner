@@ -41,6 +41,10 @@ const PlanEditor = ({ workPackage, isFullScreen = false }: Props) => {
     setResources([...groups]);
   }, [showTCTypeCategory]);
 
+  useEffect(() => {
+    setShowTCTypeCategory((prevState) => !prevState);
+  }, []);
+
   buildData(
     dataWithoutRevisionPlan,
     workPackageItems,
@@ -94,18 +98,20 @@ const PlanEditor = ({ workPackage, isFullScreen = false }: Props) => {
             Table
           </button>
         </div>
-        <ToggleSlider onToggle={(state) => setShowTCTypeCategory(state)} />
+        <ToggleSlider
+          onToggle={() => setShowTCTypeCategory((prevState) => !prevState)}
+        />
         <h4>Toggle Task Card Type Group</h4>
       </div>
       {isActive.planEditor && taskList.length > 0 && (
         <div style={showPopUp()}>
-          <div key={taskList.toString()}>
+          <span key={showTCTypeCategory.toString()}>
             <PlanningTool
               items={taskList}
               groups={resources}
               legendItems={LEGEND_ITEMS}
             />
-          </div>
+          </span>
         </div>
       )}
       {isActive.table && taskList.length > 0 && (

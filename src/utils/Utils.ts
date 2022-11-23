@@ -31,7 +31,7 @@ const getItemTitle = (item) => {
 };
 
 const buildData = (
-  data: Array<PlanPartInterface>,
+  data: Array<any>,
   items: Array<any>,
   level: number,
   groupParentId: number | null,
@@ -43,13 +43,14 @@ const buildData = (
     return;
   }
 
-  const pushToItems = (
+  function pushItem(
     itemId: number,
     resourceId: string,
     item: PlanPartInterface,
     startDate,
-    endDate
-  ) => {
+    endDate,
+    isHidden: boolean
+  ) {
     items.push({
       id: itemId,
       group: groupsMap.get(resourceId)?.id,
@@ -75,8 +76,9 @@ const buildData = (
       startTime: item.startTime,
       endTime: item.endTime,
       removable: false,
+      isHidden: isHidden,
     });
-  };
+  }
 
   for (const item of data) {
     const resourceId =
@@ -115,13 +117,18 @@ const buildData = (
 
     if (
       !showTCTypeCategory &&
-      item.applicationType !== Constants.APPLICATION_TYPE.TASK_CARD_TYPE_GROUP
+      item.applicationType === Constants.APPLICATION_TYPE.TASK_CARD_TYPE_GROUP
     ) {
-      pushToItems(itemId, resourceId, item, startDate, endDate);
+      pushItem(itemId, resourceId, item, startDate, endDate, true);
     }
 
-    if (showTCTypeCategory) {
-      pushToItems(itemId, resourceId, item, startDate, endDate);
+    if (
+      showTCTypeCategory ||
+      (!showTCTypeCategory &&
+        item.applicationType !==
+          Constants.APPLICATION_TYPE.TASK_CARD_TYPE_GROUP)
+    ) {
+      pushItem(itemId, resourceId, item, startDate, endDate, false);
     }
 
     if (item.planParts && item.planParts.length > 0) {
