@@ -3,6 +3,8 @@ import PlanningTool from "react-maintenance-planner";
 import { LEGEND_ITEMS } from "../utils/Constants";
 import TasksTable from "./table/TasksTable";
 import { buildData, pushResourcesToTaskList } from "../utils/Utils";
+import { ToggleSlider } from "react-toggle-slider";
+import classNames from "classnames";
 
 import {
   PlanPartInterface,
@@ -12,7 +14,6 @@ import {
 
 import "react-maintenance-planner/dist/react-maintenance-planner.css";
 import * as styles from "./PlanEditor.module.scss";
-import classNames from "classnames";
 
 interface Props {
   workPackage: RevisionPlanInterface;
@@ -27,6 +28,7 @@ const PlanEditor = ({ workPackage, isFullScreen = false }: Props) => {
   });
   const [taskList, setTaskList] = useState<Array<PlanPartInterface>>([]);
   const [resources, setResources] = useState<Array<ResourceInterface>>([]);
+  const [showTCTypeCategory, setShowTCTypeCategory] = useState<boolean>(false);
 
   const workPackageItems: Array<PlanPartInterface> = [];
   const taskListWithResources: Array<PlanPartInterface> = [];
@@ -37,7 +39,7 @@ const PlanEditor = ({ workPackage, isFullScreen = false }: Props) => {
   useEffect(() => {
     setTaskList([...taskListWithResources]);
     setResources([...groups]);
-  }, []);
+  }, [showTCTypeCategory]);
 
   buildData(
     dataWithoutRevisionPlan,
@@ -45,7 +47,8 @@ const PlanEditor = ({ workPackage, isFullScreen = false }: Props) => {
     0,
     null,
     null,
-    groupsMap
+    groupsMap,
+    showTCTypeCategory
   );
 
   const groups = Array.from(groupsMap, ([key, values]) => values);
@@ -77,26 +80,32 @@ const PlanEditor = ({ workPackage, isFullScreen = false }: Props) => {
   return (
     <div className={styles["container"]}>
       <div className={styles["header"]}>
-        <button
-          className={isActive.planEditor && styles["active"]}
-          onClick={viewPlanEditorOnClick}
-        >
-          Plan Editor
-        </button>
-        <button
-          className={isActive.table && styles["active"]}
-          onClick={viewUnknownTasksOnClick}
-        >
-          Table
-        </button>
+        <div className={styles["editor-view"]}>
+          <button
+            className={isActive.planEditor && styles["active"]}
+            onClick={viewPlanEditorOnClick}
+          >
+            Plan Editor
+          </button>
+          <button
+            className={isActive.table && styles["active"]}
+            onClick={viewUnknownTasksOnClick}
+          >
+            Table
+          </button>
+        </div>
+        <ToggleSlider onToggle={(state) => setShowTCTypeCategory(state)} />
+        <h4>Toggle Task Card Type Group</h4>
       </div>
       {isActive.planEditor && taskList.length > 0 && (
         <div style={showPopUp()}>
-          <PlanningTool
-            items={taskList}
-            groups={resources}
-            legendItems={LEGEND_ITEMS}
-          />
+          <div key={taskList.toString()}>
+            <PlanningTool
+              items={taskList}
+              groups={resources}
+              legendItems={LEGEND_ITEMS}
+            />
+          </div>
         </div>
       )}
       {isActive.table && taskList.length > 0 && (

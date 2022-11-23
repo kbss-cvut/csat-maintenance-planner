@@ -21,7 +21,6 @@ const getItemBackground = (item) => {
 const getItemTitle = (item) => {
   const title = item.title;
   if (item.applicationType === Constants.APPLICATION_TYPE.PHASE_PLAN) {
-    console.log(PHASE_PLAN_TITLES.find((o) => o.id === item.title)?.title);
     return PHASE_PLAN_TITLES.find((o) => o.id === item.title)?.title || "Other";
   }
   if (!title || title.toUpperCase() === "UNKNOWN") {
@@ -37,11 +36,47 @@ const buildData = (
   level: number,
   groupParentId: number | null,
   itemParentId: number | null,
-  groupsMap: Record<string, any>
+  groupsMap: Record<string, any>,
+  showTCTypeCategory: boolean
 ) => {
   if (!data) {
     return;
   }
+
+  const pushToItems = (
+    itemId: number,
+    resourceId: string,
+    item: PlanPartInterface,
+    startDate,
+    endDate
+  ) => {
+    items.push({
+      id: itemId,
+      group: groupsMap.get(resourceId)?.id,
+      title: getItemTitle(item),
+      start: startDate,
+      end: endDate,
+      parent: itemParentId,
+      className: "item",
+      bgColor: getItemBackground(item),
+      color: "#fff",
+      selectedBgColor: "#FFC107",
+      selectedColor: "#000",
+      draggingBgColor: "#f00",
+      highlightBgColor: "#FFA500",
+      highlight: false,
+      canMove: level > 1 && level !== 3,
+      canResize: "both", //'left','right','both', false
+      minimumDuration: 0, //minutes
+      workTime: item.workTime,
+      plannedWorkTime: item.plannedWorkTime,
+      applicationType: item.applicationType,
+      duration: item.duration,
+      startTime: item.startTime,
+      endTime: item.endTime,
+      removable: false,
+    });
+  };
 
   for (const item of data) {
     const resourceId =
@@ -78,32 +113,16 @@ const buildData = (
     }
     const itemId = items.length + 1;
 
-    items.push({
-      id: itemId,
-      group: groupsMap.get(resourceId)?.id,
-      title: getItemTitle(item),
-      start: startDate,
-      end: endDate,
-      parent: itemParentId,
-      className: "item",
-      bgColor: getItemBackground(item),
-      color: "#fff",
-      selectedBgColor: "#FFC107",
-      selectedColor: "#000",
-      draggingBgColor: "#f00",
-      highlightBgColor: "#FFA500",
-      highlight: false,
-      canMove: level > 1 && level !== 3,
-      canResize: "both", //'left','right','both', false
-      minimumDuration: 0, //minutes
-      workTime: item.workTime,
-      plannedWorkTime: item.plannedWorkTime,
-      applicationType: item.applicationType,
-      duration: item.duration,
-      startTime: item.startTime,
-      endTime: item.endTime,
-      removable: false,
-    });
+    if (
+      !showTCTypeCategory &&
+      item.applicationType !== Constants.APPLICATION_TYPE.TASK_CARD_TYPE_GROUP
+    ) {
+      pushToItems(itemId, resourceId, item, startDate, endDate);
+    }
+
+    if (showTCTypeCategory) {
+      pushToItems(itemId, resourceId, item, startDate, endDate);
+    }
 
     if (item.planParts && item.planParts.length > 0) {
       buildData(
@@ -112,7 +131,8 @@ const buildData = (
         level + 1,
         groupsMap.get(resourceId)?.id,
         itemId,
-        groupsMap
+        groupsMap,
+        showTCTypeCategory
       );
     }
   }
