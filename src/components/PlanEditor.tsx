@@ -3,7 +3,6 @@ import PlanningTool from "react-maintenance-planner";
 import { LEGEND_ITEMS } from "../utils/Constants";
 import TasksTable from "./table/TasksTable";
 import { buildData, pushResourcesToTaskList } from "../utils/Utils";
-import { ToggleSlider } from "react-toggle-slider";
 import classNames from "classnames";
 
 import {
@@ -73,7 +72,7 @@ const PlanEditor = ({ workPackage, isFullScreen = false }: Props) => {
     });
   };
 
-  const viewUnknownTasksOnClick = () => {
+  const viewTableOnClick = () => {
     setIsActive({
       planEditor: false,
       table: true,
@@ -93,15 +92,16 @@ const PlanEditor = ({ workPackage, isFullScreen = false }: Props) => {
           </button>
           <button
             className={isActive.table && styles["active"]}
-            onClick={viewUnknownTasksOnClick}
+            onClick={viewTableOnClick}
           >
             Table
           </button>
         </div>
-        <ToggleSlider
-          onToggle={() => setShowTCTypeCategory((prevState) => !prevState)}
-        />
-        <h4>Toggle Task Card Type Group</h4>
+        <button
+          onClick={() => setShowTCTypeCategory((prevState) => !prevState)}
+        >
+          Toggle Task Card Type Group
+        </button>
       </div>
       {isActive.planEditor && taskList.length > 0 && (
         <div style={showPopUp()}>
