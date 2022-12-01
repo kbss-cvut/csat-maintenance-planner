@@ -27,13 +27,6 @@ const TasksTable = ({ taskList }: Props) => {
         let x = a[sortColumn];
         let y = b[sortColumn];
 
-        if (!x) {
-          x = a.children[0]?.title;
-        }
-        if (!y) {
-          y = b.children[0]?.title;
-        }
-
         if (typeof x === "string") {
           x = x.charCodeAt(0);
         }

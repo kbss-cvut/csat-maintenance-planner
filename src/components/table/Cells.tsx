@@ -87,8 +87,7 @@ const DateCell = ({ rowData, dataKey, onChange, ...props }: any) => {
       {editing ? (
         <input
           className="rs-input"
-          defaultValue={moment(rowData[dataKey]["_d"]).format("DD/MM/YYYY")}
-          // defaultValue={rowData[dataKey]}
+          defaultValue={moment().format("DD/MM/YYYY")}
           onChange={(event) => {
             onChange &&
               onChange(
