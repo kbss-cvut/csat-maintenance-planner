@@ -93,19 +93,18 @@ const DateCell = ({ rowData, dataKey, onChange, ...props }: any) => {
     <Cell {...props} className={editing ? "table-content-editing" : ""}>
       {editing ? (
         <input
-          className="rs-input"
-          defaultValue={moment().format("DD/MM/YYYY")}
+          type="date"
           onChange={(event) => {
             onChange &&
               onChange(
                 rowData.id,
                 dataKey,
-                moment(event.target.value, "DD/MM/YYYY")
+                moment(event.target.value, "YYYY-MM-DD")
               );
           }}
         />
       ) : rowData[dataKey] ? (
-        moment(rowData[dataKey]["_d"]).format("DD/MM/YYYY")
+        moment(rowData[dataKey]["_d"]).format("YYYY-MM-DD")
       ) : (
         "NaN"
       )}
