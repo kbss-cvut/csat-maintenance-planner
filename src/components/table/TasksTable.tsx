@@ -9,6 +9,7 @@ import {
 } from "./Cells";
 
 import "rsuite-table/dist/css/rsuite-table.css";
+import moment from "moment";
 
 interface Props {
   taskList: Array<PlanPartInterface>;
@@ -84,6 +85,7 @@ const TasksTable = ({ taskList, groups }: Props) => {
     setData(nextData);
   };
 
+  console.log(taskList);
   return (
     <Table
       data={sortData(taskList)}
@@ -135,6 +137,21 @@ const TasksTable = ({ taskList, groups }: Props) => {
           dataKey="title"
           onChange={handleChange}
         />
+      </Column>
+
+      <Column flexGrow={1}>
+        <HeaderCell>Man Hours</HeaderCell>
+        <Cell>
+          {(rowData) => {
+            return (
+              <div>
+                {rowData.workTime
+                  ? new Date(rowData.workTime).getHours()
+                  : "NaN"}
+              </div>
+            );
+          }}
+        </Cell>
       </Column>
 
       <Column flexGrow={1}>
