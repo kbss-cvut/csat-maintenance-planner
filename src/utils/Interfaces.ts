@@ -95,3 +95,12 @@ export enum PlanPartType {
   SessionPlan = "SessionPlan",
   TaskPlan = "TaskPlan",
 }
+
+export interface GroupInterface {
+  hasChildren: boolean;
+  id: number;
+  open: boolean;
+  parent: number | null;
+  show: boolean;
+  title: string | null;
+}

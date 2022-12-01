@@ -1,6 +1,7 @@
 import React from "react";
 import { Cell } from "rsuite-table";
 import moment from "moment";
+import { GroupInterface } from "../../utils/Interfaces";
 
 import styles from "./TasksTable.module.scss";
 
@@ -14,6 +15,7 @@ interface NestedCellProps {
   rowData: any;
   dataKey1: string;
   dataKey2: string;
+  groups: Array<GroupInterface>;
   onChange: (
     dataId: string | number,
     dataKey1: string,
@@ -57,20 +59,25 @@ const NestedEditableCell = ({
   dataKey1,
   dataKey2,
   onChange,
+  groups,
   ...props
 }: NestedCellProps) => {
   const editing = rowData.status === "EDIT";
   return (
     <Cell {...props} className={editing ? "table-content-editing" : ""}>
       {editing ? (
-        <input
+        <select
           className="rs-input"
           defaultValue={rowData[dataKey1][dataKey2]}
           onChange={(event) => {
             onChange &&
               onChange(rowData.id, dataKey1, dataKey2, event.target.value);
           }}
-        />
+        >
+          {groups.map((resource, index) => (
+            <option key={index}>{resource.title}</option>
+          ))}
+        </select>
       ) : (
         <span className="table-content-edit-span">
           {rowData[dataKey1][dataKey2]}

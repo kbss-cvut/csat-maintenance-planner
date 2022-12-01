@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Cell, Column, HeaderCell, SortType, Table } from "rsuite-table";
-import { PlanPartInterface } from "../../utils/Interfaces";
+import { GroupInterface, PlanPartInterface } from "../../utils/Interfaces";
 import {
   ActionCell,
   DateCell,
@@ -12,9 +12,10 @@ import "rsuite-table/dist/css/rsuite-table.css";
 
 interface Props {
   taskList: Array<PlanPartInterface>;
+  groups: Array<GroupInterface>;
 }
 
-const TasksTable = ({ taskList }: Props) => {
+const TasksTable = ({ taskList, groups }: Props) => {
   const [sortColumn, setSortColumn] = useState<string>("id");
   const [sortType, setSortType] = useState<SortType | undefined | never>("asc");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -98,13 +99,14 @@ const TasksTable = ({ taskList }: Props) => {
         <Cell dataKey="id" />
       </Column>
 
-      <Column flexGrow={2} sortable>
+      <Column flexGrow={2}>
         <HeaderCell>Resource</HeaderCell>
         <NestedEditableCell
           rowData={taskList}
           dataKey1="resource"
           dataKey2="title"
           onChange={handleNestedChange}
+          groups={groups}
         />
       </Column>
 

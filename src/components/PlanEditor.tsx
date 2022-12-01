@@ -121,7 +121,7 @@ const PlanEditor = ({ workPackage, isFullScreen = false }: Props) => {
             isFullScreen && styles["table-full-screen"],
           ])}
         >
-          <TasksTable taskList={taskList} />
+          <TasksTable taskList={taskList} groups={groups} />
         </div>
       )}
     </div>
