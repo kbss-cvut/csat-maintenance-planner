@@ -16,10 +16,15 @@ import * as styles from "./PlanEditor.module.scss";
 
 interface Props {
   workPackage: RevisionPlanInterface;
+  workPackageTitle: string;
   isFullScreen?: boolean;
 }
 
-const PlanEditor = ({ workPackage, isFullScreen = false }: Props) => {
+const PlanEditor = ({
+  workPackage,
+  isFullScreen = false,
+  workPackageTitle,
+}: Props) => {
   const [isActive, setIsActive] = useState({
     planEditor: true,
     table: false,
@@ -106,6 +111,7 @@ const PlanEditor = ({ workPackage, isFullScreen = false }: Props) => {
       {isActive.planEditor && taskList.length > 0 && (
         <div style={showPopUp()}>
           <span key={showTCTypeCategory.toString()}>
+            <h4>{workPackageTitle}</h4>
             <PlanningTool
               items={taskList}
               groups={resources}

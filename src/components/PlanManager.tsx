@@ -172,6 +172,7 @@ const PlanManager = ({ basename }: Props) => {
           <PlanEditor
             workPackage={workPackage}
             isFullScreen={isPlanFullScreen}
+            workPackageTitle={documentTitle}
           />
         )}
       </React.Fragment>

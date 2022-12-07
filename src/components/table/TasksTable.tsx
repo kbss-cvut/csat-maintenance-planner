@@ -85,7 +85,6 @@ const TasksTable = ({ taskList, groups }: Props) => {
     setData(nextData);
   };
 
-  console.log(taskList);
   return (
     <Table
       data={sortData(taskList)}
