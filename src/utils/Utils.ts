@@ -97,7 +97,7 @@ const buildData = (
 
     let startDate;
     if (!item.startTime && !item.plannedStartTime) {
-      startDate = moment();
+      startDate = null;
     } else {
       startDate = moment(
         item.startTime ? item.startTime : item.plannedStartTime
@@ -106,7 +106,7 @@ const buildData = (
 
     let endDate;
     if (!item.endTime && !item.plannedEndTime) {
-      endDate = moment();
+      endDate = null;
     } else {
       endDate = moment(
         item.endTime ? item.plannedEndTime : item.plannedEndTime
