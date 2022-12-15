@@ -82,8 +82,6 @@ const PlanEditor = ({
     });
   };
 
-  console.log(groups);
-
   return (
     <div className={styles["container"]}>
       <div className={styles["header"]}>
