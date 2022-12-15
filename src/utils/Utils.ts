@@ -36,24 +36,24 @@ const buildData = (
   level: number,
   groupParentId: number | null,
   itemParentId: number | null,
-  groupsMap: Record<string, any>,
+  groupsMap: Array<any>,
   showTCTypeCategory: boolean
 ) => {
   if (!data) {
     return;
   }
 
-  function pushItem(
+  const pushItem = (
     itemId: number,
     resourceId: string,
     item: PlanPartInterface,
     startDate,
     endDate,
     isHidden: boolean
-  ) {
+  ) => {
     items.push({
       id: itemId,
-      group: groupsMap.get(resourceId)?.id,
+      group: groupsMap.find((i) => i.id === resourceId).id,
       title: getItemTitle(item),
       start: startDate,
       end: endDate,
@@ -78,14 +78,13 @@ const buildData = (
       removable: false,
       isHidden: isHidden,
     });
-  }
+  };
 
   for (const item of data) {
-    const resourceId =
-      item.resource?.id + " - " + item.resource?.applicationType;
-    if (!groupsMap.has(resourceId)) {
-      groupsMap.set(resourceId, {
-        id: groupsMap.size,
+    const resourceId = item.resource?.entityURI;
+    if (!groupsMap.find((i) => i.id === resourceId)) {
+      groupsMap.push({
+        id: resourceId,
         title:
           item.resource?.title !== "unknown" ? item.resource?.title : "Other",
         hasChildren: item.planParts && item.planParts.length > 0,
@@ -98,7 +97,7 @@ const buildData = (
 
     let startDate;
     if (!item.startTime && !item.plannedStartTime) {
-      startDate = null;
+      startDate = moment();
     } else {
       startDate = moment(
         item.startTime ? item.startTime : item.plannedStartTime
@@ -107,13 +106,14 @@ const buildData = (
 
     let endDate;
     if (!item.endTime && !item.plannedEndTime) {
-      endDate = null;
+      endDate = moment();
     } else {
       endDate = moment(
         item.endTime ? item.plannedEndTime : item.plannedEndTime
       );
     }
-    const itemId = items.length + 1;
+
+    const itemId = item.entityURI;
 
     if (
       !showTCTypeCategory &&
@@ -136,7 +136,7 @@ const buildData = (
         item.planParts,
         items,
         level + 1,
-        groupsMap.get(resourceId)?.id,
+        groupsMap.find((i) => i.id === resourceId).id,
         itemId,
         groupsMap,
         showTCTypeCategory

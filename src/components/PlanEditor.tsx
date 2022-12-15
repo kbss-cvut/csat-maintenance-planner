@@ -6,8 +6,8 @@ import { buildData, pushResourcesToTaskList } from "../utils/Utils";
 import classNames from "classnames";
 
 import {
+  GroupInterface,
   PlanPartInterface,
-  ResourceInterface,
   RevisionPlanInterface,
 } from "../utils/Interfaces";
 
@@ -31,18 +31,16 @@ const PlanEditor = ({
     taskList: false,
   });
   const [taskList, setTaskList] = useState<Array<PlanPartInterface>>([]);
-  const [resources, setResources] = useState<Array<ResourceInterface>>([]);
   const [showTCTypeCategory, setShowTCTypeCategory] = useState<boolean>(false);
 
   const workPackageItems: Array<PlanPartInterface> = [];
   const taskListWithResources: Array<PlanPartInterface> = [];
-  const groupsMap = new Map();
+  const groups: Array<GroupInterface> = [];
 
   const dataWithoutRevisionPlan = workPackage[0].planParts;
 
   useEffect(() => {
     setTaskList([...taskListWithResources]);
-    setResources([...groups]);
   }, [showTCTypeCategory]);
 
   useEffect(() => {
@@ -55,11 +53,10 @@ const PlanEditor = ({
     0,
     null,
     null,
-    groupsMap,
+    groups,
     showTCTypeCategory
   );
 
-  const groups = Array.from(groupsMap, ([key, values]) => values);
   pushResourcesToTaskList(workPackageItems, taskListWithResources, groups);
 
   const showPopUp = () => {
@@ -84,6 +81,8 @@ const PlanEditor = ({
       taskList: false,
     });
   };
+
+  console.log(groups);
 
   return (
     <div className={styles["container"]}>
@@ -114,7 +113,7 @@ const PlanEditor = ({
             <h4>{workPackageTitle}</h4>
             <PlanningTool
               items={taskList}
-              groups={resources}
+              groups={groups}
               legendItems={LEGEND_ITEMS}
             />
           </span>
