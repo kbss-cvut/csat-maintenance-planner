@@ -81,12 +81,20 @@ const buildData = (
   };
 
   for (const item of data) {
-    const resourceId = item.resource?.entityURI;
+    let resourceId;
+    let resourceTitle;
+    if (item.resource) {
+      resourceId = item.resource.entityURI;
+      resourceTitle =
+        item.resource.title !== "unknown" ? item.resource.title : "Other";
+    } else {
+      resourceId = Math.random().toString(36).substring(2, 15);
+      resourceTitle = resourceId;
+    }
     if (!groupsMap.find((i) => i.id === resourceId)) {
       groupsMap.push({
         id: resourceId,
-        title:
-          item.resource?.title !== "unknown" ? item.resource?.title : "Other",
+        title: resourceTitle,
         hasChildren: item.planParts && item.planParts.length > 0,
         parent: groupParentId,
         open: level < 0,
