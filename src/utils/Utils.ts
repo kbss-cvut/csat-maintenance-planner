@@ -36,7 +36,7 @@ const buildData = (
   level: number,
   groupParentId: number | null,
   itemParentId: number | null,
-  groupsMap: Array<any>,
+  groups: Array<any>,
   showTCTypeCategory: boolean
 ) => {
   if (!data) {
@@ -53,7 +53,7 @@ const buildData = (
   ) => {
     items.push({
       id: itemId,
-      group: groupsMap.find((i) => i.id === resourceId).id,
+      group: groups.find((i) => i.id === resourceId).id,
       title: getItemTitle(item),
       start: startDate,
       end: endDate,
@@ -91,8 +91,9 @@ const buildData = (
       resourceId = Math.random().toString(36).substring(2, 15);
       resourceTitle = resourceId;
     }
-    if (!groupsMap.find((i) => i.id === resourceId)) {
-      groupsMap.push({
+
+    if (!groups.find((i) => i.id === resourceId)) {
+      groups.push({
         id: resourceId,
         title: resourceTitle,
         hasChildren: item.planParts && item.planParts.length > 0,
@@ -102,6 +103,28 @@ const buildData = (
         level: level,
       });
     }
+
+    const alreadyExistingGroup = groups.filter(
+      (g) => g.id === resourceId && g.parent !== groupParentId
+    );
+
+    let modifiedGroup;
+
+    if (alreadyExistingGroup.length > 0) resourceId = resourceId + resourceId;
+
+    modifiedGroup = alreadyExistingGroup.map((resource) => {
+      return {
+        id: resourceId,
+        title: resourceTitle,
+        hasChildren: item.planParts && item.planParts.length > 0,
+        parent: groupParentId,
+        open: level < 0,
+        show: level < 1,
+        level: level,
+      };
+    });
+
+    groups.push(...modifiedGroup);
 
     let startDate;
     if (!item.startTime && !item.plannedStartTime) {
@@ -144,9 +167,9 @@ const buildData = (
         item.planParts,
         items,
         level + 1,
-        groupsMap.find((i) => i.id === resourceId).id,
+        groups.find((i) => i.id === resourceId).id,
         itemId,
-        groupsMap,
+        groups,
         showTCTypeCategory
       );
     }
