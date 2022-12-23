@@ -51,9 +51,11 @@ const buildData = (
     endDate,
     isHidden: boolean
   ) => {
+    const groupId = groups.find((i) => i.id === item.group);
+
     items.push({
       id: itemId,
-      group: groups.find((i) => i.id === resourceId).id,
+      group: groupId ? groupId : resourceId,
       title: getItemTitle(item),
       start: startDate,
       end: endDate,
@@ -80,6 +82,8 @@ const buildData = (
     });
   };
 
+  let modifiedGroup;
+
   for (const item of data) {
     let resourceId;
     let resourceTitle;
@@ -104,11 +108,9 @@ const buildData = (
       });
     }
 
-    const alreadyExistingGroup = groups.filter(
-      (g) => g.id === resourceId && g.parent !== groupParentId
-    );
-
-    let modifiedGroup;
+    const alreadyExistingGroup = groups
+      .filter((g) => g.id === resourceId)
+      .filter((g) => g.parent !== groupParentId);
 
     if (alreadyExistingGroup.length > 0) resourceId = resourceId + resourceId;
 
@@ -123,8 +125,6 @@ const buildData = (
         level: level,
       };
     });
-
-    groups.push(...modifiedGroup);
 
     let startDate;
     if (!item.startTime && !item.plannedStartTime) {
@@ -172,6 +172,21 @@ const buildData = (
         groups,
         showTCTypeCategory
       );
+    }
+  }
+  groups.push(...modifiedGroup);
+
+  for (let i = 0; i < groups.length; i++) {
+    let index = groups.findIndex(
+      (obj) =>
+        obj.id === groups[i].id &&
+        obj.parent === groups[i].parent &&
+        obj.level === groups[i].level &&
+        obj !== groups[i]
+    );
+    if (index !== -1) {
+      groups.splice(index, 1);
+      i--;
     }
   }
 };
