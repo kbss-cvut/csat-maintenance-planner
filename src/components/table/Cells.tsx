@@ -80,7 +80,7 @@ const NestedEditableCell = ({
         </select>
       ) : (
         <span className="table-content-edit-span">
-          {rowData[dataKey1][dataKey2]}
+          {rowData[dataKey1] && rowData[dataKey1][dataKey2]}
         </span>
       )}
     </Cell>
