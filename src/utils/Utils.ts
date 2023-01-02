@@ -51,11 +51,9 @@ const buildData = (
     endDate,
     isHidden: boolean
   ) => {
-    const groupId = groups.find((i) => i.id === item.group);
-
     items.push({
       id: itemId,
-      group: groupId ? groupId : resourceId,
+      group: resourceId,
       title: getItemTitle(item),
       start: startDate,
       end: endDate,
@@ -112,9 +110,10 @@ const buildData = (
       .filter((g) => g.id === resourceId)
       .filter((g) => g.parent !== groupParentId);
 
-    if (alreadyExistingGroup.length > 0) resourceId = resourceId + resourceId;
+    if (alreadyExistingGroup.length > 0)
+      resourceId = resourceId + level + groupParentId + itemParentId;
 
-    modifiedGroup = alreadyExistingGroup.map((resource) => {
+    modifiedGroup = alreadyExistingGroup.map(() => {
       return {
         id: resourceId,
         title: resourceTitle,
@@ -175,20 +174,6 @@ const buildData = (
     }
   }
   groups.push(...modifiedGroup);
-
-  for (let i = 0; i < groups.length; i++) {
-    let index = groups.findIndex(
-      (obj) =>
-        obj.id === groups[i].id &&
-        obj.parent === groups[i].parent &&
-        obj.level === groups[i].level &&
-        obj !== groups[i]
-    );
-    if (index !== -1) {
-      groups.splice(index, 1);
-      i--;
-    }
-  }
 };
 
 const pushResourcesToTaskList = (items, taskListWithResources, groups) => {
