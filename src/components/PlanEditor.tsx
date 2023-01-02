@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import PlanningTool from "react-maintenance-planner";
 import { LEGEND_ITEMS } from "../utils/Constants";
 import TasksTable from "./table/TasksTable";
-import { buildData, pushResourcesToTaskList } from "../utils/Utils";
+import {
+  buildData,
+  pushResourcesToTaskList,
+  getRestrictedTasks,
+  pushRestrictionsToTaskList,
+} from "../utils/Utils";
 import classNames from "classnames";
 
 import {
@@ -35,12 +40,13 @@ const PlanEditor = ({
 
   const workPackageItems: Array<PlanPartInterface> = [];
   const taskListWithResources: Array<PlanPartInterface> = [];
+  const taskListWithRestrictions: Array<any> = [];
   const groups: Array<GroupInterface> = [];
 
   const dataWithoutRevisionPlan = workPackage[0].planParts;
 
   useEffect(() => {
-    setTaskList([...taskListWithResources]);
+    setTaskList([...taskListWithRestrictions]);
   }, [showTCTypeCategory]);
 
   useEffect(() => {
@@ -58,6 +64,12 @@ const PlanEditor = ({
   );
 
   pushResourcesToTaskList(workPackageItems, taskListWithResources, groups);
+  const restrictedItems = getRestrictedTasks(taskList);
+  pushRestrictionsToTaskList(
+    taskListWithResources,
+    taskListWithRestrictions,
+    restrictedItems
+  );
 
   const showPopUp = () => {
     if (!isFullScreen) {

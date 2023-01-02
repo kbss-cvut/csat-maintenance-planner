@@ -46,7 +46,7 @@ const buildData = (
   const pushItem = (
     itemId: number,
     resourceId: string,
-    item: PlanPartInterface,
+    item: any,
     startDate,
     endDate,
     isHidden: boolean
@@ -77,6 +77,7 @@ const buildData = (
       endTime: item.endTime,
       removable: false,
       isHidden: isHidden,
+      requiredPlans: item.requiringPlans?.length > 0 && item.requiringPlans,
     });
   };
 
@@ -185,4 +186,63 @@ const pushResourcesToTaskList = (items, taskListWithResources, groups) => {
   }
 };
 
-export { buildData, pushResourcesToTaskList };
+const pushRestrictionsToTaskList = (
+  taskList,
+  taskListWithRestrictions,
+  restrictedItems
+) => {
+  const restrictedByMap = {};
+  for (const restrictedItem of restrictedItems) {
+    restrictedByMap[restrictedItem.entityURI] = restrictedItem.restrictedBy;
+  }
+  for (const task of taskList) {
+    const updatedTask = { ...task };
+    if (restrictedByMap[task.id]) {
+      updatedTask.restrictedBy = restrictedByMap[task.id];
+    }
+    taskListWithRestrictions.push(updatedTask);
+  }
+};
+
+const getRestrictedTasks = (items) => {
+  const restrictedItems: Array<any> = [];
+
+  for (const item of items) {
+    if (item.applicationType === Constants.APPLICATION_TYPE.RESTRICTION_PLAN) {
+      if (item.requiredPlans?.length > 0) {
+        const requiredPlans = item.requiredPlans;
+        for (const requiredPlan of requiredPlans) {
+          if (requiredPlan.planParts?.length > 0) {
+            const planParts = requiredPlan.planParts;
+            for (const planPart of planParts) {
+              restrictedItems.push({ ...planPart, restrictedBy: item.id });
+            }
+          }
+        }
+      }
+    }
+  }
+  const mergedRestrictedItems = {};
+
+  for (const item of restrictedItems) {
+    const { entityURI, restrictedBy, ...otherProperties } = item;
+    if (mergedRestrictedItems[entityURI]) {
+      mergedRestrictedItems[entityURI].restrictedBy.push(restrictedBy);
+    } else {
+      mergedRestrictedItems[entityURI] = {
+        entityURI,
+        restrictedBy: [restrictedBy],
+        ...otherProperties,
+      };
+    }
+  }
+  const mergedRestrictedItemsArray = Object.values(mergedRestrictedItems);
+  return mergedRestrictedItemsArray;
+};
+
+export {
+  buildData,
+  pushResourcesToTaskList,
+  getRestrictedTasks,
+  pushRestrictionsToTaskList,
+};
