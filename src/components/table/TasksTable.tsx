@@ -95,7 +95,7 @@ const TasksTable = ({ taskList, groups }: Props) => {
       fillHeight={true}
       loading={isLoading}
     >
-      <Column flexGrow={1} sortable>
+      <Column resizable={true} sortable>
         <HeaderCell>ID</HeaderCell>
         <Cell dataKey="id" />
       </Column>
