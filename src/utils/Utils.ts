@@ -139,9 +139,7 @@ const buildData = (
     if (!item.endTime && !item.plannedEndTime) {
       endDate = null;
     } else {
-      endDate = moment(
-        item.endTime ? item.plannedEndTime : item.plannedEndTime
-      );
+      endDate = moment(item.endTime ? item.endTime : item.plannedEndTime);
     }
 
     const itemId = item.entityURI;
@@ -191,47 +189,48 @@ const pushRestrictionsToTaskList = (
   taskListWithRestrictions,
   restrictedItems
 ) => {
-  const restrictedByMap = {};
+  const tasksRestrictionsMap = {};
   for (const restrictedItem of restrictedItems) {
-    restrictedByMap[restrictedItem.entityURI] = restrictedItem.restrictedBy;
+    tasksRestrictionsMap[restrictedItem.entityURI] =
+      restrictedItem.linkedItemsIDs;
   }
   for (const task of taskList) {
     const updatedTask = { ...task };
-    if (restrictedByMap[task.id]) {
-      updatedTask.restrictedBy = restrictedByMap[task.id];
+    if (tasksRestrictionsMap[task.id]) {
+      updatedTask.linkedItemsIDs = tasksRestrictionsMap[task.id];
     }
     taskListWithRestrictions.push(updatedTask);
   }
 };
 
-const getRestrictedTasks = (items) => {
-  const restrictedItems: Array<any> = [];
+const getRestrictedTasks = (tasks) => {
+  const restrictedItems: Array<PlanPartInterface> = [];
 
-  for (const item of items) {
-    if (item.applicationType === Constants.APPLICATION_TYPE.RESTRICTION_PLAN) {
-      if (item.requiredPlans?.length > 0) {
-        const requiredPlans = item.requiredPlans;
+  for (const task of tasks) {
+    if (task.applicationType === Constants.APPLICATION_TYPE.RESTRICTION_PLAN) {
+      if (task.requiredPlans?.length > 0) {
+        const requiredPlans = task.requiredPlans;
         for (const requiredPlan of requiredPlans) {
           if (requiredPlan.planParts?.length > 0) {
             const planParts = requiredPlan.planParts;
             for (const planPart of planParts) {
-              restrictedItems.push({ ...planPart, restrictedBy: item.id });
+              restrictedItems.push({ ...planPart, linkedItemsIDs: task.id });
             }
           }
         }
       }
     }
   }
-  const mergedRestrictedItems = {};
 
+  const mergedRestrictedItems = {};
   for (const item of restrictedItems) {
-    const { entityURI, restrictedBy, ...otherProperties } = item;
+    const { entityURI, linkedItemsIDs, ...otherProperties } = item;
     if (mergedRestrictedItems[entityURI]) {
-      mergedRestrictedItems[entityURI].restrictedBy.push(restrictedBy);
+      mergedRestrictedItems[entityURI].linkedItemsIDs.push(linkedItemsIDs);
     } else {
       mergedRestrictedItems[entityURI] = {
         entityURI,
-        restrictedBy: [restrictedBy],
+        linkedItemsIDs: [linkedItemsIDs],
         ...otherProperties,
       };
     }
