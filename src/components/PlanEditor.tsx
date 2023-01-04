@@ -40,7 +40,7 @@ const PlanEditor = ({
 
   const workPackageItems: Array<PlanPartInterface> = [];
   const taskListWithResources: Array<PlanPartInterface> = [];
-  const taskListWithRestrictions: Array<any> = [];
+  const taskListWithRestrictions: Array<PlanPartInterface> = [];
   const groups: Array<GroupInterface> = [];
 
   const dataWithoutRevisionPlan = workPackage[0].planParts;
@@ -51,6 +51,12 @@ const PlanEditor = ({
 
   useEffect(() => {
     setShowTCTypeCategory((prevState) => !prevState);
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowTCTypeCategory((prevState) => !prevState);
+    }, 500);
   }, []);
 
   buildData(
@@ -117,7 +123,7 @@ const PlanEditor = ({
           Toggle Task Card Type Group
         </button>
       </div>
-      {isActive.planEditor && taskList.length > 0 && (
+      {isActive.planEditor && taskList.length > 0 && taskList && (
         <div style={showPopUp()}>
           <span key={showTCTypeCategory.toString()}>
             <h4>{workPackageTitle}</h4>
