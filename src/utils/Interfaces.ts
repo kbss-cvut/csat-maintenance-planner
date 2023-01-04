@@ -27,6 +27,7 @@ export interface RevisionPlanInterface {
 export interface PlanPartInterface {
   type?: PlanPartType;
   id?: number;
+  entityURI: string;
   title?: null | string;
   resource?: ResourceInterface;
   duration?: number | null;
@@ -44,6 +45,7 @@ export interface PlanPartInterface {
   start?: any;
   end?: any;
   parent?: any;
+  linkedItemsIDs?: Array<string>;
 }
 
 export interface ResourceInterface {

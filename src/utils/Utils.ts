@@ -46,7 +46,7 @@ const buildData = (
   const pushItem = (
     itemId: number,
     resourceId: string,
-    item: PlanPartInterface,
+    item: any,
     startDate,
     endDate,
     isHidden: boolean
@@ -77,6 +77,7 @@ const buildData = (
       endTime: item.endTime,
       removable: false,
       isHidden: isHidden,
+      requiredPlans: item.requiringPlans?.length > 0 && item.requiringPlans,
     });
   };
 
@@ -138,9 +139,7 @@ const buildData = (
     if (!item.endTime && !item.plannedEndTime) {
       endDate = null;
     } else {
-      endDate = moment(
-        item.endTime ? item.plannedEndTime : item.plannedEndTime
-      );
+      endDate = moment(item.endTime ? item.endTime : item.plannedEndTime);
     }
 
     const itemId = item.entityURI;
@@ -185,4 +184,64 @@ const pushResourcesToTaskList = (items, taskListWithResources, groups) => {
   }
 };
 
-export { buildData, pushResourcesToTaskList };
+const pushRestrictionsToTaskList = (
+  taskList,
+  taskListWithRestrictions,
+  restrictedItems
+) => {
+  const tasksRestrictionsMap = {};
+  for (const restrictedItem of restrictedItems) {
+    tasksRestrictionsMap[restrictedItem.entityURI] =
+      restrictedItem.linkedItemsIDs;
+  }
+  for (const task of taskList) {
+    const updatedTask = { ...task };
+    if (tasksRestrictionsMap[task.id]) {
+      updatedTask.linkedItemsIDs = tasksRestrictionsMap[task.id];
+    }
+    taskListWithRestrictions.push(updatedTask);
+  }
+};
+
+const getRestrictedTasks = (tasks) => {
+  const restrictedItems: Array<PlanPartInterface> = [];
+
+  for (const task of tasks) {
+    if (task.applicationType === Constants.APPLICATION_TYPE.RESTRICTION_PLAN) {
+      if (task.requiredPlans?.length > 0) {
+        const requiredPlans = task.requiredPlans;
+        for (const requiredPlan of requiredPlans) {
+          if (requiredPlan.planParts?.length > 0) {
+            const planParts = requiredPlan.planParts;
+            for (const planPart of planParts) {
+              restrictedItems.push({ ...planPart, linkedItemsIDs: task.id });
+            }
+          }
+        }
+      }
+    }
+  }
+
+  const mergedRestrictedItems = {};
+  for (const item of restrictedItems) {
+    const { entityURI, linkedItemsIDs, ...otherProperties } = item;
+    if (mergedRestrictedItems[entityURI]) {
+      mergedRestrictedItems[entityURI].linkedItemsIDs.push(linkedItemsIDs);
+    } else {
+      mergedRestrictedItems[entityURI] = {
+        entityURI,
+        linkedItemsIDs: [linkedItemsIDs],
+        ...otherProperties,
+      };
+    }
+  }
+  const mergedRestrictedItemsArray = Object.values(mergedRestrictedItems);
+  return mergedRestrictedItemsArray;
+};
+
+export {
+  buildData,
+  pushResourcesToTaskList,
+  getRestrictedTasks,
+  pushRestrictionsToTaskList,
+};

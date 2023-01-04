@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import PlanningTool from "react-maintenance-planner";
 import { LEGEND_ITEMS } from "../utils/Constants";
 import TasksTable from "./table/TasksTable";
-import { buildData, pushResourcesToTaskList } from "../utils/Utils";
+import {
+  buildData,
+  pushResourcesToTaskList,
+  getRestrictedTasks,
+  pushRestrictionsToTaskList,
+} from "../utils/Utils";
 import classNames from "classnames";
 
 import {
@@ -35,16 +40,21 @@ const PlanEditor = ({
 
   const workPackageItems: Array<PlanPartInterface> = [];
   const taskListWithResources: Array<PlanPartInterface> = [];
+  const taskListWithRestrictions: Array<PlanPartInterface> = [];
   const groups: Array<GroupInterface> = [];
 
   const dataWithoutRevisionPlan = workPackage[0].planParts;
 
   useEffect(() => {
-    setTaskList([...taskListWithResources]);
+    updateData();
+    setTaskList([...taskListWithRestrictions]);
   }, [showTCTypeCategory]);
 
   useEffect(() => {
     setShowTCTypeCategory((prevState) => !prevState);
+    setTimeout(() => {
+      setShowTCTypeCategory((prevState) => !prevState);
+    }, 500);
   }, []);
 
   buildData(
@@ -57,7 +67,17 @@ const PlanEditor = ({
     showTCTypeCategory
   );
 
-  pushResourcesToTaskList(workPackageItems, taskListWithResources, groups);
+  const updateData = () => {
+    pushResourcesToTaskList(workPackageItems, taskListWithResources, groups);
+    const restrictedItems = getRestrictedTasks(taskList);
+    pushRestrictionsToTaskList(
+      taskListWithResources,
+      taskListWithRestrictions,
+      restrictedItems
+    );
+  };
+
+  console.log(taskList);
 
   const showPopUp = () => {
     if (!isFullScreen) {
@@ -105,7 +125,7 @@ const PlanEditor = ({
           Toggle Task Card Type Group
         </button>
       </div>
-      {isActive.planEditor && taskList.length > 0 && (
+      {isActive.planEditor && taskList.length > 0 && taskList && (
         <div style={showPopUp()}>
           <span key={showTCTypeCategory.toString()}>
             <h4>{workPackageTitle}</h4>
