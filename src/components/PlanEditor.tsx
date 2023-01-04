@@ -46,14 +46,12 @@ const PlanEditor = ({
   const dataWithoutRevisionPlan = workPackage[0].planParts;
 
   useEffect(() => {
+    updateData();
     setTaskList([...taskListWithRestrictions]);
   }, [showTCTypeCategory]);
 
   useEffect(() => {
     setShowTCTypeCategory((prevState) => !prevState);
-  }, []);
-
-  useEffect(() => {
     setTimeout(() => {
       setShowTCTypeCategory((prevState) => !prevState);
     }, 500);
@@ -69,13 +67,17 @@ const PlanEditor = ({
     showTCTypeCategory
   );
 
-  pushResourcesToTaskList(workPackageItems, taskListWithResources, groups);
-  const restrictedItems = getRestrictedTasks(taskList);
-  pushRestrictionsToTaskList(
-    taskListWithResources,
-    taskListWithRestrictions,
-    restrictedItems
-  );
+  const updateData = () => {
+    pushResourcesToTaskList(workPackageItems, taskListWithResources, groups);
+    const restrictedItems = getRestrictedTasks(taskList);
+    pushRestrictionsToTaskList(
+      taskListWithResources,
+      taskListWithRestrictions,
+      restrictedItems
+    );
+  };
+
+  console.log(taskList);
 
   const showPopUp = () => {
     if (!isFullScreen) {
