@@ -41,7 +41,7 @@ const EditableCell = ({
     <Cell {...props} className={editing ? "table-content-editing" : ""}>
       {editing ? (
         <input
-          className="rs-input"
+          className={styles.input}
           defaultValue={rowData[dataKey]}
           onChange={(event) => {
             onChange && onChange(rowData.id, dataKey, event.target.value);
@@ -67,7 +67,7 @@ const NestedEditableCell = ({
     <Cell {...props} className={editing ? "table-content-editing" : ""}>
       {editing ? (
         <select
-          className="rs-input"
+          className={styles.select}
           defaultValue={rowData[dataKey1][dataKey2]}
           onChange={(event) => {
             onChange &&
@@ -93,6 +93,7 @@ const DateCell = ({ rowData, dataKey, onChange, ...props }: any) => {
     <Cell {...props} className={editing ? "table-content-editing" : ""}>
       {editing ? (
         <input
+          className={styles.input}
           type="date"
           onChange={(event) => {
             onChange &&
