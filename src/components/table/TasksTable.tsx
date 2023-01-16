@@ -95,9 +95,9 @@ const TasksTable = ({ taskList, groups }: Props) => {
       fillHeight={true}
       loading={isLoading}
     >
-      <Column resizable={true} sortable>
+      <Column flexGrow={2} sortable>
         <HeaderCell>ID</HeaderCell>
-        <Cell dataKey="id" />
+        <Cell>{(rowData) => rowData.id.split("/").pop()}</Cell>
       </Column>
 
       <Column flexGrow={2}>
