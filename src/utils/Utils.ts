@@ -30,6 +30,84 @@ const getItemTitle = (item) => {
   return title;
 };
 
+const pushItem = (
+  items: Array<any>,
+  itemId: number,
+  resourceId: string,
+  item: any,
+  startDate,
+  endDate,
+  itemParentId: number | null,
+  level: number,
+  isHidden: boolean
+) => {
+  items.push({
+    id: itemId,
+    group: resourceId,
+    title: getItemTitle(item),
+    start: startDate,
+    end: endDate,
+    parent: itemParentId,
+    className: "item",
+    bgColor: getItemBackground(item),
+    color: "#fff",
+    selectedBgColor: "#FFC107",
+    selectedColor: "#000",
+    draggingBgColor: "#f00",
+    highlightBgColor: "#FFA500",
+    highlight: false,
+    canMove: level > 1 && level !== 3,
+    canResize: "both", //'left','right','both', false
+    minimumDuration: 0, //minutes
+    workTime: item.workTime,
+    plannedWorkTime: item.plannedWorkTime,
+    applicationType: item.applicationType,
+    duration: item.duration,
+    startTime: item.startTime,
+    endTime: item.endTime,
+    removable: false,
+    isHidden: isHidden,
+    requiredPlans: item.requiringPlans?.length > 0 && item.requiringPlans,
+  });
+};
+
+const isItemHidden = (showTCTypeCategory: boolean, item) => {
+  let isHidden: boolean = false;
+  if (
+    !showTCTypeCategory &&
+    item.applicationType === Constants.APPLICATION_TYPE.TASK_CARD_TYPE_GROUP
+  ) {
+    isHidden = true;
+  }
+
+  if (
+    showTCTypeCategory ||
+    (!showTCTypeCategory &&
+      item.applicationType !== Constants.APPLICATION_TYPE.TASK_CARD_TYPE_GROUP)
+  ) {
+    isHidden = false;
+  }
+
+  return isHidden;
+};
+
+const getStartAndEndDates = (item) => {
+  let startDate;
+  if (!item.startTime && !item.plannedStartTime) {
+    startDate = null;
+  } else {
+    startDate = moment(item.startTime ? item.startTime : item.plannedStartTime);
+  }
+
+  let endDate;
+  if (!item.endTime && !item.plannedEndTime) {
+    endDate = null;
+  } else {
+    endDate = moment(item.endTime ? item.endTime : item.plannedEndTime);
+  }
+  return { startDate, endDate };
+};
+
 const buildData = (
   data: Array<any>,
   items: Array<any>,
@@ -43,49 +121,12 @@ const buildData = (
     return;
   }
 
-  const pushItem = (
-    itemId: number,
-    resourceId: string,
-    item: any,
-    startDate,
-    endDate,
-    isHidden: boolean
-  ) => {
-    items.push({
-      id: itemId,
-      group: resourceId,
-      title: getItemTitle(item),
-      start: startDate,
-      end: endDate,
-      parent: itemParentId,
-      className: "item",
-      bgColor: getItemBackground(item),
-      color: "#fff",
-      selectedBgColor: "#FFC107",
-      selectedColor: "#000",
-      draggingBgColor: "#f00",
-      highlightBgColor: "#FFA500",
-      highlight: false,
-      canMove: level > 1 && level !== 3,
-      canResize: "both", //'left','right','both', false
-      minimumDuration: 0, //minutes
-      workTime: item.workTime,
-      plannedWorkTime: item.plannedWorkTime,
-      applicationType: item.applicationType,
-      duration: item.duration,
-      startTime: item.startTime,
-      endTime: item.endTime,
-      removable: false,
-      isHidden: isHidden,
-      requiredPlans: item.requiringPlans?.length > 0 && item.requiringPlans,
-    });
-  };
-
   let modifiedGroup;
 
   for (const item of data) {
     let resourceId;
     let resourceTitle;
+
     if (item.resource) {
       resourceId = item.resource.entityURI;
       resourceTitle =
@@ -126,39 +167,22 @@ const buildData = (
       };
     });
 
-    let startDate;
-    if (!item.startTime && !item.plannedStartTime) {
-      startDate = null;
-    } else {
-      startDate = moment(
-        item.startTime ? item.startTime : item.plannedStartTime
-      );
-    }
-
-    let endDate;
-    if (!item.endTime && !item.plannedEndTime) {
-      endDate = null;
-    } else {
-      endDate = moment(item.endTime ? item.endTime : item.plannedEndTime);
-    }
+    let { startDate, endDate } = getStartAndEndDates(item);
 
     const itemId = item.entityURI;
+    const isHidden = isItemHidden(showTCTypeCategory, item);
 
-    if (
-      !showTCTypeCategory &&
-      item.applicationType === Constants.APPLICATION_TYPE.TASK_CARD_TYPE_GROUP
-    ) {
-      pushItem(itemId, resourceId, item, startDate, endDate, true);
-    }
-
-    if (
-      showTCTypeCategory ||
-      (!showTCTypeCategory &&
-        item.applicationType !==
-          Constants.APPLICATION_TYPE.TASK_CARD_TYPE_GROUP)
-    ) {
-      pushItem(itemId, resourceId, item, startDate, endDate, false);
-    }
+    pushItem(
+      items,
+      itemId,
+      resourceId,
+      item,
+      startDate,
+      endDate,
+      itemParentId,
+      level,
+      isHidden
+    );
 
     if (item.planParts && item.planParts.length > 0) {
       buildData(

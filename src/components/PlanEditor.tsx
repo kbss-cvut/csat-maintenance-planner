@@ -77,8 +77,6 @@ const PlanEditor = ({
     );
   };
 
-  console.log(taskList);
-
   const showPopUp = () => {
     if (!isFullScreen) {
       return { ["--display" as string]: "none" };
