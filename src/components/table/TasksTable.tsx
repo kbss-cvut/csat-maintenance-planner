@@ -88,6 +88,8 @@ const TasksTable = ({ taskList, groups }: Props) => {
   return (
     <Table
       data={sortData(taskList)}
+      headerHeight={40}
+      rowHeight={30}
       sortColumn={sortColumn}
       sortType={sortType}
       onSortColumn={handleSortColumn}
