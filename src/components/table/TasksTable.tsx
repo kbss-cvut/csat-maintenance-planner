@@ -9,7 +9,6 @@ import {
 } from "./Cells";
 
 import "rsuite-table/dist/css/rsuite-table.css";
-import moment from "moment";
 
 interface Props {
   taskList: Array<PlanPartInterface>;
@@ -138,6 +137,11 @@ const TasksTable = ({ taskList, groups }: Props) => {
           dataKey="title"
           onChange={handleChange}
         />
+      </Column>
+
+      <Column flexGrow={1} sortable>
+        <HeaderCell>Type</HeaderCell>
+        <Cell rowData={taskList} dataKey="applicationType" />
       </Column>
 
       <Column flexGrow={1}>
