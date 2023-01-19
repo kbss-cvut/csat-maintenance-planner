@@ -67,7 +67,16 @@ const PlanManager = ({ basename }: Props) => {
     });
 
     fetchWorkPackageTitles().catch((error) => {
-      setWorkPackageListErrorMessage(error.toString());
+      if (error.status === 500) {
+        setWorkPackageListErrorMessage(
+          "It takes longer, please wait a few seconds."
+        );
+        setTimeout(() => {
+          fetchWorkPackageTitles();
+        }, 3000);
+      } else {
+        setWorkPackageListErrorMessage(error.toString());
+      }
     });
   }, [update]);
 
@@ -92,8 +101,17 @@ const PlanManager = ({ basename }: Props) => {
       });
 
       fetchWorkPackage().catch((error) => {
-        setWorkPackageErrorMessage(error.toString());
-        setIsWorkPackageLoading(false);
+        if (error.status === 500) {
+          setWorkPackageErrorMessage(
+            "It takes longer, please wait a few seconds."
+          );
+          setTimeout(() => {
+            fetchWorkPackage();
+          }, 3000);
+        } else {
+          setWorkPackageErrorMessage(error.toString());
+          setIsWorkPackageLoading(false);
+        }
       });
     };
     if (
@@ -133,8 +151,17 @@ const PlanManager = ({ basename }: Props) => {
     });
 
     fetchWorkPackage().catch((error) => {
-      setWorkPackageErrorMessage(error.toString());
-      setIsWorkPackageLoading(false);
+      if (error.status === 500) {
+        setWorkPackageErrorMessage(
+          "It takes longer, please wait a few seconds."
+        );
+        setTimeout(() => {
+          fetchWorkPackage();
+        }, 3000);
+      } else {
+        setWorkPackageErrorMessage(error.toString());
+        setIsWorkPackageLoading(false);
+      }
     });
   };
 
