@@ -100,9 +100,10 @@ export enum PlanPartType {
 
 export interface GroupInterface {
   hasChildren: boolean;
-  id: number;
+  id: number | string;
   open: boolean;
   parent: number | null;
   show: boolean;
   title: string | null;
+  level: number;
 }

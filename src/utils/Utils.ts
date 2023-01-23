@@ -41,9 +41,15 @@ const pushItem = (
   level: number,
   isHidden: boolean
 ) => {
+  let groupId: string;
+  if (item.applicationType === Constants.TASK_CATEGORY.MAINTENANCE_WO) {
+    groupId = "findings: " + resourceId;
+  } else {
+    groupId = resourceId;
+  }
   items.push({
     id: itemId,
-    group: resourceId,
+    group: groupId,
     title: getItemTitle(item),
     start: startDate,
     end: endDate,
@@ -134,6 +140,18 @@ const buildData = (
     } else {
       resourceId = Math.random().toString(36).substring(2, 15);
       resourceTitle = resourceId;
+    }
+
+    if (item.applicationType === Constants.TASK_CATEGORY.MAINTENANCE_WO) {
+      groups.push({
+        id: "findings: " + resourceId,
+        title: "Findings",
+        hasChildren: false,
+        parent: groupParentId,
+        open: level < 0,
+        show: level < 1,
+        level: level,
+      });
     }
 
     if (!groups.find((i) => i.id === resourceId)) {
