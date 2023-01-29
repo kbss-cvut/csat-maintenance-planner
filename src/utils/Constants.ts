@@ -47,7 +47,6 @@ const Constants = {
     SESSION_PLAN: "SessionPlan",
     TASK_PLAN: "TaskPlan",
     RESTRICTION_PLAN: "RestrictionPlan",
-    MECHANIC: "Mechanic",
   },
   TASK_CATEGORY: {
     TASK_CARD: "task-card",
@@ -113,8 +112,8 @@ const LEGEND_ITEMS = [
     color: "#a90000",
   },
   {
-    code: Constants.APPLICATION_TYPE.MECHANIC,
-    name: "Mechanic",
+    code: Constants.APPLICATION_TYPE.SESSION_PLAN,
+    name: "Session Plan",
     color: "#CFCBC8",
   },
 ];

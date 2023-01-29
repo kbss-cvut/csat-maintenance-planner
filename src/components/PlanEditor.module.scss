@@ -66,6 +66,23 @@
     }
   }
 
+  .editor-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+  }
+
+  .editor {
+    width: 80vw;
+  }
+
+  .fixed-legend {
+    position: fixed;
+    left: 80vw;
+    margin: 1rem;
+  }
+
   .table {
     width: 70vw;
     height: 70vh;

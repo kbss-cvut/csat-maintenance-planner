@@ -1,6 +1,6 @@
 import moment from "moment";
 import { Constants, LEGEND_ITEMS, PHASE_PLAN_TITLES } from "./Constants";
-import { PlanPartInterface } from "./Interfaces";
+import { GroupInterface, PlanPartInterface } from "./Interfaces";
 
 const getItemBackground = (item) => {
   if (item.taskType) {
@@ -38,8 +38,7 @@ const pushItem = (
   startDate,
   endDate,
   itemParentId: number | null,
-  level: number,
-  isHidden: boolean
+  level: number
 ) => {
   items.push({
     id: itemId,
@@ -62,33 +61,13 @@ const pushItem = (
     workTime: item.workTime,
     plannedWorkTime: item.plannedWorkTime,
     applicationType: item.applicationType,
+    taskType: item.taskType,
     duration: item.duration,
     startTime: item.startTime,
     endTime: item.endTime,
     removable: false,
-    isHidden: isHidden,
     requiredPlans: item.requiringPlans?.length > 0 && item.requiringPlans,
   });
-};
-
-const isItemHidden = (showTCTypeCategory: boolean, item) => {
-  let isHidden: boolean = false;
-  if (
-    !showTCTypeCategory &&
-    item.applicationType === Constants.APPLICATION_TYPE.TASK_CARD_TYPE_GROUP
-  ) {
-    isHidden = true;
-  }
-
-  if (
-    showTCTypeCategory ||
-    (!showTCTypeCategory &&
-      item.applicationType !== Constants.APPLICATION_TYPE.TASK_CARD_TYPE_GROUP)
-  ) {
-    isHidden = false;
-  }
-
-  return isHidden;
 };
 
 const getStartAndEndDates = (item) => {
@@ -114,8 +93,7 @@ const buildData = (
   level: number,
   groupParentId: number | null,
   itemParentId: number | null,
-  groups: Array<any>,
-  showTCTypeCategory: boolean
+  groups: Array<GroupInterface>
 ) => {
   if (!data) {
     return;
@@ -168,9 +146,7 @@ const buildData = (
     });
 
     let { startDate, endDate } = getStartAndEndDates(item);
-
     const itemId = item.entityURI;
-    const isHidden = isItemHidden(showTCTypeCategory, item);
 
     pushItem(
       items,
@@ -180,20 +156,15 @@ const buildData = (
       startDate,
       endDate,
       itemParentId,
-      level,
-      isHidden
+      level
     );
 
-    if (item.planParts && item.planParts.length > 0) {
-      buildData(
-        item.planParts,
-        items,
-        level + 1,
-        groups.find((i) => i.id === resourceId).id,
-        itemId,
-        groups,
-        showTCTypeCategory
-      );
+    const group = groups.find((i) => i.id === resourceId)?.id;
+
+    if (group) {
+      if (item.planParts && item.planParts.length > 0) {
+        buildData(item.planParts, items, level + 1, group, itemId, groups);
+      }
     }
   }
   groups.push(...modifiedGroup);

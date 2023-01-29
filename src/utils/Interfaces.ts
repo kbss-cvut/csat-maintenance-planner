@@ -40,6 +40,7 @@ export interface PlanPartInterface {
   endTime?: number | null;
   workTime?: number;
   taskType?: TaskType;
+  taskCategory?: TaskCategory;
   applicationType?: string;
   group?: any;
   start?: any;
@@ -105,4 +106,5 @@ export interface GroupInterface {
   parent: number | null;
   show: boolean;
   title: string | null;
+  level: number;
 }

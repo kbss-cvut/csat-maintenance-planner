@@ -9,6 +9,7 @@ import {
   pushRestrictionsToTaskList,
 } from "../utils/Utils";
 import classNames from "classnames";
+import Legend from "./Legend";
 
 import {
   GroupInterface,
@@ -36,7 +37,10 @@ const PlanEditor = ({
     taskList: false,
   });
   const [taskList, setTaskList] = useState<Array<PlanPartInterface>>([]);
-  const [showTCTypeCategory, setShowTCTypeCategory] = useState<boolean>(false);
+  const [filteredTaskList, setFilteredTaskList] = useState<
+    Array<PlanPartInterface>
+  >([]);
+  const [filteredTaskTypes, setFilteredTaskTypes] = useState<Array<string>>([]);
 
   const workPackageItems: Array<PlanPartInterface> = [];
   const taskListWithResources: Array<PlanPartInterface> = [];
@@ -48,24 +52,29 @@ const PlanEditor = ({
   useEffect(() => {
     updateData();
     setTaskList([...taskListWithRestrictions]);
-  }, [showTCTypeCategory]);
-
-  useEffect(() => {
-    setShowTCTypeCategory((prevState) => !prevState);
-    setTimeout(() => {
-      setShowTCTypeCategory((prevState) => !prevState);
-    }, 500);
   }, []);
 
-  buildData(
-    dataWithoutRevisionPlan,
-    workPackageItems,
-    0,
-    null,
-    null,
-    groups,
-    showTCTypeCategory
-  );
+  useEffect(() => {
+    const filteredTaskList = taskList.filter((i) => {
+      if (i.taskType?.["task-category"]) {
+        return i.taskType?.["task-category"]
+          ? filteredTaskTypes.some((selected) =>
+              i.taskType?.["task-category"]?.includes(selected)
+            )
+          : false;
+      }
+      if (i.applicationType) {
+        return i.applicationType
+          ? filteredTaskTypes.some((selected) =>
+              i.applicationType?.includes(selected)
+            )
+          : false;
+      }
+    });
+    setFilteredTaskList(filteredTaskList);
+  }, [filteredTaskTypes]);
+
+  buildData(dataWithoutRevisionPlan, workPackageItems, 0, null, null, groups);
 
   const updateData = () => {
     pushResourcesToTaskList(workPackageItems, taskListWithResources, groups);
@@ -100,6 +109,10 @@ const PlanEditor = ({
     });
   };
 
+  const handleOnLabelClick = (taskTypes: Array<string>) => {
+    setFilteredTaskTypes(taskTypes);
+  };
+
   return (
     <div className={styles["container"]}>
       <div className={styles["header"]}>
@@ -117,22 +130,29 @@ const PlanEditor = ({
             Table
           </button>
         </div>
-        <button
-          onClick={() => setShowTCTypeCategory((prevState) => !prevState)}
-        >
-          Toggle Task Card Type Group
-        </button>
       </div>
+
       {isActive.planEditor && taskList.length > 0 && taskList && (
         <div style={showPopUp()}>
-          <span key={showTCTypeCategory.toString()}>
-            <h4>{workPackageTitle}</h4>
-            <PlanningTool
-              items={taskList}
-              groups={groups}
-              legendItems={LEGEND_ITEMS}
-            />
-          </span>
+          <h4>{workPackageTitle}</h4>
+          <div className={styles["editor-container"]}>
+            <div className={styles["editor"]}>
+              <PlanningTool
+                key={filteredTaskList}
+                items={
+                  filteredTaskList.length > 0 ? filteredTaskList : taskList
+                }
+                groups={groups}
+              />
+            </div>
+            <div className={styles["fixed-legend"]}>
+              <Legend
+                title={"Legend"}
+                items={LEGEND_ITEMS}
+                onSelectLegendItem={handleOnLabelClick}
+              />
+            </div>
+          </div>
         </div>
       )}
       {isActive.table && taskList.length > 0 && (
