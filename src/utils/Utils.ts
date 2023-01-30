@@ -18,16 +18,24 @@ const getItemBackground = (item) => {
   }
 };
 
-const getItemTitle = (item) => {
-  const title = item.title;
+const getItemTitle = (items, item, itemParentId) => {
   if (item.applicationType === Constants.APPLICATION_TYPE.PHASE_PLAN) {
     return PHASE_PLAN_TITLES.find((o) => o.id === item.title)?.title || "Other";
   }
-  if (!title || title.toUpperCase() === "UNKNOWN") {
+
+  if (item.applicationType === Constants.APPLICATION_TYPE.SESSION_PLAN) {
+    return items.find((i) => i.id === itemParentId)?.title;
+  }
+
+  if (item.taskType?.title) {
+    return item.taskType?.title;
+  }
+
+  if (!item.title || item.title.toUpperCase() === "UNKNOWN") {
     return "Other";
   }
 
-  return title;
+  return item.title;
 };
 
 const pushItem = (
@@ -43,7 +51,7 @@ const pushItem = (
   items.push({
     id: itemId,
     group: resourceId,
-    title: getItemTitle(item),
+    title: getItemTitle(items, item, itemParentId),
     start: startDate,
     end: endDate,
     parent: itemParentId,
