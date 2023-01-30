@@ -19,6 +19,7 @@ import {
 
 import "react-maintenance-planner/dist/react-maintenance-planner.css";
 import * as styles from "./PlanEditor.module.scss";
+import Tooltip from "./Tooltip";
 
 interface Props {
   workPackage: RevisionPlanInterface;
@@ -143,6 +144,7 @@ const PlanEditor = ({
                   filteredTaskList.length > 0 ? filteredTaskList : taskList
                 }
                 groups={groups}
+                tooltip={<Tooltip />}
               />
             </div>
             <div className={styles["fixed-legend"]}>

@@ -76,6 +76,7 @@ export interface TaskType {
   phase?: Title;
   taskType?: string;
   "task-category"?: TaskCategory;
+  code?: number;
 }
 
 export enum Title {
