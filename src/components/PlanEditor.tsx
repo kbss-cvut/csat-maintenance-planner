@@ -8,18 +8,18 @@ import {
   getRestrictedTasks,
   pushRestrictionsToTaskList,
 } from "../utils/Utils";
-import classNames from "classnames";
 import Legend from "./Legend";
-
+import Tooltip from "./Tooltip";
+import Badge from "./Badge";
 import {
   GroupInterface,
   PlanPartInterface,
   RevisionPlanInterface,
 } from "../utils/Interfaces";
 
+import classNames from "classnames";
 import "react-maintenance-planner/dist/react-maintenance-planner.css";
 import * as styles from "./PlanEditor.module.scss";
-import Tooltip from "./Tooltip";
 
 interface Props {
   workPackage: RevisionPlanInterface;
@@ -129,6 +129,7 @@ const PlanEditor = ({
             onClick={viewTableOnClick}
           >
             Table
+            <Badge count={taskList.filter((i) => !i.startTime).length} />
           </button>
         </div>
       </div>

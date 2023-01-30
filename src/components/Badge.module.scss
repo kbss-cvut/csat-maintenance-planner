@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #c42020;
+  color: white;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  padding: 0.5rem;
+  right: 0;
+  margin: 1rem;
+
+  .count {
+    font-size: .8rem;
+    font-weight: bold;
+  }
+}

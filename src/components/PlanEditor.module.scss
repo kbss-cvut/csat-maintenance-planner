@@ -49,6 +49,9 @@
     flex-wrap: nowrap;
 
     button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       height: 3rem;
       border-radius: 3rem;
       width: 250px;
