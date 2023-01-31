@@ -68,6 +68,7 @@ const PlanManager = ({ basename }: Props) => {
 
     fetchWorkPackageTitles().catch((error) => {
       if (error.status === 500) {
+        setIsWorkPackageListLoading(false);
         setWorkPackageListErrorMessage(
           "It takes longer, please wait a few seconds."
         );
@@ -102,6 +103,7 @@ const PlanManager = ({ basename }: Props) => {
 
       fetchWorkPackage().catch((error) => {
         if (error.status === 500) {
+          setIsWorkPackageListLoading(false);
           setWorkPackageErrorMessage(
             "It takes longer, please wait a few seconds."
           );
