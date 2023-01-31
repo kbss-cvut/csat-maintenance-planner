@@ -13,14 +13,14 @@ import "rsuite-table/dist/css/rsuite-table.css";
 interface Props {
   taskList: Array<PlanPartInterface>;
   groups: Array<GroupInterface>;
+  handleEdit: (editValue: any) => void
 }
 
-const TasksTable = ({ taskList, groups }: Props) => {
+const TasksTable = ({ taskList, groups, handleEdit }: Props) => {
   const [sortColumn, setSortColumn] = useState<string>("id");
   const [sortType, setSortType] = useState<SortType | undefined | never>("asc");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [data, setData] = useState<Array<PlanPartInterface>>(taskList);
-  const nextData: Array<PlanPartInterface> = Object.assign([], data);
+  const nextData: Array<PlanPartInterface> = Object.assign([], taskList);
 
   const sortData = (data) => {
     if (sortColumn && sortType && taskList) {
@@ -62,32 +62,32 @@ const TasksTable = ({ taskList, groups }: Props) => {
   };
 
   const handleChange = (id, key, value) => {
-    const item = nextData.find((item) => item.id === id);
+    const item = taskList.find((item) => item.id === id);
     if (item) {
       item[key] = value;
     }
   };
 
   const handleNestedChange = (id, key1, key2, value) => {
-    const item = nextData.find((item) => item.id === id)
+    const item = taskList.find((item) => item.id === id)
     if (item) {
       item[key1][key2] = value
     }
   };
 
   const handleDateChange = (id, key, value) => {
-    const item = nextData.find((item) => item.id === id);
+    const item = taskList.find((item) => item.id === id);
     if (item) {
       item[key] = value;
     }
   };
 
   const handleEditState = (id) => {
-    const activeItem: PlanPartInterface | any = nextData.find(
+    const activeItem: PlanPartInterface | any = taskList.find(
       (item) => item.id === id
     );
     activeItem.status = activeItem.status ? null : "EDIT";
-    setData(nextData);
+    handleEdit(nextData);
   };
 
   return (

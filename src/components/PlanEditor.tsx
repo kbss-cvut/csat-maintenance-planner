@@ -42,6 +42,7 @@ const PlanEditor = ({
     Array<PlanPartInterface>
   >([]);
   const [filteredTaskTypes, setFilteredTaskTypes] = useState<Array<string>>([]);
+  const [unplannedTasksCount, setUnplannedTasksCount] = useState<number>(0);
 
   const workPackageItems: Array<PlanPartInterface> = [];
   const taskListWithResources: Array<PlanPartInterface> = [];
@@ -73,7 +74,11 @@ const PlanEditor = ({
       }
     });
     setFilteredTaskList(filteredTaskList);
-  }, [filteredTaskTypes]);
+  }, [filteredTaskTypes, taskList]);
+
+  useEffect(() => {
+    setUnplannedTasksCount(taskList.filter((i) => !i.start || !i.end).length);
+  }, [taskList]);
 
   buildData(dataWithoutRevisionPlan, workPackageItems, 0, null, null, groups);
 
@@ -129,7 +134,7 @@ const PlanEditor = ({
             onClick={viewTableOnClick}
           >
             Table
-            <Badge count={taskList.filter((i) => !i.startTime).length} />
+            <Badge count={unplannedTasksCount} />
           </button>
         </div>
       </div>
@@ -165,7 +170,11 @@ const PlanEditor = ({
             isFullScreen && styles["table-full-screen"],
           ])}
         >
-          <TasksTable taskList={taskList} groups={groups} />
+          <TasksTable
+            taskList={taskList}
+            groups={groups}
+            handleEdit={setTaskList}
+          />
         </div>
       )}
     </div>
