@@ -10,17 +10,19 @@ interface Props {
     code: string;
     color: string;
     name: string;
-    active?: boolean;
+    active: boolean;
   }>;
   onSelectLegendItem: (selectedItems: Array<string>) => void;
 }
 
 const Legend = ({ title, items, onSelectLegendItem }: Props) => {
-  const [selectedItems, setSelectedItems] = useState<Array<string>>([]);
+  const [selectedItems, setSelectedItems] = useState<Array<string>>(
+    items.map((item) => item.code)
+  );
 
   useEffect(() => {
-    onSelectLegendItem(selectedItems)
-  }, [selectedItems])
+    onSelectLegendItem(selectedItems);
+  }, [selectedItems]);
 
   const handleClick = (index, item) => {
     const newItems = [...items];
@@ -42,7 +44,7 @@ const Legend = ({ title, items, onSelectLegendItem }: Props) => {
               key={index}
               className={classNames([
                 styles["item"],
-                legendItem.active ? styles["active"] : null,
+                legendItem.active ? styles["active"] : styles["non-active"],
               ])}
               onClick={() => handleClick(index, legendItem)}
             >

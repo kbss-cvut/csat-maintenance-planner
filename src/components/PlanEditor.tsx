@@ -146,9 +146,7 @@ const PlanEditor = ({
             <div className={styles["editor"]}>
               <PlanningTool
                 key={filteredTaskList}
-                items={
-                  filteredTaskList.length > 0 ? filteredTaskList : taskList
-                }
+                items={filteredTaskList}
                 groups={groups}
                 tooltip={<Tooltip />}
               />

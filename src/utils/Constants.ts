@@ -85,36 +85,43 @@ const LEGEND_ITEMS = [
     code: Constants.APPLICATION_TYPE.RESTRICTION_PLAN,
     name: "Restriction Plan",
     color: "#ff0000",
+    active: true,
   },
   {
     code: Constants.APPLICATION_TYPE.PHASE_PLAN,
     name: "Phase Plan",
     color: "#00718F",
+    active: true,
   },
   {
     code: Constants.APPLICATION_TYPE.TASK_CARD_TYPE_GROUP,
     name: "Task Card Type Group",
     color: "#0BA5BE",
+    active: true,
   },
   {
     code: Constants.TASK_CATEGORY.TASK_CARD,
     name: "Task Card",
     color: "#00a900",
+    active: true,
   },
   {
     code: Constants.TASK_CATEGORY.SCHEDULED_WO,
     name: "Scheduled Work Order",
     color: "#576319",
+    active: true,
   },
   {
     code: Constants.TASK_CATEGORY.MAINTENANCE_WO,
     name: "Maintenance Work Order",
     color: "#a90000",
+    active: true,
   },
   {
     code: Constants.APPLICATION_TYPE.SESSION_PLAN,
     name: "Session Plan",
     color: "#CFCBC8",
+    active: true,
   },
 ];
 
