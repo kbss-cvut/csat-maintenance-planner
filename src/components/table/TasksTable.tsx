@@ -62,18 +62,24 @@ const TasksTable = ({ taskList, groups }: Props) => {
   };
 
   const handleChange = (id, key, value) => {
-    // @ts-ignore
-    nextData.find((item) => item.id === id)[key] = value;
+    const item = nextData.find((item) => item.id === id);
+    if (item) {
+      item[key] = value;
+    }
   };
 
   const handleNestedChange = (id, key1, key2, value) => {
-    // @ts-ignore
-    nextData.find((item) => item.id === id)[key1][key2] = value;
+    const item = nextData.find((item) => item.id === id)
+    if (item) {
+      item[key1][key2] = value
+    }
   };
 
   const handleDateChange = (id, key, value) => {
-    // @ts-ignore
-    nextData.find((item) => item.id === id)[key] = value;
+    const item = nextData.find((item) => item.id === id);
+    if (item) {
+      item[key] = value;
+    }
   };
 
   const handleEditState = (id) => {
