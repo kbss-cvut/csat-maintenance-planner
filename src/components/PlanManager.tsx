@@ -7,7 +7,7 @@ import LoadingSpinnerIcon from "../assets/icons/LoadingSpinnerIcon";
 import { CgChevronDoubleLeftO } from "react-icons/cg";
 import { motion } from "framer-motion/dist/framer-motion";
 import Animations from "../utils/Animations";
-import useKeycloak from "../hooks/KeycloakHook";
+import { useKeycloak } from "@react-keycloak/web";
 
 import styles from "./PlanManager.module.scss";
 
@@ -210,7 +210,7 @@ const PlanManager = ({ basename }: Props) => {
     );
   };
 
-  if (!initialized && process.env.NODE_ENV === "production") {
+  if (!initialized && process.env.NODE_ENV !== "development") {
     return <h1>Loading...</h1>;
   }
 

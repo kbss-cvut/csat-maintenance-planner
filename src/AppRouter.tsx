@@ -27,11 +27,13 @@ const AppRouter = () => {
           </BrowserRouter>
         </ReactKeycloakProvider>
       ) : (
-        <BrowserRouter basename={basename}>
-          <Routes>
-            <Route path="/*" element={<PlanManager basename={basename} />} />
-          </Routes>
-        </BrowserRouter>
+        <ReactKeycloakProvider authClient={keycloak}>
+          <BrowserRouter basename={basename}>
+            <Routes>
+              <Route path="/*" element={<PlanManager basename={basename} />} />
+            </Routes>
+          </BrowserRouter>
+        </ReactKeycloakProvider>
       )}
     </React.Fragment>
   );
