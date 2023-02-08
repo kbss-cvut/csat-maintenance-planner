@@ -97,7 +97,7 @@ const LEGEND_ITEMS = [
     code: Constants.APPLICATION_TYPE.TASK_CARD_TYPE_GROUP,
     name: "Task Card Type Group",
     color: "#0BA5BE",
-    active: true,
+    active: false,
   },
   {
     code: Constants.TASK_CATEGORY.TASK_CARD,

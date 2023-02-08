@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion/dist/framer-motion";
+import { Constants } from "../utils/Constants";
 
 import styles from "./Legend.module.scss";
 import classNames from "classnames";
 
 interface Props {
-  title: string;
   items: Array<{
     code: string;
     color: string;
@@ -15,9 +15,13 @@ interface Props {
   onSelectLegendItem: (selectedItems: Array<string>) => void;
 }
 
-const Legend = ({ title, items, onSelectLegendItem }: Props) => {
+const Legend = ({ items, onSelectLegendItem }: Props) => {
   const [selectedItems, setSelectedItems] = useState<Array<string>>(
-    items.map((item) => item.code)
+    items
+      .filter(
+        (item) => item.code !== Constants.APPLICATION_TYPE.TASK_CARD_TYPE_GROUP
+      )
+      .map((item) => item.code)
   );
 
   useEffect(() => {
@@ -34,33 +38,70 @@ const Legend = ({ title, items, onSelectLegendItem }: Props) => {
     setSelectedItems(updatedSelectedItems);
   };
 
+  const applicationTypes = items.filter((item) =>
+    Object.values(Constants.APPLICATION_TYPE).includes(item.code)
+  );
+
+  const taskTypes = items.filter(
+    (item) => !Object.values(Constants.APPLICATION_TYPE).includes(item.code)
+  );
+
   return (
     <div className={styles["container"]}>
-      <h3 className={styles["legend-title"]}>{title}</h3>
       <>
-        {items.map((legendItem, index) => {
-          return (
-            <div
-              key={index}
-              className={classNames([
-                styles["item"],
-                legendItem.active ? styles["active"] : styles["non-active"],
-              ])}
-              onClick={() => handleClick(index, legendItem)}
-            >
+        <div className={styles["section"]}>
+          <h4>Application types:</h4>
+          {applicationTypes.map((legendItem, index) => {
+            return (
               <div
-                className={styles["color"]}
-                style={{ background: `${legendItem.color}` }}
-              />
-              <motion.div
-                className={styles["label"]}
-                whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
+                key={index}
+                className={classNames([
+                  styles["item"],
+                  legendItem.active ? styles["active"] : styles["non-active"],
+                ])}
+                onClick={() => handleClick(index, legendItem)}
               >
-                {legendItem.name}
-              </motion.div>
-            </div>
-          );
-        })}
+                <div
+                  className={styles["color"]}
+                  style={{ background: `${legendItem.color}` }}
+                />
+                <motion.div
+                  className={styles["label"]}
+                  whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
+                >
+                  {legendItem.name}
+                </motion.div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className={styles["section"]}>
+          <h4>Task types:</h4>
+          {taskTypes.map((legendItem, index) => {
+            return (
+              <div
+                key={index}
+                className={classNames([
+                  styles["item"],
+                  legendItem.active ? styles["active"] : styles["non-active"],
+                ])}
+                onClick={() => handleClick(index, legendItem)}
+              >
+                <div
+                  className={styles["color"]}
+                  style={{ background: `${legendItem.color}` }}
+                />
+                <motion.div
+                  className={styles["label"]}
+                  whileHover={{ scale: 1.1, transition: { duration: 0.1 } }}
+                >
+                  {legendItem.name}
+                </motion.div>
+              </div>
+            );
+          })}
+        </div>
       </>
     </div>
   );

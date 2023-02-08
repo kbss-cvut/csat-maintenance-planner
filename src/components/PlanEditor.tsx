@@ -163,7 +163,6 @@ const PlanEditor = ({
             </div>
             <div className={styles["fixed-legend"]}>
               <Legend
-                title={"Legend"}
                 items={LEGEND_ITEMS}
                 onSelectLegendItem={handleOnLabelClick}
               />
