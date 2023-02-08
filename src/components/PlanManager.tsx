@@ -7,7 +7,7 @@ import LoadingSpinnerIcon from "../assets/icons/LoadingSpinnerIcon";
 import { CgChevronDoubleLeftO } from "react-icons/cg";
 import { motion } from "framer-motion/dist/framer-motion";
 import Animations from "../utils/Animations";
-import { useKeycloak } from "@react-keycloak/web";
+import useKeycloak from "../hooks/KeycloakHook";
 
 import styles from "./PlanManager.module.scss";
 
@@ -42,12 +42,14 @@ const PlanManager = ({ basename }: Props) => {
   );
 
   useEffect(() => {
-    const initializeKeycloak = () => {
-      if (initialized && !keycloak.authenticated) {
-        keycloak.login();
-      }
-    };
-    initializeKeycloak();
+    if (process.env.NODE_ENV !== "development") {
+      const initializeKeycloak = () => {
+        if (initialized && keycloak && !keycloak.authenticated) {
+          keycloak.login();
+        }
+      };
+      initializeKeycloak();
+    }
   }, [initialized]);
 
   useEffect(() => {
@@ -208,7 +210,7 @@ const PlanManager = ({ basename }: Props) => {
     );
   };
 
-  if (!initialized) {
+  if (!initialized && process.env.NODE_ENV === "production") {
     return <h1>Loading...</h1>;
   }
 
@@ -239,7 +241,7 @@ const PlanManager = ({ basename }: Props) => {
         </div>
 
         <h2>Work Packages</h2>
-        {keycloak.authenticated && (
+        {keycloak && keycloak.authenticated && (
           <React.Fragment>
             {renderWorkPackageList()}
             <button className={styles.button} onClick={handleUpdateClick}>

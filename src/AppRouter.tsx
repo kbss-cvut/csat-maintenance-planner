@@ -15,16 +15,24 @@ const basename = window.location.pathname.replace(/(\/[^/]+)$/, "");
 const AppRouter = () => {
   return (
     <React.Fragment>
-      <ReactKeycloakProvider
-        authClient={keycloak}
-        initOptions={{ checkLoginIframe: false }}
-      >
+      {process.env.NODE_ENV !== "development" ? (
+        <ReactKeycloakProvider
+          authClient={keycloak}
+          initOptions={{ checkLoginIframe: false }}
+        >
+          <BrowserRouter basename={basename}>
+            <Routes>
+              <Route path="/*" element={<PlanManager basename={basename} />} />
+            </Routes>
+          </BrowserRouter>
+        </ReactKeycloakProvider>
+      ) : (
         <BrowserRouter basename={basename}>
           <Routes>
             <Route path="/*" element={<PlanManager basename={basename} />} />
           </Routes>
         </BrowserRouter>
-      </ReactKeycloakProvider>
+      )}
     </React.Fragment>
   );
 };
