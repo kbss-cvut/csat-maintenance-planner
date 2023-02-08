@@ -95,7 +95,7 @@ const PlanManager = ({ basename }: Props) => {
             Constants.SERVER_URL_WORKPACKAGE_ID + workPackageId
           );
           setWorkPackage([data]);
-          setDocumentTitle(workPackageId);
+          setDocumentTitle(decodeURIComponent(workPackageId));
         }
       };
 
