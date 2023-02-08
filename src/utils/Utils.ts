@@ -38,6 +38,10 @@ const getItemTitle = (items, item, itemParentId) => {
   return item.title;
 };
 
+const getAircraftModel = (items) => {
+  return items.find((i) => i.taskType?.acmodel);
+};
+
 const pushItem = (
   items: Array<any>,
   itemId: number,
@@ -247,4 +251,5 @@ export {
   pushResourcesToTaskList,
   getRestrictedTasks,
   pushRestrictionsToTaskList,
+  getAircraftModel,
 };

@@ -7,6 +7,7 @@ import {
   pushResourcesToTaskList,
   getRestrictedTasks,
   pushRestrictionsToTaskList,
+  getAircraftModel,
 } from "../utils/Utils";
 import Legend from "./Legend";
 import Tooltip from "./Tooltip";
@@ -43,6 +44,7 @@ const PlanEditor = ({
   >([]);
   const [filteredTaskTypes, setFilteredTaskTypes] = useState<Array<string>>([]);
   const [unplannedTasksCount, setUnplannedTasksCount] = useState<number>(0);
+  const [aircraftModel, setAircraftModel] = useState<string | null>();
 
   const workPackageItems: Array<PlanPartInterface> = [];
   const taskListWithResources: Array<PlanPartInterface> = [];
@@ -91,6 +93,13 @@ const PlanEditor = ({
       restrictedItems
     );
   };
+
+  useEffect(() => {
+    const acmodel = getAircraftModel(taskList);
+    if (acmodel) {
+      setAircraftModel(acmodel.taskType.acmodel);
+    }
+  }, [taskList]);
 
   const showPopUp = () => {
     if (!isFullScreen) {
@@ -141,7 +150,8 @@ const PlanEditor = ({
 
       {isActive.planEditor && taskList.length > 0 && taskList && (
         <div style={showPopUp()}>
-          <h4>{workPackageTitle}</h4>
+          <h3>{workPackageTitle}</h3>
+          {aircraftModel && <h4>Aircraft Model: {aircraftModel}</h4>}
           <div className={styles["editor-container"]}>
             <div className={styles["editor"]}>
               <PlanningTool

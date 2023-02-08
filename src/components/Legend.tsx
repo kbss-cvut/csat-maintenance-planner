@@ -36,7 +36,7 @@ const Legend = ({ title, items, onSelectLegendItem }: Props) => {
 
   return (
     <div className={styles["container"]}>
-      <h3>{title}</h3>
+      <h3 className={styles["legend-title"]}>{title}</h3>
       <>
         {items.map((legendItem, index) => {
           return (
