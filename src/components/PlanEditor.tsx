@@ -101,13 +101,6 @@ const PlanEditor = ({
     }
   }, [taskList]);
 
-  const showPopUp = () => {
-    if (!isFullScreen) {
-      return { ["--display" as string]: "none" };
-    }
-    return {};
-  };
-
   const viewPlanEditorOnClick = () => {
     setIsActive({
       planEditor: true,
@@ -149,7 +142,7 @@ const PlanEditor = ({
       </div>
 
       {isActive.planEditor && taskList.length > 0 && taskList && (
-        <div style={showPopUp()}>
+        <>
           <h3>{workPackageTitle}</h3>
           {aircraftModel && <h4>Aircraft Model: {aircraftModel}</h4>}
           <div className={styles["editor-container"]}>
@@ -161,14 +154,20 @@ const PlanEditor = ({
                 tooltip={<Tooltip />}
               />
             </div>
-            <div className={styles["fixed-legend"]}>
+
+            <div
+              className={classNames([
+                styles["fixed-legend"],
+                isFullScreen ? null : styles["hidden"],
+              ])}
+            >
               <Legend
                 items={LEGEND_ITEMS}
                 onSelectLegendItem={handleOnLabelClick}
               />
             </div>
           </div>
-        </div>
+        </>
       )}
       {isActive.table && taskList.length > 0 && (
         <div
