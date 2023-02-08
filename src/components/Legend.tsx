@@ -79,14 +79,16 @@ const Legend = ({ items, onSelectLegendItem }: Props) => {
         <div className={styles["section"]}>
           <h4>Task types:</h4>
           {taskTypes.map((legendItem, index) => {
+            const offsetIndex = index + applicationTypes.length - 1;
+
             return (
               <div
-                key={index}
+                key={offsetIndex}
                 className={classNames([
                   styles["item"],
                   legendItem.active ? styles["active"] : styles["non-active"],
                 ])}
-                onClick={() => handleClick(index, legendItem)}
+                onClick={() => handleClick(offsetIndex, legendItem)}
               >
                 <div
                   className={styles["color"]}
