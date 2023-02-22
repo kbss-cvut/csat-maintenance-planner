@@ -94,7 +94,7 @@ const PlanManager = ({ basename }: Props) => {
 		setDocumentTitle(decodeURIComponent(workPackageId));
 	  } catch(error){
 		// @ts-ignore
-		if (error.status && error.status === 500) {
+		if (error.status === 500) {
 		  
 		  setWorkPackageErrorMessage(
 			"It takes longer, please wait a few seconds."
