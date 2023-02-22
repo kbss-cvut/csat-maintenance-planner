@@ -2,7 +2,6 @@ import moment from "moment";
 import { Constants, LEGEND_ITEMS, PHASE_PLAN_TITLES } from "./Constants";
 import { GroupInterface, PlanPartInterface } from "./Interfaces";
 
-const a = 1;
 
 const getItemBackground = (item) => {
   if (item.taskType) {
