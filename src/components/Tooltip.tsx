@@ -81,6 +81,10 @@ const Tooltip = ({ item, group }: Props) => {
             <p>{formatEstimate(item?.estMin, item)}</p>
           </div>
 		  <div className={styles.section}>
+            <h3>Planned Work Time:</h3>
+            <p>{formatHours(scale(item?.plannedWorkTime, 3600000))}</p>
+          </div>
+		  <div className={styles.section}>
             <h3>Work time:</h3>
             <p>{formatHours(scale(item?.workTime, 3600000))}</p>
           </div>
