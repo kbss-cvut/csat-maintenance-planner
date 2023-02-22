@@ -38,6 +38,7 @@ export interface PlanPartInterface {
   plannedWorkTime?: number | null;
   startTime?: number | null;
   endTime?: number | null;
+  estMin?: number | null;
   workTime?: number;
   taskType?: TaskType;
   taskCategory?: TaskCategory;
@@ -77,6 +78,7 @@ export interface TaskType {
   taskType?: string;
   "task-category"?: TaskCategory;
   code?: number;
+  averageTime?: number | null;
 }
 
 export enum Title {
