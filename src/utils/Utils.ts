@@ -49,12 +49,12 @@ const getAircraftModel = (items) => {
 
 const pushItem = (
   items: Array<any>,
-  itemId: number,
+  itemId: string,
   resourceId: string,
   item: any,
   startDate,
   endDate,
-  itemParentId: number | null,
+  itemParentId: string | null,
   level: number
 ) => {
   items.push({
@@ -108,8 +108,8 @@ const buildData = (
   data: Array<any>,
   items: Array<any>,
   level: number,
-  groupParentId: number | null,
-  itemParentId: number | null,
+  groupParentId: string | null,
+  itemParentId: string | null,
   groups: Array<GroupInterface>
 ) => {
   if (!data) {
@@ -142,7 +142,15 @@ const buildData = (
         level: level,
       });
     }
-
+	
+	const groupsToUpdateHasChildren = groups
+      .filter((g) => g.id === resourceId)
+      .filter((g) => g.parent === groupParentId);
+	  
+	groupsToUpdateHasChildren.forEach((g) => {
+		g.hasChildren = g.hasChildren || (item.planParts && item.planParts.length > 0);
+    });
+	
     const alreadyExistingGroup = groups
       .filter((g) => g.id === resourceId)
       .filter((g) => g.parent !== groupParentId);
