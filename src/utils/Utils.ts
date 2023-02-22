@@ -2,6 +2,8 @@ import moment from "moment";
 import { Constants, LEGEND_ITEMS, PHASE_PLAN_TITLES } from "./Constants";
 import { GroupInterface, PlanPartInterface } from "./Interfaces";
 
+const a = 1;
+
 const getItemBackground = (item) => {
   if (item.taskType) {
     return (
@@ -20,7 +22,10 @@ const getItemBackground = (item) => {
 
 const getItemTitle = (items, item, itemParentId) => {
   if (item.applicationType === Constants.APPLICATION_TYPE.PHASE_PLAN) {
-    return PHASE_PLAN_TITLES.find((o) => o.id === item.title)?.title || "Other";
+	let title = item.title;
+	if(title == "unknown")
+	  title = "Other";
+    return PHASE_PLAN_TITLES.find((o) => o.id === item.title)?.title || title;
   }
 
   if (item.applicationType === Constants.APPLICATION_TYPE.SESSION_PLAN) {
