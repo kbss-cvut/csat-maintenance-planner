@@ -39,10 +39,8 @@ const PlanEditor = ({
     taskList: false,
   });
   const [taskList, setTaskList] = useState<Array<PlanPartInterface>>([]);
-  const [filteredTaskList, setFilteredTaskList] = useState<
-    Array<PlanPartInterface>
-  >([]);
   const [filteredTaskTypes, setFilteredTaskTypes] = useState<Array<string>>([]);
+  const [rerenderState, rerender] = useState<number>(0);
   const [unplannedTasksCount, setUnplannedTasksCount] = useState<number>(0);
   const [aircraftModel, setAircraftModel] = useState<string | null>();
 
@@ -59,23 +57,21 @@ const PlanEditor = ({
   }, []);
 
   useEffect(() => {
-    const filteredTaskList = taskList.filter((i) => {
-      if (i.taskType?.["task-category"]) {
-        return i.taskType?.["task-category"]
-          ? filteredTaskTypes.some((selected) =>
-              i.taskType?.["task-category"]?.includes(selected)
-            )
-          : false;
-      }
-      if (i.applicationType) {
-        return i.applicationType
-          ? filteredTaskTypes.some((selected) =>
-              i.applicationType?.includes(selected)
-            )
-          : false;
+    // hide tasks by type
+    taskList.forEach((i) => {
+      if(i.taskType?.["task-category"]) {
+        // @ts-ignore
+        i.isHidden = !filteredTaskTypes.some((selected) =>
+            i.taskType?.["task-category"]?.includes(selected)
+        );
+      } else if(i.applicationType) {
+        // @ts-ignore
+        i.isHidden = !filteredTaskTypes.some((selected) =>
+            i.applicationType?.includes(selected)
+        );
       }
     });
-    setFilteredTaskList(filteredTaskList);
+    rerender((rerenderState + 1)%2); // change state to triggere rerender
   }, [filteredTaskTypes, taskList]);
 
   useEffect(() => {
@@ -148,8 +144,8 @@ const PlanEditor = ({
           <div className={styles["editor-container"]}>
             <div className={styles["editor"]}>
               <PlanningTool
-                key={filteredTaskList}
-                items={filteredTaskList}
+                key={taskList}
+                items={taskList}
                 groups={groups}
                 tooltip={<Tooltip />}
               />
