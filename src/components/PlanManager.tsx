@@ -197,7 +197,7 @@ const PlanManager = ({ basename }: Props) => {
 	);
   };
 
-  if (!initialized) {
+  if (!initialized && process.env.NODE_ENV !== "development") {
 	return <h1>Loading...</h1>;
   }
 
