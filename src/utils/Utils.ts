@@ -21,9 +21,7 @@ const getItemBackground = (item) => {
 
 const getItemTitle = (items, item, itemParentId) => {
   if (item.applicationType === Constants.APPLICATION_TYPE.PHASE_PLAN) {
-	let title = item.title;
-	if(title == "unknown")
-	  title = "Other";
+	const title = ((!item.title) || item.title === "unknown") ? "Other" : item.title
     return PHASE_PLAN_TITLES.find((o) => o.id === item.title)?.title || title;
   }
 
