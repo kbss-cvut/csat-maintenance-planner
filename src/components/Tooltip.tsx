@@ -12,7 +12,7 @@ interface Props {
 const formatEstimate = (est: number | null | undefined, item: PlanPartInterface) => {
 	const formatedEst = formatHours(est);
 	if(est && item?.workTime){
-		return formatedEst + "(" + formatPercent(item?.workTime/36000/est) + ")";
+		return formatedEst + " (" + formatPercent(item?.workTime/36000/est) + ")";
 	}
 	return formatedEst;
 }
@@ -73,7 +73,7 @@ const Tooltip = ({ item, group }: Props) => {
             <p>{item?.taskType?.code}</p>
           </div>
 		  <div className={styles.section}>
-            <h3>averageTime:</h3>
+            <h3>Average Time:</h3>
             <p>{formatEstimate(item?.taskType?.averageTime, item)}</p>
           </div>
 		  <div className={styles.section}>
