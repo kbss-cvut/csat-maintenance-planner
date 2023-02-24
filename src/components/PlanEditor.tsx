@@ -40,7 +40,6 @@ const PlanEditor = ({
   });
   const [taskList, setTaskList] = useState<Array<PlanPartInterface>>([]);
   const [filteredTaskTypes, setFilteredTaskTypes] = useState<Array<string>>([]);
-  const [rerenderState, rerender] = useState<number>(0);
   const [unplannedTasksCount, setUnplannedTasksCount] = useState<number>(0);
   const [aircraftModel, setAircraftModel] = useState<string | null>();
 
@@ -55,24 +54,6 @@ const PlanEditor = ({
     updateData();
     setTaskList([...taskListWithRestrictions]);
   }, []);
-
-  useEffect(() => {
-    // hide tasks by type
-    taskList.forEach((i) => {
-      if(i.taskType?.["task-category"]) {
-        // @ts-ignore
-        i.isHidden = !filteredTaskTypes.some((selected) =>
-            i.taskType?.["task-category"]?.includes(selected)
-        );
-      } else if(i.applicationType) {
-        // @ts-ignore
-        i.isHidden = !filteredTaskTypes.some((selected) =>
-            i.applicationType?.includes(selected)
-        );
-      }
-    });
-    rerender((rerenderState + 1)%2); // change state to triggere rerender
-  }, [filteredTaskTypes, taskList]);
 
   useEffect(() => {
     setUnplannedTasksCount(taskList.filter((i) => !i.start || !i.end).length);
@@ -114,6 +95,17 @@ const PlanEditor = ({
   };
 
   const handleOnLabelClick = (taskTypes: Array<string>) => {
+    taskList.forEach((i) => {
+      if(i.taskType?.["task-category"]) {
+        i.isHidden = !taskTypes.some((selected) =>
+            i.taskType?.["task-category"]?.includes(selected)
+        );
+      } else if(i.applicationType) {
+        i.isHidden = !taskTypes.some((selected) =>
+            i.applicationType?.includes(selected)
+        );
+      }
+    });
     setFilteredTaskTypes(taskTypes);
   };
 

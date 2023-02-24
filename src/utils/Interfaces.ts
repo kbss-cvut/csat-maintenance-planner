@@ -48,6 +48,7 @@ export interface PlanPartInterface {
   end?: any;
   parent?: any;
   linkedItemsIDs?: Array<string>;
+  isHidden: boolean;
 }
 
 export interface ResourceInterface {
