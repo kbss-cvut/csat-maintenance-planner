@@ -12,25 +12,26 @@ interface Props {
 const formatEstimate = (est: number | null | undefined, item: PlanPartInterface) => {
 	const formatedEst = formatHours(est);
 	if(est && item?.workTime){
-		return formatedEst + " (" + formatPercent(item?.workTime/36000/est) + ")";
+		return formatedEst + " (" + formatPercent(Math.ceil(item?.workTime/36000/est)) + ")";
 	}
 	return formatedEst;
 }
 
 const formatHours = (est: number | null | undefined) => {
-	return formatWithPostfix(est, " h");
+	if(!est)
+		return "-";
+	const totalMinutes = Math.ceil(est * 60);
+	const hours = Math.floor(totalMinutes/60);
+	const minutes = totalMinutes % 60;
+
+	return hours + "h" + minutes;
 }
 
 const formatPercent = (est: number | null | undefined) => {
-	return formatWithPostfix(est, " %");
-}
-
-
-const formatWithPostfix = (est: number | null | undefined, postfix: string) => {
-	if(est)
-		return est.toFixed(2) + postfix;
-	else
+	if(!est)
 		return "-";
+	else
+		return est + " %";
 }
 
 const scale = (num: number | null | undefined, devider) => {
