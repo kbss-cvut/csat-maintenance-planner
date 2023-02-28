@@ -40,6 +40,7 @@ export interface PlanPartInterface {
   endTime?: number | null;
   estMin?: number | null;
   workTime?: number;
+  numberOfMechanics?: number;
   taskType?: TaskType;
   taskCategory?: TaskCategory;
   applicationType?: string;

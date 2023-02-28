@@ -8,6 +8,7 @@ import {
   getRestrictedTasks,
   pushRestrictionsToTaskList,
   getAircraftModel,
+  calculateNumberOfMechanics,
 } from "../utils/Utils";
 import Legend from "./Legend";
 import Tooltip from "./Tooltip";
@@ -59,6 +60,7 @@ const PlanEditor = ({
     setUnplannedTasksCount(taskList.filter((i) => !i.start || !i.end).length);
   }, [taskList]);
 
+  dataWithoutRevisionPlan?.forEach(item => calculateNumberOfMechanics(item));
   buildData(dataWithoutRevisionPlan, workPackageItems, 0, null, null, groups);
 
   const updateData = () => {
