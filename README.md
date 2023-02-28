@@ -4,7 +4,7 @@ This project is frontend application that works over REST API provided by [Aircr
 
 ## For developers
 
-The CSAT Maintenance Planner is written in [TypeScript](https://www.typescriptlang.org/) using [React](https://reactjs.org/).
+The CSAT Maintenance Planner is written in [TypeScript](https://www.typescriptlang.org/) using [React](https://reactjs.org/). 
 
 This project was bootstrapped with [Create React App](https://github.com/wmonk/create-react-app-typescript), TypeScript version.
 
@@ -16,3 +16,5 @@ If you are using **IntellJ IDEA**, it is recommended to follow [this guide](http
 The docker image of CSAT Plan Manager can be built with `docker build -t csat-plan-manager .`.
 Then, it can be run and exposed at `8090/plan-manager` as `docker run -e SERVER_URL_REVISION_LIST=<BACKEND_REVISIONS_URL> SERVER_URL_REVISION_ID=<BACKEND_PLAN> -p 8090:80 plan-manager`, or from the [deploy](https://github.com/kbss-cvut/csat-maintenance-planner/tree/main/deploy) folder with `docker compose -f docker-compose.yaml up`.
 
+-----
+This work has been supported by the grant [No. CK01000204 "Improving effectiveness of aircraft maintenance planning and execution"](https://starfos.tacr.cz/en/project/CK01000204) of Technology Agency of the Czech Republic.
