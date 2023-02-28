@@ -45,9 +45,15 @@ const Tooltip = ({ item, group }: Props) => {
     <div className={styles.container}>
       {item?.applicationType !== Constants.APPLICATION_TYPE.SESSION_PLAN &&
         !item?.taskType && (
-          <div>
-            <p>{item?.title}</p>
-          </div>
+			<>
+			  <div>
+				<p>{item?.title}</p>
+			  </div>
+			  <div className={styles.section}>
+				<h3>Mechanic count:</h3>
+				<p>{item?.numberOfMechanics}</p>
+			  </div>
+			</>
         )}
 
       {item?.applicationType === Constants.APPLICATION_TYPE.SESSION_PLAN && (
@@ -89,6 +95,10 @@ const Tooltip = ({ item, group }: Props) => {
             <h3>Work time:</h3>
             <p>{formatHours(scale(item?.workTime, 3600000))}</p>
           </div>
+			<div className={styles.section}>
+			<h3>Mechanic count:</h3>
+			<p>{item?.numberOfMechanics}</p>
+			</div>
           <div className={styles["description-section"]}>
             <h3>Description:</h3>
             <p>{item?.title}</p>

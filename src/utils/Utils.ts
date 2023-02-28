@@ -73,6 +73,7 @@ const pushItem = (
     canResize: "both", //'left','right','both', false
     minimumDuration: 0, //minutes
     workTime: item.workTime,
+    numberOfMechanics: item?.mechanicCount,
     plannedWorkTime: item.plannedWorkTime,
     applicationType: item.applicationType,
     taskType: item.taskType,
@@ -145,7 +146,7 @@ const buildData = (
       .filter((g) => g.parent === groupParentId);
 	  
 	groupsToUpdateHasChildren.forEach((g) => {
-		g.hasChildren = g.hasChildren || (item.planParts && item.planParts.length > 0);
+		g.hasChildren = !!g.hasChildren || (item.planParts && item.planParts.length > 0);
     });
 	
     const alreadyExistingGroup = groups
@@ -191,6 +192,18 @@ const buildData = (
   }
   groups.push(...modifiedGroup);
 };
+
+const calculateNumberOfMechanics = (dataItem : any) => {
+  if (dataItem.applicationType === Constants.APPLICATION_TYPE.SESSION_PLAN) {
+    dataItem.mechanicCount = 1;
+    return [!!dataItem.resource ? dataItem.resource.id : Math.random().toString(36).substring(2, 15)];
+  } else if (!!dataItem.planParts) {
+    const allMechanics = new Set(dataItem.planParts.map(p => calculateNumberOfMechanics(p)).flat());// reduce((set, currentValue) => set.conca + currentValue);
+    dataItem.mechanicCount = allMechanics.size
+    return new Array(allMechanics);
+  }
+  return []
+}
 
 const pushResourcesToTaskList = (items, taskListWithResources, groups) => {
   for (const item of items) {
@@ -262,4 +275,5 @@ export {
   getRestrictedTasks,
   pushRestrictionsToTaskList,
   getAircraftModel,
+  calculateNumberOfMechanics,
 };
