@@ -63,6 +63,10 @@ const Constants = {
 
 const PHASE_PLAN_TITLES = [
   {
+    id: "0",
+    title: "Phase 0",
+  },
+  {
     id: "1",
     title: "Incoming tests and inspections",
   },

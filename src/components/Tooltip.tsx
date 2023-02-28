@@ -8,6 +8,38 @@ interface Props {
   item?: PlanPartInterface;
   group?: GroupInterface;
 }
+
+const formatEstimate = (est: number | null | undefined, item: PlanPartInterface) => {
+	const formatedEst = formatHours(est);
+	if(est && item?.workTime){
+		return formatedEst + " (" + formatPercent(Math.ceil(item?.workTime/36000/est)) + ")";
+	}
+	return formatedEst;
+}
+
+const formatHours = (est: number | null | undefined) => {
+	if(!est)
+		return "-";
+	const totalMinutes = Math.ceil(est * 60);
+	const hours = Math.floor(totalMinutes/60);
+	const minutes = totalMinutes % 60;
+
+	return hours + "h" + minutes;
+}
+
+const formatPercent = (est: number | null | undefined) => {
+	if(!est)
+		return "-";
+	else
+		return est + " %";
+}
+
+const scale = (num: number | null | undefined, devider) => {
+	if(num)
+		return num/devider;
+	return num;
+}
+
 const Tooltip = ({ item, group }: Props) => {
   return (
     <div className={styles.container}>
@@ -40,6 +72,22 @@ const Tooltip = ({ item, group }: Props) => {
           <div className={styles.section}>
             <h3>Code:</h3>
             <p>{item?.taskType?.code}</p>
+          </div>
+		  <div className={styles.section}>
+            <h3>Average Time:</h3>
+            <p>{formatEstimate(item?.taskType?.averageTime, item)}</p>
+          </div>
+		  <div className={styles.section}>
+            <h3>Estimated Min Worktime:</h3>
+            <p>{formatEstimate(item?.estMin, item)}</p>
+          </div>
+		  <div className={styles.section}>
+            <h3>Planned Work Time:</h3>
+            <p>{formatHours(scale(item?.plannedWorkTime, 3600000))}</p>
+          </div>
+		  <div className={styles.section}>
+            <h3>Work time:</h3>
+            <p>{formatHours(scale(item?.workTime, 3600000))}</p>
           </div>
           <div className={styles["description-section"]}>
             <h3>Description:</h3>

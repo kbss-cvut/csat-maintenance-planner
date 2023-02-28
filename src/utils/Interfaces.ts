@@ -38,6 +38,7 @@ export interface PlanPartInterface {
   plannedWorkTime?: number | null;
   startTime?: number | null;
   endTime?: number | null;
+  estMin?: number | null;
   workTime?: number;
   taskType?: TaskType;
   taskCategory?: TaskCategory;
@@ -47,6 +48,7 @@ export interface PlanPartInterface {
   end?: any;
   parent?: any;
   linkedItemsIDs?: Array<string>;
+  isHidden: boolean;
 }
 
 export interface ResourceInterface {
@@ -77,6 +79,7 @@ export interface TaskType {
   taskType?: string;
   "task-category"?: TaskCategory;
   code?: number;
+  averageTime?: number | null;
 }
 
 export enum Title {
@@ -102,9 +105,9 @@ export enum PlanPartType {
 
 export interface GroupInterface {
   hasChildren: boolean;
-  id: number;
+  id: string;
   open: boolean;
-  parent: number | null;
+  parent: string | null;
   show: boolean;
   title: string | null;
   level: number;
