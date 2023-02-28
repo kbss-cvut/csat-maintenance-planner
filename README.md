@@ -1,6 +1,6 @@
 # CSAT Maintenance Planner
 The CSAT Plan Manager is a cooperation project between CTU and CSAT. The Maintenance Planner gives a visual, easy and practical way for CSAT employees to have an overview of passed, ongoing and future maintenance plans.
-This project is the client for the [Aircraft Maintenance Planning System](https://github.com/kbss-cvut/aircraft-maintenance-planning-system)
+This project is frontend application that works over REST API provided by [Aircraft Maintenance Planning System](https://github.com/kbss-cvut/aircraft-maintenance-planning-system).
 
 ## For developers
 
@@ -11,8 +11,6 @@ This project was bootstrapped with [Create React App](https://github.com/wmonk/c
 ### Formating
 This project was formatted with [Prettier](https://prettier.io/) with **no configuration**.
 If you are using **IntellJ IDEA**, it is recommended to follow [this guide](https://www.jetbrains.com/help/idea/prettier.html#ws_prettier_install) to configure Prettier.
-
-
 
 ### Dockerization
 The docker image of CSAT Plan Manager can be built with `docker build -t csat-plan-manager .`.
