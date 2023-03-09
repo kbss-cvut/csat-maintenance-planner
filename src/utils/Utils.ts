@@ -73,8 +73,9 @@ const pushItem = (
     canResize: "both", //'left','right','both', false
     minimumDuration: 0, //minutes
     workTime: item.workTime,
-    numberOfMechanics: item?.mechanicCount,
+    numberOfMechanics: item.mechanicCount,
     plannedWorkTime: item.plannedWorkTime,
+    estMin: item.estMin,
     applicationType: item.applicationType,
     taskType: item.taskType,
     duration: item.duration,
@@ -205,6 +206,33 @@ const calculateNumberOfMechanics = (dataItem : any) => {
   return []
 }
 
+const calculatePlannedWorkTimeSumFromParts = (dataItem : any) => {
+  if (dataItem.applicationType === Constants.APPLICATION_TYPE.SESSION_PLAN) {
+    return 0;
+  } else if (dataItem.applicationType === Constants.APPLICATION_TYPE.TASK_PLAN) {
+    if(!dataItem.plannedWorkTime) {
+      dataItem.plannedWorkTime = dataItem.taskType?.averageTime*3600*1000;
+    }
+    return dataItem.plannedWorkTime ? dataItem.plannedWorkTime : 0 ;
+  } else if (!!dataItem.planParts) {
+    dataItem.plannedWorkTime = dataItem.planParts.map(p => calculatePlannedWorkTimeSumFromParts(p)).reduce( (sum, val) => sum + val, 0);// reduce((set, currentValue) => set.conca + currentValue);
+    return dataItem.plannedWorkTime ? dataItem.plannedWorkTime : 0;
+  }
+  return 0;
+}
+
+const calculateEstSumFromParts = (dataItem : any) => {
+  if (dataItem.applicationType === Constants.APPLICATION_TYPE.SESSION_PLAN) {
+    return 0;
+  } else if (dataItem.applicationType === Constants.APPLICATION_TYPE.TASK_PLAN) {
+    return dataItem.estMin ? dataItem.estMin : 0;
+  } else if (!!dataItem.planParts) {
+    dataItem.estMin = dataItem.planParts.map(p => calculateEstSumFromParts(p)).reduce( (sum, val) => sum + val, 0);// reduce((set, currentValue) => set.conca + currentValue);
+    return dataItem.estMin;
+  }
+  return 0;
+}
+
 const pushResourcesToTaskList = (items, taskListWithResources, groups) => {
   for (const item of items) {
     taskListWithResources.push({
@@ -276,4 +304,6 @@ export {
   pushRestrictionsToTaskList,
   getAircraftModel,
   calculateNumberOfMechanics,
+  calculatePlannedWorkTimeSumFromParts,
+  calculateEstSumFromParts
 };

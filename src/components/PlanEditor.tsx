@@ -9,6 +9,8 @@ import {
   pushRestrictionsToTaskList,
   getAircraftModel,
   calculateNumberOfMechanics,
+  calculatePlannedWorkTimeSumFromParts,
+  calculateEstSumFromParts
 } from "../utils/Utils";
 import Legend from "./Legend";
 import Tooltip from "./Tooltip";
@@ -61,6 +63,8 @@ const PlanEditor = ({
   }, [taskList]);
 
   dataWithoutRevisionPlan?.forEach(item => calculateNumberOfMechanics(item));
+  dataWithoutRevisionPlan?.forEach(item => calculatePlannedWorkTimeSumFromParts(item));
+  dataWithoutRevisionPlan?.forEach(item => calculateEstSumFromParts(item));
   buildData(dataWithoutRevisionPlan, workPackageItems, 0, null, null, groups);
 
   const updateData = () => {
