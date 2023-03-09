@@ -13,6 +13,16 @@ h3, p {
   align-items: center;
 }
 
+table.performance {
+  marginLeft:4px;
+  border-width: 0px;
+  width: 100%;
+}
+
+table.performance tr:nth-child(even) {
+  background-color: #555555;
+}
+
 .description-section {
   h3 {
     padding-bottom: .2rem;
