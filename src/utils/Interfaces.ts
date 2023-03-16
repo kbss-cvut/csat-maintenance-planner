@@ -50,6 +50,20 @@ export interface PlanPartInterface {
   parent?: any;
   linkedItemsIDs?: Array<string>;
   isHidden: boolean;
+  failure:
+}
+
+export interface FailureInterface{
+  resource: ResourceInterface;
+  failureMode: FailureModeInterface;
+
+}
+
+export interface FailureModeInterface {
+  types?: ResourceType;
+  title?: string;
+  entityURI: string;
+  applicationType?: string;
 }
 
 export interface ResourceInterface {
