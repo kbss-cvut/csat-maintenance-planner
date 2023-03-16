@@ -106,7 +106,7 @@ const getStartAndEndDates = (item) => {
 
 const createResourceTitle = (resource, defaultTitle) => {
   if(resource && resource.applicationType === Constants.APPLICATION_TYPE.AIRCRAFT){
-    resource.title = resource.registration + " - age " + formatYear(resource.age);
+    resource.title = resource.registration;
   }
   return defaultTitle;
 }
