@@ -47,7 +47,6 @@ const Constants = {
     SESSION_PLAN: "SessionPlan",
     TASK_PLAN: "TaskPlan",
     RESTRICTION_PLAN: "RestrictionPlan",
-    AIRCRAFT: "Aircraft"
   },
   TASK_CATEGORY: {
     TASK_CARD: "task-card",
