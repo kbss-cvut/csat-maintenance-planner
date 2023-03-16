@@ -87,6 +87,8 @@ const PlanManager = ({ basename }: Props) => {
 	console.log("fetching workpackage with id = \"" + workPackageId +"\" from backend" )
 	if (workPackageId) {
 	  try {
+        setIsWorkPackageLoading(true);
+		setWorkPackageErrorMessage("");
 		const { data } = await axios.get(
 		  Constants.SERVER_URL_WORKPACKAGE_ID + workPackageId
 		);
@@ -117,14 +119,13 @@ const PlanManager = ({ basename }: Props) => {
 	
   useEffect(() => {
 	const handleWorkPackageByURL = () => {
-		if(isWorkPackageLoading)
+     if(isWorkPackageLoading)
 			return;
-	  setIsWorkPackageLoading(true);
-	  setWorkPackageErrorMessage("");
 	  const workPackageId = window.location.pathname.split("/").pop();
-	  
-	  fetchWorkPackage(workPackageId);
+	  if(!workPackageId)
+		  return;
 
+	  fetchWorkPackage(workPackageId);
 	};
 	if (
 	  window.location.pathname === "/" &&
@@ -142,13 +143,11 @@ const PlanManager = ({ basename }: Props) => {
 	changeDocumentTitle();
   }, [documentTitle]);
 
-  const handleWorkPackageOnClick = (index: number) => {		
+  const handleWorkPackageOnClick = (index: number) => {
 	if(isWorkPackageLoading){
 		return;
 	}
 	
-	setIsWorkPackageLoading(true);
-	setWorkPackageErrorMessage("");
 	setIsPlanFullScreen(true);
 
 	const workPackageTitle = workPackageList[index].split(",")[0];
