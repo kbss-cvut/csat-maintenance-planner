@@ -104,19 +104,15 @@ const getStartAndEndDates = (item) => {
 };
 
 const getResourceInfo = (item) => {
-  const resourceId = item.resource.entityURI;
-  let resourceTitle =
-    item.resource.title !== "unknown" ? item.resource.title : "Other";
+  const id = item.resource.entityURI;
+  let title = item.resource.title !== "unknown" ? item.resource.title : "Other";
   let regex = /\d+\.\d+/;
-  if (regex.test(resourceTitle)) {
-    let num = parseFloat(resourceTitle.match(regex)[0]);
+  if (regex.test(title)) {
+    let num = parseFloat(title.match(regex)[0]);
     num = Math.ceil(num);
-    resourceTitle = resourceTitle.replace(
-      regex,
-      "Aircraft age: " + num.toString() + " y"
-    );
+    title = title.replace(regex, "Aircraft age: " + num.toString() + " y");
   }
-  return { resourceId, resourceTitle };
+  return { id, title };
 };
 
 const buildData = (
@@ -138,9 +134,9 @@ const buildData = (
     let resourceTitle;
 
     if (item.resource) {
-      let resourceTitle = getResourceInfo(item);
-      resourceId = resourceTitle.resourceId;
-      resourceTitle = resourceTitle.resourceTitle;
+      const resourceInfo = getResourceInfo(item);
+      resourceId = resourceInfo.id;
+      resourceTitle = resourceInfo.title;
     } else {
       resourceId = Math.random().toString(36).substring(2, 15);
       resourceTitle = resourceId;
