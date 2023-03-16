@@ -1,7 +1,6 @@
 import moment from "moment";
 import { Constants, LEGEND_ITEMS, PHASE_PLAN_TITLES } from "./Constants";
 import { GroupInterface, PlanPartInterface } from "./Interfaces";
-import {formatYear} from "./Formating"
 
 
 const getItemBackground = (item) => {
@@ -104,13 +103,6 @@ const getStartAndEndDates = (item) => {
   return { startDate, endDate };
 };
 
-const createResourceTitle = (resource, defaultTitle) => {
-  if(resource && resource.applicationType === Constants.APPLICATION_TYPE.AIRCRAFT){
-    resource.title = resource.registration + " - age " + formatYear(resource.age);
-  }
-  return defaultTitle;
-}
-
 const buildData = (
   data: Array<any>,
   items: Array<any>,
@@ -141,7 +133,7 @@ const buildData = (
     if (!groups.find((i) => i.id === resourceId)) {
       groups.push({
         id: resourceId,
-        title: createResourceTitle(item.resource, resourceTitle),
+        title: resourceTitle,
         hasChildren: item.planParts && item.planParts.length > 0,
         parent: groupParentId,
         open: level < 0,
