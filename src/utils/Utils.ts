@@ -2,7 +2,6 @@ import moment from "moment";
 import { Constants, LEGEND_ITEMS, PHASE_PLAN_TITLES } from "./Constants";
 import { GroupInterface, PlanPartInterface } from "./Interfaces";
 
-
 const getItemBackground = (item) => {
   if (item.taskType) {
     return (
@@ -21,7 +20,8 @@ const getItemBackground = (item) => {
 
 const getItemTitle = (items, item, itemParentId) => {
   if (item.applicationType === Constants.APPLICATION_TYPE.PHASE_PLAN) {
-	const title = ((!item.title) || item.title === "unknown") ? "Other" : item.title
+    const title =
+      !item.title || item.title === "unknown" ? "Other" : item.title;
     return PHASE_PLAN_TITLES.find((o) => o.id === item.title)?.title || title;
   }
 
@@ -103,6 +103,22 @@ const getStartAndEndDates = (item) => {
   return { startDate, endDate };
 };
 
+const getResourceInfo = (item) => {
+  const resourceId = item.resource.entityURI;
+  let resourceTitle =
+    item.resource.title !== "unknown" ? item.resource.title : "Other";
+  let regex = /\d+\.\d+/;
+  if (regex.test(resourceTitle)) {
+    let num = parseFloat(resourceTitle.match(regex)[0]);
+    num = Math.ceil(num);
+    resourceTitle = resourceTitle.replace(
+      regex,
+      "Aircraft age: " + num.toString() + " y"
+    );
+  }
+  return { resourceId, resourceTitle };
+};
+
 const buildData = (
   data: Array<any>,
   items: Array<any>,
@@ -122,9 +138,9 @@ const buildData = (
     let resourceTitle;
 
     if (item.resource) {
-      resourceId = item.resource.entityURI;
-      resourceTitle =
-        item.resource.title !== "unknown" ? item.resource.title : "Other";
+      let resourceTitle = getResourceInfo(item);
+      resourceId = resourceTitle.resourceId;
+      resourceTitle = resourceTitle.resourceTitle;
     } else {
       resourceId = Math.random().toString(36).substring(2, 15);
       resourceTitle = resourceId;
@@ -141,15 +157,16 @@ const buildData = (
         level: level,
       });
     }
-	
-	const groupsToUpdateHasChildren = groups
+
+    const groupsToUpdateHasChildren = groups
       .filter((g) => g.id === resourceId)
       .filter((g) => g.parent === groupParentId);
-	  
-	groupsToUpdateHasChildren.forEach((g) => {
-		g.hasChildren = !!g.hasChildren || (item.planParts && item.planParts.length > 0);
+
+    groupsToUpdateHasChildren.forEach((g) => {
+      g.hasChildren =
+        !!g.hasChildren || (item.planParts && item.planParts.length > 0);
     });
-	
+
     const alreadyExistingGroup = groups
       .filter((g) => g.id === resourceId)
       .filter((g) => g.parent !== groupParentId);
@@ -194,44 +211,58 @@ const buildData = (
   groups.push(...modifiedGroup);
 };
 
-const calculateNumberOfMechanics = (dataItem : any) => {
+const calculateNumberOfMechanics = (dataItem: any) => {
   if (dataItem.applicationType === Constants.APPLICATION_TYPE.SESSION_PLAN) {
     dataItem.mechanicCount = 1;
-    return [!!dataItem.resource ? dataItem.resource.id : Math.random().toString(36).substring(2, 15)];
+    return [
+      !!dataItem.resource
+        ? dataItem.resource.id
+        : Math.random().toString(36).substring(2, 15),
+    ];
   } else if (!!dataItem.planParts) {
-    const allMechanics = new Set(dataItem.planParts.map(p => calculateNumberOfMechanics(p)).flat());// reduce((set, currentValue) => set.conca + currentValue);
-    dataItem.mechanicCount = allMechanics.size
+    const allMechanics = new Set(
+      dataItem.planParts.map((p) => calculateNumberOfMechanics(p)).flat()
+    ); // reduce((set, currentValue) => set.conca + currentValue);
+    dataItem.mechanicCount = allMechanics.size;
     return new Array(allMechanics);
   }
-  return []
-}
+  return [];
+};
 
-const calculatePlannedWorkTimeSumFromParts = (dataItem : any) => {
+const calculatePlannedWorkTimeSumFromParts = (dataItem: any) => {
   if (dataItem.applicationType === Constants.APPLICATION_TYPE.SESSION_PLAN) {
     return 0;
-  } else if (dataItem.applicationType === Constants.APPLICATION_TYPE.TASK_PLAN) {
-    if(!dataItem.plannedWorkTime) {
-      dataItem.plannedWorkTime = dataItem.taskType?.averageTime*3600*1000;
+  } else if (
+    dataItem.applicationType === Constants.APPLICATION_TYPE.TASK_PLAN
+  ) {
+    if (!dataItem.plannedWorkTime) {
+      dataItem.plannedWorkTime = dataItem.taskType?.averageTime * 3600 * 1000;
     }
-    return dataItem.plannedWorkTime ? dataItem.plannedWorkTime : 0 ;
+    return dataItem.plannedWorkTime ? dataItem.plannedWorkTime : 0;
   } else if (!!dataItem.planParts) {
-    dataItem.plannedWorkTime = dataItem.planParts.map(p => calculatePlannedWorkTimeSumFromParts(p)).reduce( (sum, val) => sum + val, 0);// reduce((set, currentValue) => set.conca + currentValue);
+    dataItem.plannedWorkTime = dataItem.planParts
+      .map((p) => calculatePlannedWorkTimeSumFromParts(p))
+      .reduce((sum, val) => sum + val, 0); // reduce((set, currentValue) => set.conca + currentValue);
     return dataItem.plannedWorkTime ? dataItem.plannedWorkTime : 0;
   }
   return 0;
-}
+};
 
-const calculateEstSumFromParts = (dataItem : any) => {
+const calculateEstSumFromParts = (dataItem: any) => {
   if (dataItem.applicationType === Constants.APPLICATION_TYPE.SESSION_PLAN) {
     return 0;
-  } else if (dataItem.applicationType === Constants.APPLICATION_TYPE.TASK_PLAN) {
+  } else if (
+    dataItem.applicationType === Constants.APPLICATION_TYPE.TASK_PLAN
+  ) {
     return dataItem.estMin ? dataItem.estMin : 0;
   } else if (!!dataItem.planParts) {
-    dataItem.estMin = dataItem.planParts.map(p => calculateEstSumFromParts(p)).reduce( (sum, val) => sum + val, 0);// reduce((set, currentValue) => set.conca + currentValue);
+    dataItem.estMin = dataItem.planParts
+      .map((p) => calculateEstSumFromParts(p))
+      .reduce((sum, val) => sum + val, 0); // reduce((set, currentValue) => set.conca + currentValue);
     return dataItem.estMin;
   }
   return 0;
-}
+};
 
 const pushResourcesToTaskList = (items, taskListWithResources, groups) => {
   for (const item of items) {
@@ -305,5 +336,5 @@ export {
   getAircraftModel,
   calculateNumberOfMechanics,
   calculatePlannedWorkTimeSumFromParts,
-  calculateEstSumFromParts
+  calculateEstSumFromParts,
 };
