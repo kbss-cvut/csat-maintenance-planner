@@ -105,13 +105,12 @@ const getStartAndEndDates = (item) => {
 
 const getResourceInfo = (item) => {
   const id = item.resource.entityURI;
-  let title = item.resource.title !== "unknown" ? item.resource.title : "Other";
-  let regex = /\d+\.\d+/;
-  if (regex.test(title)) {
-    let num = parseFloat(title.match(regex)[0]);
-    num = Math.ceil(num);
-    title = title.replace(regex, "Aircraft age: " + num.toString() + " y");
-  }
+  let title;
+  if(item.resource.applicationType === Constants.APPLICATION_TYPE.AIRCRAFT)
+    title = item.resource.registration;
+  else
+    title = item.resource.title !== "unknown" ? item.resource.title : "Other";
+
   return { id, title };
 };
 
