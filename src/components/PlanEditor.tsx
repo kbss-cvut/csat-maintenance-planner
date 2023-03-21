@@ -115,6 +115,15 @@ const PlanEditor = ({
     setFilteredTaskTypes(taskTypes);
   };
 
+  const renderAircraftHeader = (aircraftModel, aircraft) => {
+    const aircraftAge = aircraft?.age ? Math.round(aircraft.age * 10)/10 : undefined;
+
+    return <h4>
+      Aircraft Model: {aircraftModel ? aircraftModel : "-"},
+      Years: {aircraftAge ? aircraftAge : "-"}
+    </h4>;
+  };
+
   return (
     <div className={styles["container"]}>
       <div className={styles["header"]}>
@@ -138,7 +147,7 @@ const PlanEditor = ({
       {isActive.planEditor && taskList.length > 0 && taskList && (
         <>
           <h3>{workPackageTitle}</h3>
-          {aircraftModel && <h4>Aircraft Model: {aircraftModel}</h4>}
+          {renderAircraftHeader(aircraftModel, workPackage[0].resource)}
           <div className={styles["editor-container"]}>
             <div className={styles["editor"]}>
               <PlanningTool
