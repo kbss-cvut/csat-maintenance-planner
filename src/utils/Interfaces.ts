@@ -50,20 +50,34 @@ export interface PlanPartInterface {
   parent?: any;
   linkedItemsIDs?: Array<string>;
   isHidden: boolean;
-  failure:
+  taskStepPlans: Array<TaskPlanStep>;
 }
 
-export interface FailureInterface{
-  resource: ResourceInterface;
-  failureMode: FailureModeInterface;
-
-}
-
-export interface FailureModeInterface {
-  types?: ResourceType;
+export interface TaskPlanStep {
+  id?: number;
   title?: string;
-  entityURI: string;
-  applicationType?: string;
+  entityURI: null | string;
+  applicationType: string;
+  stepIndex?: string;
+
+  description?: string;
+  actionDescription?: string;
+
+  failureAnnotation?: FailureAnnotation;
+}
+
+export interface FailureAnnotation{
+  annotatedText?: string;
+  componentUri?: string;
+  componentLabel?: string;
+  componentScore: number;
+
+  failureUri: string;
+  failureLabel: string;
+  failureScore: number;
+
+  aggregateScore: number;
+  confirmed: string;
 }
 
 export interface ResourceInterface {
