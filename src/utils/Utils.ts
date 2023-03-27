@@ -83,6 +83,7 @@ const pushItem = (
     endTime: item.endTime,
     removable: false,
     requiredPlans: item.requiringPlans?.length > 0 && item.requiringPlans,
+    taskStepPlans: item.taskStepPlans
   });
 };
 
