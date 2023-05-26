@@ -139,3 +139,6 @@ button {
   }
 }
 
+.tippy-box { // TODO remove quick fix
+  max-width: 1000px !important;
+}
