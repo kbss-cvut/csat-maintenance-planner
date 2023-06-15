@@ -120,13 +120,13 @@ const PlanEditor = ({
       <div className={styles["header"]}>
         <div className={styles["editor-view"]}>
           <button
-            className={isActive.planEditor && styles["active"]}
+            className={isActive.planEditor ? styles["active"] : ""}
             onClick={viewPlanEditorOnClick}
           >
             Plan Editor
           </button>
           <button
-            className={isActive.table && styles["active"]}
+            className={isActive.table ? styles["active"] : ""}
             onClick={viewTableOnClick}
           >
             Table
@@ -167,7 +167,7 @@ const PlanEditor = ({
         <div
           className={classNames([
             styles["table"],
-            isFullScreen && styles["table-full-screen"],
+            isFullScreen ? styles["table-full-screen"] : "",
           ])}
         >
           <TasksTable

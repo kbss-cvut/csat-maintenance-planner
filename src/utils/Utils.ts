@@ -2,7 +2,19 @@ import moment from "moment";
 import { Constants, LEGEND_ITEMS, PHASE_PLAN_TITLES } from "./Constants";
 import { GroupInterface, PlanPartInterface } from "./Interfaces";
 
+let __mycounter : number = 0;
+const idMap = new Map();
+const idReverseMap = new Map();
 
+const getId = (strId : string) => {
+  let id = idMap.get(strId);
+  if(!id) {
+    id = __mycounter ++;
+    idMap.set(strId, id);
+    idReverseMap.set(id, strId);
+  }
+  return id;
+}
 const getItemBackground = (item) => {
   if (item.taskType) {
     return (
@@ -46,12 +58,12 @@ const getAircraftModel = (items) => {
 
 const pushItem = (
   items: Array<any>,
-  itemId: string,
-  resourceId: string,
+  itemId: number,
+  resourceId: number,
   item: any,
   startDate,
   endDate,
-  itemParentId: string | null,
+  itemParentId: number | null,
   level: number
 ) => {
   items.push({
@@ -108,8 +120,8 @@ const buildData = (
   data: Array<any>,
   items: Array<any>,
   level: number,
-  groupParentId: string | null,
-  itemParentId: string | null,
+  groupParentId: number | null,
+  itemParentId: number | null,
   groups: Array<GroupInterface>
 ) => {
   if (!data) {
@@ -123,7 +135,7 @@ const buildData = (
     let resourceTitle;
 
     if (item.resource) {
-      resourceId = item.resource.entityURI;
+      resourceId = getId(item.resource.entityURI);
       resourceTitle =
         item.resource.title !== "unknown" ? item.resource.title : "Other";
     } else {
@@ -171,7 +183,7 @@ const buildData = (
     });
 
     let { startDate, endDate } = getStartAndEndDates(item);
-    const itemId = item.entityURI;
+    const itemId = getId(item.entityURI);
 
     pushItem(
       items,
