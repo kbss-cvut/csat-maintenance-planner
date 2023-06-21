@@ -100,7 +100,7 @@ export interface TaskType {
   type?: TaskTypeType;
   id?: string;
   label?: string;
-  scope?: string;
+  scope?: MaintenanceGroup;
   acmodel?: null;
   area?: string;
   mpdtask?: null;
@@ -140,4 +140,13 @@ export interface GroupInterface {
   show: boolean;
   title: string | null;
   level: number;
+}
+
+export interface MaintenanceGroup {
+  id?:string;
+  abbreviation?:string;
+  applicationType?:string;
+  description?:string;
+  entityURI:string;
+  title?:string;
 }

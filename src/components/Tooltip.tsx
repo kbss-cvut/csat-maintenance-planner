@@ -143,8 +143,8 @@ const Tooltip = ({ item, group }: Props) => {
         <>
           <div className={styles.section}>
             <h3>Scope:</h3>
-            <p>{item?.taskType?.scope}</p>
-          </div>
+            <p>{item?.taskType?.scope?.abbreviation}</p>
+          </div>npm start
           <div className={styles.section}>
             <h3>Code:</h3>
             <p>{item?.taskType?.code}</p>
