@@ -50,6 +50,34 @@ export interface PlanPartInterface {
   parent?: any;
   linkedItemsIDs?: Array<string>;
   isHidden: boolean;
+  taskStepPlans: Array<TaskPlanStep>;
+}
+
+export interface TaskPlanStep {
+  id?: number;
+  title?: string;
+  entityURI: null | string;
+  applicationType: string;
+  stepIndex?: string;
+
+  description?: string;
+  actionDescription?: string;
+
+  failureAnnotation?: FailureAnnotation;
+}
+
+export interface FailureAnnotation{
+  annotatedText?: string;
+  componentUri?: string;
+  componentLabel?: string;
+  componentScore: number;
+
+  failureUri: string;
+  failureLabel: string;
+  failureScore: number;
+
+  aggregateScore: number;
+  confirmed: string;
 }
 
 export interface ResourceInterface {
@@ -72,7 +100,7 @@ export interface TaskType {
   type?: TaskTypeType;
   id?: string;
   label?: string;
-  scope?: string;
+  scope?: MaintenanceGroup;
   acmodel?: null;
   area?: string;
   mpdtask?: null;
@@ -106,10 +134,19 @@ export enum PlanPartType {
 
 export interface GroupInterface {
   hasChildren: boolean;
-  id: string;
+  id: number;
   open: boolean;
-  parent: string | null;
+  parent: number | null;
   show: boolean;
   title: string | null;
   level: number;
+}
+
+export interface MaintenanceGroup {
+  id?:string;
+  abbreviation?:string;
+  applicationType?:string;
+  description?:string;
+  entityURI:string;
+  title?:string;
 }

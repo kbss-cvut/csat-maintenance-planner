@@ -96,7 +96,7 @@ const PlanManager = ({ basename }: Props) => {
 		setDocumentTitle(decodeURIComponent(workPackageId));
 	  } catch(error){
 		// @ts-ignore
-		if (error.status === 500) {
+		if (error.response.status === 500) {
 		  
 		  setWorkPackageErrorMessage(
 			"It takes longer, please wait a few seconds."
@@ -104,6 +104,13 @@ const PlanManager = ({ basename }: Props) => {
 		  setTimeout(() => {
 			fetchWorkPackage(workPackageId);
 		  }, 3000);
+		// @ts-ignore
+		} else if (error.response.status === 503) {
+			setWorkPackageErrorMessage(
+				"Planning service is busy precalculating cache. Try again later."
+			);
+			setWorkPackage([]);
+			// setDocumentTitle("Planning service is busy precalculating cache. Try again later.");
 		} else {
 	      // @ts-ignore
 		  setWorkPackageErrorMessage(error.toString());

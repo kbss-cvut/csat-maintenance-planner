@@ -1,5 +1,5 @@
 import React from "react";
-import { GroupInterface, PlanPartInterface } from "../utils/Interfaces";
+import {GroupInterface, PlanPartInterface, TaskPlanStep} from "../utils/Interfaces";
 import { Constants } from "../utils/Constants";
 
 import styles from "./Tooltip.module.scss";
@@ -73,7 +73,7 @@ const scale = (num: number | null | undefined, devider) => {
 
 const commonPlanDescription = ( item ) =>{
 	return <>
-		<h4>Performance:</h4>
+		<h3>Performance:</h3>
 		<div className={styles.section}>
 			<table className={styles.performance}>
 				<tr><td style={{paddingRight:"10px"}}>Estimated work-time  </td><td>{formatEstimate(item?.estMin*3600, item)}</td></tr>
@@ -86,9 +86,36 @@ const commonPlanDescription = ( item ) =>{
 	</>
 };
 
+const renderSteps = (steps : Array<TaskPlanStep>) => {
+  return (
+    <>
+	  <h3>Steps</h3>
+      <table style={{width:"fit-content"}} className={styles.performance}>
+		  <tr><th>#</th><th style={{width:"fit-content"}}>Work Order</th><th>Work Order Action</th><th>Component</th> <th>Failure</th></tr>
+	    {
+	      steps.sort((a,b) => {
+			  //@ts-ignore
+			  const aIndex = a.stepIndex || a.stepIndex >= 0 ? a.stepIndex : -1;
+			  //@ts-ignore
+			  const bIndex = b.stepIndex || b.stepIndex >= 0 ? b.stepIndex : -1;
+			  //@ts-ignore
+			  return aIndex > bIndex ? 1: -1;
+		  }).map(s => {
+		    const stepIndex = s.stepIndex;
+		    const workOrderText = s.description;
+		    const workOrderActionText = s.actionDescription;
+		    const componentLabel = s?.failureAnnotation?.componentLabel;
+		    const failureLabel = s?.failureAnnotation?.failureLabel;
+			  return <tr><td>{stepIndex}</td><td>{workOrderText}</td><td>{workOrderActionText}</td><td>{componentLabel}</td><td>{failureLabel}</td></tr>
+	      })
+	    }
+	  </table>
+    </>)
+}
+
 const Tooltip = ({ item, group }: Props) => {
   return (
-    <div className={styles.container}>
+    <div style={{width: "fit-content"}} className={styles.container}>
       {item?.applicationType !== Constants.APPLICATION_TYPE.SESSION_PLAN &&
         !item?.taskType && (
 			<>
@@ -116,8 +143,8 @@ const Tooltip = ({ item, group }: Props) => {
         <>
           <div className={styles.section}>
             <h3>Scope:</h3>
-            <p>{item?.taskType?.scope}</p>
-          </div>
+            <p>{item?.taskType?.scope?.abbreviation}</p>
+          </div>npm start
           <div className={styles.section}>
             <h3>Code:</h3>
             <p>{item?.taskType?.code}</p>
@@ -129,6 +156,9 @@ const Tooltip = ({ item, group }: Props) => {
           </div>
         </>
       )}
+	  {item?.applicationType === Constants.APPLICATION_TYPE.TASK_PLAN &&  item?.taskStepPlans && item?.taskStepPlans.length > 0 &&
+	    renderSteps(item.taskStepPlans)
+	  }
     </div>
   );
 };

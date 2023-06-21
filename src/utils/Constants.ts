@@ -34,11 +34,11 @@ const Constants = {
   ),
   SERVER_URL_WORKPACKAGE_LIST: getEnv(
     "SERVER_URL_REVISION_LIST",
-    "https://kbss.felk.cvut.cz/csat/api2/revisions/"
+    "https://kbss.felk.cvut.cz/csat/api2/workpackage/header"
   ),
   SERVER_URL_WORKPACKAGE_ID: getEnv(
     "SERVER_URL_REVISION_ID",
-    "https://kbss.felk.cvut.cz/csat/api2/plans/revision-plans-induced-by-revision-execution?revisionId="
+    "https://kbss.felk.cvut.cz/csat/api2/plans/plan-from-similar-revisions?revisionId="
   ),
 
   APPLICATION_TYPE: {
