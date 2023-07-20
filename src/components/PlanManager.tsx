@@ -10,6 +10,13 @@ import Animations from "../utils/Animations";
 import { useKeycloak } from "@react-keycloak/web";
 
 import styles from "./PlanManager.module.scss";
+import {PlanPartInterface} from "../utils/Interfaces";
+import {
+	buildData,
+	calculateEstSumFromParts,
+	calculateNumberOfMechanics,
+	calculatePlannedWorkTimeSumFromParts, getRestrictedTasks, pushResourcesToTaskList, pushRestrictionsToTaskList
+} from "../utils/Utils";
 
 interface Props {
   basename: string;
@@ -40,6 +47,8 @@ const PlanManager = ({ basename }: Props) => {
   const [documentTitle, setDocumentTitle] = useState<string>(
 	"CSAT Maintenance Planner"
   );
+
+  const [showPlannedSchedule, setShowPlannedScheduled] = useState(true);
 
   useEffect(() => {
 	if (process.env.NODE_ENV !== "development") {
@@ -97,7 +106,7 @@ const PlanManager = ({ basename }: Props) => {
 	  } catch(error){
 		// @ts-ignore
 		if (error.response.status === 500) {
-		  
+
 		  setWorkPackageErrorMessage(
 			"It takes longer, please wait a few seconds."
 		  );
@@ -118,12 +127,12 @@ const PlanManager = ({ basename }: Props) => {
 		  setDocumentTitle("");
 		}
 	  } finally {
-		setIsWorkPackageLoading(false);				
+		setIsWorkPackageLoading(false);
 	  }
 	}
   };
 
-	
+
   useEffect(() => {
 	const handleWorkPackageByURL = () => {
      if(isWorkPackageLoading)
@@ -184,7 +193,37 @@ const PlanManager = ({ basename }: Props) => {
 	  </React.Fragment>
 	);
   };
+  const updateData = (workPackage) => {
+    const dataWithoutRevisionPlan = workPackage[0].planParts;
+    const workPackageItems: Array<PlanPartInterface> = [];
+    const taskListWithResources: Array<PlanPartInterface> = [];
+    const taskListWithRestrictions: Array<PlanPartInterface> = [];
+    const _groups = [];
+    dataWithoutRevisionPlan?.forEach(item => calculateNumberOfMechanics(item));
+    dataWithoutRevisionPlan?.forEach(item => calculatePlannedWorkTimeSumFromParts(item));
+    dataWithoutRevisionPlan?.forEach(item => calculateEstSumFromParts(item));
+    buildData(dataWithoutRevisionPlan, workPackageItems, 0, null, null, _groups, showPlannedSchedule);
 
+    pushResourcesToTaskList(workPackageItems, taskListWithResources, _groups);
+    const restrictedItems = getRestrictedTasks(taskListWithResources);
+    pushRestrictionsToTaskList(
+        taskListWithResources,
+        taskListWithRestrictions,
+        restrictedItems
+    );
+    return {taskListWithRestrictions, _groups};
+  };
+
+  const planedView = (workPackage) => {
+      const ret = updateData(workPackage);
+      // @ts-ignore
+      ret.taskListWithRestrictions = ret.taskListWithRestrictions.filter(t => !t.applicationType.includes("SessionPlan"));
+      return ret;
+  }
+
+  const mixedView = (workPackage) => {
+      return updateData(workPackage);
+  }
   const renderPlanEditor = () => {
 	return (
 	  <React.Fragment>
@@ -197,6 +236,9 @@ const PlanManager = ({ basename }: Props) => {
 			workPackage={workPackage}
 			isFullScreen={isPlanFullScreen}
 			workPackageTitle={documentTitle}
+			showPlannedSchedule={showPlannedSchedule}
+			setShowPlannedScheduled={setShowPlannedScheduled}
+			calculatePlanView={showPlannedSchedule ? planedView : mixedView}
 		  />
 		)}
 	  </React.Fragment>
@@ -234,14 +276,14 @@ const PlanManager = ({ basename }: Props) => {
 		</div>
 
 		<h2>Work Packages</h2>
-		{keycloak.authenticated && (
+		{//keycloak.authenticated && (
 		  <React.Fragment>
 			{renderWorkPackageList()}
 			<button className={styles.button} onClick={handleUpdateClick}>
 			  Update
 			</button>
 		  </React.Fragment>
-		)
+		// )
 		}
 	  </motion.div>
 	  <motion.span

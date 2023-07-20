@@ -2,19 +2,6 @@ import moment from "moment";
 import { Constants, LEGEND_ITEMS, PHASE_PLAN_TITLES } from "./Constants";
 import { GroupInterface, PlanPartInterface } from "./Interfaces";
 
-let __mycounter : number = 0;
-const idMap = new Map();
-const idReverseMap = new Map();
-
-const getId = (strId : string) => {
-  let id = idMap.get(strId);
-  if(!id) {
-    id = __mycounter ++;
-    idMap.set(strId, id);
-    idReverseMap.set(id, strId);
-  }
-  return id;
-}
 const getItemBackground = (item) => {
   if (item.taskType) {
     return (
@@ -58,12 +45,12 @@ const getAircraftModel = (items) => {
 
 const pushItem = (
   items: Array<any>,
-  itemId: number,
-  resourceId: number,
+  itemId: string,
+  resourceId: string,
   item: any,
   startDate,
   endDate,
-  itemParentId: number | null,
+  itemParentId: string | null,
   level: number
 ) => {
   items.push({
@@ -99,7 +86,14 @@ const pushItem = (
   });
 };
 
-const getStartAndEndDates = (item) => {
+const getStartAndEndDates = (item, showPlannedSchedule) => {
+  return showPlannedSchedule ?
+      getPlannedStartAndEndDates(item):
+      getPlannedAndSessionLogStartAndEndDates(item);
+}
+
+const getPlannedAndSessionLogStartAndEndDates = (item) => {
+
   let startDate;
   if (!item.startTime && !item.plannedStartTime) {
     startDate = null;
@@ -116,13 +110,20 @@ const getStartAndEndDates = (item) => {
   return { startDate, endDate };
 };
 
+const getPlannedStartAndEndDates = (item) => {
+  let startDate = !item.plannedStartTime ? undefined : moment(item.plannedStartTime);
+  let endDate = !item.plannedEndTime ? undefined : moment(item.plannedEndTime);
+  return { startDate, endDate };
+}
+
 const buildData = (
   data: Array<any>,
   items: Array<any>,
   level: number,
-  groupParentId: number | null,
-  itemParentId: number | null,
-  groups: Array<GroupInterface>
+  groupParentId: string | null,
+  itemParentId: string | null,
+  groups: Array<GroupInterface>,
+  showPlannedSchedule: boolean
 ) => {
   if (!data) {
     return;
@@ -135,7 +136,7 @@ const buildData = (
     let resourceTitle;
 
     if (item.resource) {
-      resourceId = getId(item.resource.entityURI);
+      resourceId = item.resource.entityURI;
       resourceTitle =
         item.resource.title !== "unknown" ? item.resource.title : "Other";
     } else {
@@ -182,8 +183,8 @@ const buildData = (
       };
     });
 
-    let { startDate, endDate } = getStartAndEndDates(item);
-    const itemId = getId(item.entityURI);
+    let { startDate, endDate } = getStartAndEndDates(item, showPlannedSchedule);
+    const itemId = item.entityURI
 
     pushItem(
       items,
@@ -200,7 +201,7 @@ const buildData = (
 
     if (group) {
       if (item.planParts && item.planParts.length > 0) {
-        buildData(item.planParts, items, level + 1, group, itemId, groups);
+        buildData(item.planParts, items, level + 1, group, itemId, groups, showPlannedSchedule);
       }
     }
   }

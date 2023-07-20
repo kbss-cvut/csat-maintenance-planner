@@ -29,12 +29,18 @@ interface Props {
   workPackage: RevisionPlanInterface;
   workPackageTitle: string;
   isFullScreen?: boolean;
+  showPlannedSchedule: boolean;
+  setShowPlannedScheduled;
+  calculatePlanView
 }
 
 const PlanEditor = ({
   workPackage,
   isFullScreen = false,
   workPackageTitle,
+  showPlannedSchedule,
+  setShowPlannedScheduled,
+  calculatePlanView
 }: Props) => {
   const [isActive, setIsActive] = useState({
     planEditor: true,
@@ -42,40 +48,29 @@ const PlanEditor = ({
     taskList: false,
   });
   const [taskList, setTaskList] = useState<Array<PlanPartInterface>>([]);
-  const [filteredTaskTypes, setFilteredTaskTypes] = useState<Array<string>>([]);
+  const [groups, setGroups] = useState<Array<GroupInterface>>([]);
+  const [filteredTaskTypes, setFilteredTaskTypes] = useState<Array<string>>(LEGEND_ITEMS.filter(i => i.active).map(i => i.code));
   const [unplannedTasksCount, setUnplannedTasksCount] = useState<number>(0);
   const [aircraftModel, setAircraftModel] = useState<string | null>();
 
-  const workPackageItems: Array<PlanPartInterface> = [];
-  const taskListWithResources: Array<PlanPartInterface> = [];
-  const taskListWithRestrictions: Array<PlanPartInterface> = [];
-  const groups: Array<GroupInterface> = [];
+  useEffect(() => {
+    const taskListWithRestrictions = calculatePlanView(workPackage);
+    updateHiddenTasks(taskListWithRestrictions.taskListWithRestrictions, filteredTaskTypes);
 
-  const dataWithoutRevisionPlan = workPackage[0].planParts;
+    // setTaskList([...taskListWithRestrictions.taskListWithRestrictions.filter(t => t.applicationType?.includes("PhasePlan"))]);
+    setTaskList([...taskListWithRestrictions.taskListWithRestrictions]);
+    setGroups([...taskListWithRestrictions._groups]);
+  }, [workPackage, showPlannedSchedule]);
 
   useEffect(() => {
-    updateData();
-    setTaskList([...taskListWithRestrictions]);
-  }, []);
-
-  useEffect(() => {
+    if(taskList.length == null && workPackage != null && workPackage.planParts != null && workPackage.planParts.length > 0){
+      const taskListWithRestrictions = calculatePlanView(workPackage);
+      // updateHiddenTasks(taskListWithRestrictions, filteredTaskTypes);
+      setTaskList([...taskListWithRestrictions.taskListWithRestrictions]);
+      setGroups([...taskListWithRestrictions._groups]);
+    }
     setUnplannedTasksCount(taskList.filter((i) => !i.start || !i.end).length);
   }, [taskList]);
-
-  dataWithoutRevisionPlan?.forEach(item => calculateNumberOfMechanics(item));
-  dataWithoutRevisionPlan?.forEach(item => calculatePlannedWorkTimeSumFromParts(item));
-  dataWithoutRevisionPlan?.forEach(item => calculateEstSumFromParts(item));
-  buildData(dataWithoutRevisionPlan, workPackageItems, 0, null, null, groups);
-
-  const updateData = () => {
-    pushResourcesToTaskList(workPackageItems, taskListWithResources, groups);
-    const restrictedItems = getRestrictedTasks(taskList);
-    pushRestrictionsToTaskList(
-      taskListWithResources,
-      taskListWithRestrictions,
-      restrictedItems
-    );
-  };
 
   useEffect(() => {
     const acmodel = getAircraftModel(taskList);
@@ -83,6 +78,11 @@ const PlanEditor = ({
       setAircraftModel(acmodel.taskType.acmodel);
     }
   }, [taskList]);
+
+  const handleChangeShowPlannedSchedule = (event) => {
+    const val = event.target.checked;
+    setShowPlannedScheduled(val);
+  };
 
   const viewPlanEditorOnClick = () => {
     setIsActive({
@@ -100,7 +100,7 @@ const PlanEditor = ({
     });
   };
 
-  const handleOnLabelClick = (taskTypes: Array<string>) => {
+  const updateHiddenTasks = (taskList, taskTypes: Array<string>) => {
     taskList.forEach((i) => {
       if(i.taskType?.["task-category"]) {
         i.isHidden = !taskTypes.some((selected) =>
@@ -112,12 +112,20 @@ const PlanEditor = ({
         );
       }
     });
+  }
+
+  const handleOnLabelClick = (taskTypes: Array<string>) => {
+    updateHiddenTasks(taskList, taskTypes);
     setFilteredTaskTypes(taskTypes);
   };
 
   return (
     <div className={styles["container"]}>
       <div className={styles["header"]}>
+        <label className={styles["schedule-selector-label"]}>
+          <input className={styles["schedule-selector-checkbox"]}  type="checkbox" checked={showPlannedSchedule} onChange={handleChangeShowPlannedSchedule}/>
+          {showPlannedSchedule ? "planned schedule" : "planned and session log schedule" }
+        </label>
         <div className={styles["editor-view"]}>
           <button
             className={isActive.planEditor ? styles["active"] : ""}
