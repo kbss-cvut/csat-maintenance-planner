@@ -134,9 +134,9 @@ export enum PlanPartType {
 
 export interface GroupInterface {
   hasChildren: boolean;
-  id: number;
+  id: string;
   open: boolean;
-  parent: number | null;
+  parent: string | null;
   show: boolean;
   title: string | null;
   level: number;

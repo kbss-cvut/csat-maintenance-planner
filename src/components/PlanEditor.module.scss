@@ -25,9 +25,25 @@ h3, h4 {
 
   .header {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     padding: 1rem;
+  }
+
+  .schedule-selector-label {
+    background-color: white;
+    display: inline-flex;
+    border-radius: 20px;
+    flex-direction: row;
+    margin-right: 10px;
+    padding-right: 10px;
+  }
+
+  .schedule-selector-checkbox {
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    margin: 10px;
   }
 
   .toggle {
