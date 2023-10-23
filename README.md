@@ -8,6 +8,9 @@ The CSAT Maintenance Planner is written in [TypeScript](https://www.typescriptla
 
 This project was bootstrapped with [Create React App](https://github.com/wmonk/create-react-app-typescript), TypeScript version.
 
+### Requirements
+- tested on nodejs version 14
+
 ### Formating
 This project was formatted with [Prettier](https://prettier.io/) with **no configuration**.
 If you are using **IntellJ IDEA**, it is recommended to follow [this guide](https://www.jetbrains.com/help/idea/prettier.html#ws_prettier_install) to configure Prettier.
