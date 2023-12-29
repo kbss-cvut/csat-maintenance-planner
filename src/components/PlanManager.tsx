@@ -18,6 +18,8 @@ import {
 	calculatePlannedWorkTimeSumFromParts, getRestrictedTasks, pushResourcesToTaskList, pushRestrictionsToTaskList
 } from "../utils/Utils";
 
+import data from "../test/anonymized_data.json"
+
 interface Props {
   basename: string;
 }
@@ -28,7 +30,7 @@ const PlanManager = ({ basename }: Props) => {
   const [workPackageList, setWorkPackageList] = useState<Array<string>>([]);
 
   // TODO: Set work package interface
-  const [workPackage, setWorkPackage] = useState<any>(null);
+  const [workPackage, setWorkPackage] = useState<any>([data]);
 
   const [isWorkPackageListLoading, setIsWorkPackageListLoading] =
 	useState<boolean>(false);
@@ -163,7 +165,7 @@ const PlanManager = ({ basename }: Props) => {
 	if(isWorkPackageLoading){
 		return;
 	}
-	
+
 	setIsPlanFullScreen(true);
 
 	const workPackageTitle = workPackageList[index].split(",")[0];
@@ -177,21 +179,21 @@ const PlanManager = ({ basename }: Props) => {
 
   const renderWorkPackageList = () => {
 	return (
-	  <React.Fragment>
-		{isWorkPackageListLoading && workPackageListErrorMessage && (
-		  <p>{workPackageListErrorMessage}</p>
-		)}
-		{isWorkPackageListLoading && !workPackageListErrorMessage && (
-		  <LoadingSpinnerIcon />
-		)}
-		{!isWorkPackageListLoading && (
-		  <WorkPackageList
-			workPackageList={workPackageList}
-			handleWorkPackageOnClick={handleWorkPackageOnClick}
-		  />
-		)}
-	  </React.Fragment>
-	);
+    <React.Fragment>
+      {isWorkPackageListLoading && workPackageListErrorMessage && (
+        <p>{workPackageListErrorMessage}</p>
+      )}
+      {isWorkPackageListLoading && !workPackageListErrorMessage && (
+        <LoadingSpinnerIcon />
+      )}
+      {!isWorkPackageListLoading && process.env.NODE_ENV !== "development" && (
+        <WorkPackageList
+          workPackageList={workPackageList}
+          handleWorkPackageOnClick={handleWorkPackageOnClick}
+        />
+      )}
+    </React.Fragment>
+  );
   };
   const updateData = (workPackage) => {
     const dataWithoutRevisionPlan = workPackage[0].planParts;

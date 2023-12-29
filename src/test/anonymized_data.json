@@ -1,0 +1,371 @@
+{
+  "applicationType": "RevisionPlan",
+  "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/487418064",
+  "id": "487418064",
+  "title": "Aircraft Maintenance Plan",
+  "resource": {
+    "types": [
+      "http://www.w3.org/2002/07/owl#NamedIndividual"
+    ],
+    "applicationType": "Aircraft",
+    "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/aircraft",
+    "title": "ATR-72 - 9.56",
+    "model": "ATR-72",
+    "age": "9.56"
+  },
+  "plannedStartTime": "2017-04-21T22:00:00.000+00:00",
+  "plannedEndTime": "2017-04-22T09:17:00.000+00:00",
+  "plannedDuration": 40620000,
+  "plannedWorkTime": 0,
+  "startTime": "2017-04-21T22:00:00.000+00:00",
+  "endTime": "2017-04-22T00:30:00.000+00:00",
+  "duration": 9000000,
+  "workTime": 12360000,
+  "planParts": [
+    {
+      "applicationType": "PhasePlan",
+      "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/17038604530390000",
+      "id": "17038604530390000",
+      "title": "General Inspection",
+      "resource": {
+        "types": [
+          "http://www.w3.org/2002/07/owl#NamedIndividual"
+        ],
+        "applicationType": "Aircraft",
+        "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/aircraft",
+        "title": "ATR-72 - 9.56",
+        "model": "ATR-72",
+        "age": "9.56"
+      },
+      "plannedStartTime": "2017-04-21T22:00:00.000+00:00",
+      "plannedEndTime": "2017-04-22T09:17:00.000+00:00",
+      "plannedDuration": 40620000,
+      "plannedWorkTime": 0,
+      "startTime": "2017-04-21T22:00:00.000+00:00",
+      "endTime": "2017-04-22T00:30:00.000+00:00",
+      "duration": 9000000,
+      "workTime": 12360000,
+      "planParts": [
+        {
+          "applicationType": "GeneralTaskPlan",
+          "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/17038604530390002",
+          "id": "17038604530390002",
+          "title": "Left Wing",
+          "resource": {
+            "applicationType": "AircraftArea",
+            "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/17038604530390001",
+            "id": "17038604530390001",
+            "title": "Left Wing"
+          },
+          "plannedStartTime": "2017-04-21T22:00:00.000+00:00",
+          "plannedEndTime": "2017-04-22T09:17:00.000+00:00",
+          "plannedDuration": 40620000,
+          "plannedWorkTime": 0,
+          "startTime": "2017-04-21T22:00:00.000+00:00",
+          "endTime": "2017-04-22T00:30:00.000+00:00",
+          "duration": 9000000,
+          "workTime": 12360000,
+          "planParts": [
+            {
+              "applicationType": "TaskPlan",
+              "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/17038604530390006",
+              "id": "17038604530390006",
+              "title": "\nnull",
+              "resource": {
+                "applicationType": "MaintenanceGroup",
+                "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/17038604530390004",
+                "id": "17038604530390004",
+                "title": "MECH"
+              },
+              "plannedStartTime": "2017-04-22T01:02:00.000+00:00",
+              "plannedEndTime": "2017-04-22T05:02:00.000+00:00",
+              "plannedWorkTime": 0,
+              "startTime": "2017-04-21T23:30:00.000+00:00",
+              "endTime": "2017-04-22T00:30:00.000+00:00",
+              "duration": 3600000,
+              "workTime": 5400000,
+              "planParts": [
+                {
+                  "applicationType": "SessionPlan",
+                  "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/17038604530390008",
+                  "id": "17038604530390008",
+                  "resource": {
+                    "applicationType": "Mechanic",
+                    "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/mechanic-50583--17038604530390004",
+                    "id": "50583",
+                    "title": "CHOPAMAX",
+                    "belongsToGroup": "MECH"
+                  },
+                  "startTime": "2017-04-22T00:00:00.000+00:00",
+                  "endTime": "2017-04-22T00:30:00.000+00:00",
+                  "duration": 1800000,
+                  "workTime": 1800000
+                },
+                {
+                  "applicationType": "SessionPlan",
+                  "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/17038604530390007",
+                  "id": "17038604530390007",
+                  "resource": {
+                    "applicationType": "Mechanic",
+                    "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/mechanic-50540--17038604530390004",
+                    "id": "50540",
+                    "title": "BLCHAM",
+                    "belongsToGroup": "MECH-ENG"
+                  },
+                  "startTime": "2017-04-21T23:30:00.000+00:00",
+                  "endTime": "2017-04-22T00:00:00.000+00:00",
+                  "duration": 1800000,
+                  "workTime": 1800000
+                },
+                {
+                  "applicationType": "SessionPlan",
+                  "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/17038604530390009",
+                  "id": "17038604530390009",
+                  "resource": {
+                    "applicationType": "Mechanic",
+                    "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/mechanic-50584--17038604530390004",
+                    "id": "50584",
+                    "title": "LALISAND",
+                    "belongsToGroup": "MECH"
+                  },
+                  "startTime": "2017-04-21T23:30:00.000+00:00",
+                  "endTime": "2017-04-22T00:00:00.000+00:00",
+                  "duration": 1800000,
+                  "workTime": 1800000
+                }
+              ],
+              "taskType": {
+                "applicationType": "TaskType",
+                "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/task-type--TC--792261-RAI-10010-2-000",
+                "id": "792261-RAI-10010-2-000",
+                "title": "Rev. Spoiler 1",
+                "code": "665844654",
+                "scopes": [
+                  {
+                    "applicationType": "MaintenanceGroup",
+                    "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/mechanic",
+                    "abbreviation": "MECH"
+                  },
+                  {
+                    "applicationType": "MaintenanceGroup",
+                    "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/interior-mechanic-group",
+                    "abbreviation": "MECH-INT"
+                  },
+                  {
+                    "applicationType": "MaintenanceGroup",
+                    "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/avionics-mechanic-group",
+                    "abbreviation": "AVIO"
+                  },
+                  {
+                    "applicationType": "MaintenanceGroup",
+                    "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/engine-mechanic-group",
+                    "abbreviation": "MECH-ENG"
+                  }
+                ],
+                "scope": {
+                  "applicationType": "MaintenanceGroup",
+                  "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/mechanic",
+                  "abbreviation": "MECH"
+                },
+                "tcorMPDCode": "7925576454",
+                "restrictions": [],
+                "task-category": "task-card"
+              },
+              "taskStepPlans": []
+            },
+            {
+              "applicationType": "TaskPlan",
+              "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/17038604530390012",
+              "id": "17038604530390012",
+              "title": "\nnull",
+              "resource": {
+                "applicationType": "MaintenanceGroup",
+                "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/17038604530390004",
+                "id": "17038604530390004",
+                "title": "MECH"
+              },
+              "plannedStartTime": "2017-04-21T22:00:00.000+00:00",
+              "plannedEndTime": "2017-04-22T02:00:00.000+00:00",
+              "plannedWorkTime": 0,
+              "startTime": "2017-04-21T22:35:00.000+00:00",
+              "endTime": "2017-04-21T22:55:00.000+00:00",
+              "duration": 1200000,
+              "workTime": 1200000,
+              "planParts": [
+                {
+                  "applicationType": "SessionPlan",
+                  "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/17038604530390013",
+                  "id": "17038604530390013",
+                  "resource": {
+                    "applicationType": "Mechanic",
+                    "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/mechanic-50584--17038604530390004",
+                    "id": "50584",
+                    "title": "LALISAND",
+                    "belongsToGroup": "MECH"
+                  },
+                  "startTime": "2017-04-21T22:35:00.000+00:00",
+                  "endTime": "2017-04-21T22:55:00.000+00:00",
+                  "duration": 1200000,
+                  "workTime": 1200000
+                }
+              ],
+              "taskType": {
+                "applicationType": "TaskType",
+                "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/task-type--TC--ZL-440-GVI-10000-1-000",
+                "id": "ZL-440-GVI-10000-1-000",
+                "title": "Rev. Spoiler 4",
+                "code": "MC-780",
+                "scopes": [
+                  {
+                    "applicationType": "MaintenanceGroup",
+                    "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/mechanic",
+                    "abbreviation": "MECH"
+                  },
+                  {
+                    "applicationType": "MaintenanceGroup",
+                    "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/avionics-mechanic-group",
+                    "abbreviation": "AVIO"
+                  },
+                  {
+                    "applicationType": "MaintenanceGroup",
+                    "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/engine-mechanic-group",
+                    "abbreviation": "MECH-ENG"
+                  }
+                ],
+                "scope": {
+                  "applicationType": "MaintenanceGroup",
+                  "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/mechanic",
+                  "abbreviation": "MECH"
+                },
+                "tcorMPDCode": "221687135",
+                "restrictions": [],
+                "task-category": "task-card"
+              },
+              "taskStepPlans": []
+            },
+            {
+              "applicationType": "TaskPlan",
+              "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/17038604530390003",
+              "id": "17038604530390003",
+              "title": "\nnull",
+              "resource": {
+                "applicationType": "MaintenanceGroup",
+                "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/17038604530390004",
+                "id": "17038604530390004",
+                "title": "MECH"
+              },
+              "plannedStartTime": "2017-04-22T05:17:00.000+00:00",
+              "plannedEndTime": "2017-04-22T09:17:00.000+00:00",
+              "plannedWorkTime": 0,
+              "startTime": "2017-04-21T22:55:00.000+00:00",
+              "endTime": "2017-04-21T23:30:00.000+00:00",
+              "duration": 2100000,
+              "workTime": 2100000,
+              "planParts": [
+                {
+                  "applicationType": "SessionPlan",
+                  "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/17038604530390005",
+                  "id": "17038604530390005",
+                  "resource": {
+                    "applicationType": "Mechanic",
+                    "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/mechanic-50584--17038604530390004",
+                    "id": "50584",
+                    "title": "CHOPAMAX",
+                    "belongsToGroup": "MECH"
+                  },
+                  "startTime": "2017-04-21T22:55:00.000+00:00",
+                  "endTime": "2017-04-21T23:30:00.000+00:00",
+                  "duration": 2100000,
+                  "workTime": 2100000
+                }
+              ],
+              "taskType": {
+                "applicationType": "TaskType",
+                "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/task-type--M--4393365",
+                "id": "4393365",
+                "title": "PERFORM REPLACE OIL SCAVENGE FILTER",
+                "code": "4393365",
+                "scopes": [
+                  {
+                    "applicationType": "MaintenanceGroup",
+                    "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/mechanic",
+                    "abbreviation": "MECH"
+                  }
+                ],
+                "scope": {
+                  "applicationType": "MaintenanceGroup",
+                  "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/mechanic",
+                  "abbreviation": "MECH"
+                },
+                "tcorMPDCode": "5464657988",
+                "restrictions": [],
+                "task-category": "maintenance-work-order"
+              },
+              "taskStepPlans": []
+            },
+            {
+              "applicationType": "TaskPlan",
+              "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/17038604530390010",
+              "id": "17038604530390010",
+              "title": "\nnull",
+              "resource": {
+                "applicationType": "MaintenanceGroup",
+                "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/17038604530390004",
+                "id": "17038604530390004",
+                "title": "MECH"
+              },
+              "plannedStartTime": "2017-04-22T05:17:00.000+00:00",
+              "plannedEndTime": "2017-04-22T09:17:00.000+00:00",
+              "plannedWorkTime": 0,
+              "startTime": "2017-04-21T22:00:00.000+00:00",
+              "endTime": "2017-04-21T23:01:00.000+00:00",
+              "duration": 3660000,
+              "workTime": 3660000,
+              "planParts": [
+                {
+                  "applicationType": "SessionPlan",
+                  "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/17038604530390011",
+                  "id": "17038604530390011",
+                  "resource": {
+                    "applicationType": "Mechanic",
+                    "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/mechanic-50583--17038604530390004",
+                    "id": "50583",
+                    "title": "LALISAND",
+                    "belongsToGroup": "MECH"
+                  },
+                  "startTime": "2017-04-21T22:00:00.000+00:00",
+                  "endTime": "2017-04-21T23:01:00.000+00:00",
+                  "duration": 3660000,
+                  "workTime": 3660000
+                }
+              ],
+              "taskType": {
+                "applicationType": "TaskType",
+                "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/task-type--M--4393361",
+                "id": "4393361",
+                "title": "PERFORM REPLACE SCAVENGE FILTER ENG NO 1",
+                "code": "4564897",
+                "scopes": [
+                  {
+                    "applicationType": "MaintenanceGroup",
+                    "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/mechanic",
+                    "abbreviation": "MECH"
+                  }
+                ],
+                "scope": {
+                  "applicationType": "MaintenanceGroup",
+                  "entityURI": "http://onto.fel.cvut.cz/ontologies/maintenance/mechanic",
+                  "abbreviation": "MECH"
+                },
+                "tcorMPDCode": "57864546",
+                "restrictions": [],
+                "task-category": "maintenance-work-order"
+              },
+              "taskStepPlans": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
