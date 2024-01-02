@@ -43,7 +43,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.4.0",
-    "react-maintenance-planner": "^0.1.2-beta-60ee639.0",
+    "react-maintenance-planner": "0.1.2-beta-6f66574.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^4.0.3",
     "react-toggle-slider": "^0.4.0",
