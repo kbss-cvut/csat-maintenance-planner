@@ -187,12 +187,14 @@ const PlanManager = ({ basename }: Props) => {
       {isWorkPackageListLoading && !workPackageListErrorMessage && (
         <LoadingSpinnerIcon />
       )}
-      {!isWorkPackageListLoading && process.env.NODE_ENV !== "development" && (
-        <WorkPackageList
-          workPackageList={workPackageList}
-          handleWorkPackageOnClick={handleWorkPackageOnClick}
-        />
-      )}
+      {!isWorkPackageListLoading &&
+        process.env.NODE_ENV === "production" &&
+        process.env.REACT_APP_AUTHENTICATION === "true" && (
+          <WorkPackageList
+            workPackageList={workPackageList}
+            handleWorkPackageOnClick={handleWorkPackageOnClick}
+          />
+        )}
     </React.Fragment>
   );
   };
@@ -248,8 +250,12 @@ const PlanManager = ({ basename }: Props) => {
 	);
   };
 
-  if (!initialized && process.env.NODE_ENV !== "development") {
-	return <h1>Loading...</h1>;
+	if (
+    !initialized &&
+    process.env.NODE_ENV === "production" &&
+    process.env.REACT_APP_AUTHENTICATION === "true"
+  ) {
+    return <h1>Loading...</h1>;
   }
 
   return (
