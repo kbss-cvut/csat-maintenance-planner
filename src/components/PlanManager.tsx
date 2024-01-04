@@ -53,7 +53,8 @@ const PlanManager = ({ basename }: Props) => {
   const [showPlannedSchedule, setShowPlannedScheduled] = useState(true);
 
   useEffect(() => {
-	if (process.env.NODE_ENV !== "development") {
+	if (process.env.NODE_ENV === "production" &&
+		process.env.REACT_APP_AUTHENTICATION === "true") {
   	  const initializeKeycloak = () => {
 	    if (initialized && keycloak && !keycloak.authenticated) {
 		  keycloak.login();

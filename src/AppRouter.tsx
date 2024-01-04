@@ -15,7 +15,8 @@ const basename = window.location.pathname.replace(/(\/[^/]+)$/, "");
 const AppRouter = () => {
   return (
     <React.Fragment>
-      {process.env.NODE_ENV !== "development" ? (
+      {process.env.NODE_ENV === "production" &&
+      process.env.REACT_APP_AUTHENTICATION === "true" ? (
         <ReactKeycloakProvider
           authClient={keycloak}
           initOptions={{ checkLoginIframe: false }}
