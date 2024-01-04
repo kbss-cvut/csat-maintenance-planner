@@ -1,4 +1,6 @@
 # CSAT Maintenance Planner
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2eea8b97-1504-4f69-be1a-efe298a9d1fc/deploy-status)](https://app.netlify.com/sites/magical-cranachan-80d5d3/deploys)
+
 The CSAT Plan Manager is a cooperation project between CTU and CSAT. The Maintenance Planner gives a visual, easy and practical way for CSAT employees to have an overview of passed, ongoing and future maintenance plans.
 This project is frontend application that works over REST API provided by [Aircraft Maintenance Planning System](https://github.com/kbss-cvut/aircraft-maintenance-planning-system).
 
