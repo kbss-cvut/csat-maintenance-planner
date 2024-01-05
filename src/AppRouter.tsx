@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PlanManager from "./components/PlanManager";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
 import keycloak from "./utils/KeycloakConfig";
+import {Constants} from "./utils/Constants";
 
 import "./styles/global.scss";
 
@@ -15,7 +16,8 @@ const basename = window.location.pathname.replace(/(\/[^/]+)$/, "");
 const AppRouter = () => {
   return (
     <React.Fragment>
-      {process.env.NODE_ENV !== "development" ? (
+      {process.env.NODE_ENV === "production" &&
+      Constants.AUTHENTICATION === "true" ? (
         <ReactKeycloakProvider
           authClient={keycloak}
           initOptions={{ checkLoginIframe: false }}
