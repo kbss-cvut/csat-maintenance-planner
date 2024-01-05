@@ -41,6 +41,8 @@ const Constants = {
     "https://kbss.felk.cvut.cz/csat/api2/plans/plan-from-similar-revisions?revisionId="
   ),
 
+  AUTHENTICATION: getEnv("AUTHENTICATION", "true"),
+
   APPLICATION_TYPE: {
     PHASE_PLAN: "PhasePlan",
     TASK_CARD_TYPE_GROUP: "GeneralTaskPlan",

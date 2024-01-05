@@ -53,15 +53,17 @@ const PlanManager = ({ basename }: Props) => {
   const [showPlannedSchedule, setShowPlannedScheduled] = useState(true);
 
   useEffect(() => {
-	if (process.env.NODE_ENV === "production" &&
-		process.env.REACT_APP_AUTHENTICATION === "true") {
-  	  const initializeKeycloak = () => {
-	    if (initialized && keycloak && !keycloak.authenticated) {
-		  keycloak.login();
-	    }
-	  };
-	  initializeKeycloak();
-	}
+    if (
+      process.env.NODE_ENV === "production" &&
+      Constants.AUTHENTICATION === "true"
+    ) {
+      const initializeKeycloak = () => {
+        if (initialized && keycloak && !keycloak.authenticated) {
+          keycloak.login();
+        }
+      };
+      initializeKeycloak();
+    }
   }, [initialized]);
 
   useEffect(() => {
@@ -189,7 +191,7 @@ const PlanManager = ({ basename }: Props) => {
       )}
       {!isWorkPackageListLoading &&
         process.env.NODE_ENV === "production" &&
-        process.env.REACT_APP_AUTHENTICATION === "true" && (
+        Constants.AUTHENTICATION === "true" && (
           <WorkPackageList
             workPackageList={workPackageList}
             handleWorkPackageOnClick={handleWorkPackageOnClick}
@@ -253,7 +255,7 @@ const PlanManager = ({ basename }: Props) => {
 	if (
     !initialized &&
     process.env.NODE_ENV === "production" &&
-    process.env.REACT_APP_AUTHENTICATION === "true"
+    Constants.AUTHENTICATION === "true"
   ) {
     return <h1>Loading...</h1>;
   }
